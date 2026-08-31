@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "20mAi4hTxHb9V+a9sUYRne2KTWP9Y8oCFO+cgHI6xOc=",
+  "Source": "Divinity.PlatformApi",
+  "BasePath": "_content/Divinity.PlatformApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

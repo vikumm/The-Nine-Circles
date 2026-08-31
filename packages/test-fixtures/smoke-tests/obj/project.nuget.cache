@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9IPc/PblAa0=",
+  "success": true,
+  "projectFilePath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/Divinity.SmokeTests.csproj",
+  "expectedPackageFiles": [
+    "/tmp/divinity-dotnet-home/.nuget/packages/google.protobuf/3.36.0/google.protobuf.3.36.0.nupkg.sha512"
+  ],
+  "logs": []
+}

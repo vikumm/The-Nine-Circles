@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/Divinity.PlatformApi.props" />
+</Project>

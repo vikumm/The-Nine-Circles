@@ -1,0 +1,39 @@
+name: MMO-VS1 CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  restore-build-smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Validate Compose config
+        run: docker compose -f infra/compose/compose.yml config
+
+      - name: Restore solution
+        run: dotnet restore Divinity.sln
+
+      - name: Build solution
+        run: dotnet build Divinity.sln --configuration Release --no-restore
+
+      - name: VS-001 smoke tests
+        run: dotnet run --project packages/test-fixtures/smoke-tests/Divinity.SmokeTests.csproj --configuration Release --no-build
+
+      - name: Restore protocol tests
+        run: dotnet restore packages/contracts-proto/tests/Divinity.ContractsProto.Tests.csproj
+
+      - name: Build protocol contracts
+        run: dotnet build packages/contracts-proto/Divinity.ContractsProto.csproj --configuration Release --no-restore
+
+      - name: VS-003 protocol tests
+        run: dotnet run --project packages/contracts-proto/tests/Divinity.ContractsProto.Tests.csproj --configuration Release

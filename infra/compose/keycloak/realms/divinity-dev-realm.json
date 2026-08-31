@@ -1,0 +1,39 @@
+{
+  "realm": "divinity-dev",
+  "displayName": "Divinity VS1 Local Dev",
+  "enabled": true,
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "resetPasswordAllowed": false,
+  "verifyEmail": false,
+  "sslRequired": "external",
+  "clients": [
+    {
+      "clientId": "divinity-launcher-dev",
+      "name": "Divinity Launcher Dev",
+      "description": "Local public OIDC client reserved for VS-005 PKCE launcher work.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "bearerOnly": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "frontchannelLogout": true,
+      "redirectUris": [
+        "http://127.0.0.1:*/callback",
+        "http://localhost:*/callback"
+      ],
+      "webOrigins": [
+        "http://127.0.0.1:*",
+        "http://localhost:*"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "post.logout.redirect.uris": "http://127.0.0.1:* http://localhost:*"
+      }
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+syntax = "proto3";
+
+package divinity.protocol.v1;
+
+option csharp_namespace = "Divinity.Contracts.V1";
+
+message ClientEnvelope {
+  uint32 protocol_version = 1;
+  uint64 sequence = 2;
+  uint64 client_tick = 3;
+
+  oneof payload {
+    ClientHello client_hello = 10;
+    JoinWorld join_world = 11;
+    MoveIntent move_intent = 12;
+    AttackIntent attack_intent = 13;
+    CastIntent cast_intent = 14;
+    EquipItemIntent equip_item_intent = 15;
+    UnequipItemIntent unequip_item_intent = 16;
+    Heartbeat heartbeat = 17;
+    ReconnectRequest reconnect_request = 18;
+  }
+}
+
+message ServerEnvelope {
+  uint32 protocol_version = 1;
+  uint64 server_tick = 2;
+  uint64 ack_sequence = 3;
+
+  oneof payload {
+    JoinAccepted join_accepted = 10;
+    WorldSnapshot world_snapshot = 11;
+    CombatEvent combat_event = 12;
+    RewardGranted reward_granted = 13;
+    InventoryDelta inventory_delta = 14;
+    Correction correction = 15;
+    ServerError server_error = 16;
+  }
+}
+
+message ClientHello {
+  string build_id = 1;
+  string game_ticket = 2;
+  string client_nonce = 3;
+}
+
+message JoinWorld {
+  string character_id = 1;
+  string requested_map_id = 2;
+  string content_hash = 3;
+}
+
+message MoveIntent {
+  MovementMode mode = 1;
+  float direction_x = 2;
+  float direction_y = 3;
+  float target_x = 4;
+  float target_y = 5;
+}
+
+enum MovementMode {
+  MOVEMENT_MODE_UNSPECIFIED = 0;
+  MOVEMENT_MODE_DIRECTION = 1;
+  MOVEMENT_MODE_CLICK_TARGET = 2;
+}
+
+message AttackIntent {
+  string target_entity_id = 1;
+  string skill_id = 2;
+  string action_id = 3;
+}
+
+message CastIntent {
+  string skill_id = 1;
+  string target_entity_id = 2;
+  string action_id = 3;
+}
+
+message EquipItemIntent {
+  string item_instance_id = 1;
+  EquipmentSlot slot = 2;
+  uint64 inventory_version = 3;
+}
+
+message UnequipItemIntent {
+  EquipmentSlot slot = 1;
+  uint64 inventory_version = 2;
+}
+
+enum EquipmentSlot {
+  EQUIPMENT_SLOT_UNSPECIFIED = 0;
+  EQUIPMENT_SLOT_OFF_HAND = 1;
+}
+
+message Heartbeat {
+  uint64 client_time_ms = 1;
+}
+
+message ReconnectRequest {
+  string reconnect_token = 1;
+  string previous_connection_id = 2;
+}
+
+message JoinAccepted {
+  string character_id = 1;
+  string map_id = 2;
+  string channel_id = 3;
+  Vector2 position = 4;
+  CharacterStats stats = 5;
+  string content_hash = 6;
+}
+
+message WorldSnapshot {
+  uint64 snapshot_id = 1;
+  string map_id = 2;
+  repeated EntityState entities = 3;
+}
+
+message EntityState {
+  string entity_id = 1;
+  EntityKind kind = 2;
+  Vector2 position = 3;
+  uint32 level = 4;
+  int32 hp = 5;
+  int32 mp = 6;
+}
+
+enum EntityKind {
+  ENTITY_KIND_UNSPECIFIED = 0;
+  ENTITY_KIND_PLAYER = 1;
+  ENTITY_KIND_MONSTER = 2;
+}
+
+message CombatEvent {
+  string event_id = 1;
+  string source_entity_id = 2;
+  string target_entity_id = 3;
+  string skill_id = 4;
+  CombatResult result = 5;
+  int32 damage = 6;
+  int32 target_hp = 7;
+  repeated StatusEffectApplied status_effects = 8;
+}
+
+enum CombatResult {
+  COMBAT_RESULT_UNSPECIFIED = 0;
+  COMBAT_RESULT_HIT = 1;
+  COMBAT_RESULT_CRITICAL = 2;
+  COMBAT_RESULT_MISS = 3;
+  COMBAT_RESULT_REJECTED = 4;
+}
+
+message StatusEffectApplied {
+  string effect_id = 1;
+  uint32 duration_ms = 2;
+}
+
+message RewardGranted {
+  string reward_key = 1;
+  string character_id = 2;
+  uint32 xp = 3;
+  uint32 skill_xp = 4;
+  uint32 currency_delta = 5;
+  repeated string item_instance_ids = 6;
+}
+
+message InventoryDelta {
+  uint64 inventory_version = 1;
+  repeated InventorySlot slots = 2;
+  repeated EquipmentItem equipment = 3;
+  uint32 currency_balance = 4;
+}
+
+message InventorySlot {
+  uint32 slot_index = 1;
+  string item_instance_id = 2;
+}
+
+message EquipmentItem {
+  EquipmentSlot slot = 1;
+  string item_instance_id = 2;
+}
+
+message Correction {
+  string entity_id = 1;
+  Vector2 authoritative_position = 2;
+  CorrectionReason reason = 3;
+}
+
+enum CorrectionReason {
+  CORRECTION_REASON_UNSPECIFIED = 0;
+  CORRECTION_REASON_PROTOCOL_REJECTED = 1;
+  CORRECTION_REASON_COLLISION = 2;
+  CORRECTION_REASON_SPEED_LIMIT = 3;
+  CORRECTION_REASON_SEQUENCE_REPLAY = 4;
+}
+
+message ServerError {
+  ErrorCode code = 1;
+  string message = 2;
+  string correlation_id = 3;
+}
+
+enum ErrorCode {
+  ERROR_CODE_UNSPECIFIED = 0;
+  ERROR_CODE_UNSUPPORTED_PROTOCOL_VERSION = 1;
+  ERROR_CODE_PAYLOAD_TOO_LARGE = 2;
+  ERROR_CODE_MALFORMED_PAYLOAD = 3;
+  ERROR_CODE_UNKNOWN_PAYLOAD_TYPE = 4;
+  ERROR_CODE_CLIENT_HELLO_ACCEPTED_NO_SESSION = 5;
+}
+
+message CharacterStats {
+  uint32 level = 1;
+  int32 hp = 2;
+  int32 mp = 3;
+}
+
+message Vector2 {
+  float x = 1;
+  float y = 2;
+}

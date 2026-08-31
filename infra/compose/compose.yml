@@ -1,0 +1,160 @@
+name: divinity-vs1
+
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-divinity_platform}
+      POSTGRES_USER: ${POSTGRES_USER:-divinity_platform}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-divinity_platform_dev_password}
+    ports:
+      - "${POSTGRES_BIND_HOST:-127.0.0.1}:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    networks:
+      - divinity-local
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-divinity_admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-divinity_admin_dev_password}
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT: "false"
+    ports:
+      - "${KEYCLOAK_BIND_HOST:-127.0.0.1}:${KEYCLOAK_PORT:-8080}:8080"
+    volumes:
+      - ./keycloak/realms:/opt/keycloak/data/import:ro
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/keycloak/bin/kcadm.sh config credentials --server http://127.0.0.1:8080 --realm master --user \"$${KEYCLOAK_ADMIN}\" --password \"$${KEYCLOAK_ADMIN_PASSWORD}\" >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 30s
+    networks:
+      - divinity-local
+
+  valkey:
+    image: valkey/valkey:8-alpine
+    command: ["sh", "-c", "exec valkey-server --appendonly yes --requirepass \"$${VALKEY_PASSWORD}\""]
+    environment:
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD:-divinity_valkey_dev_password}
+    ports:
+      - "${VALKEY_BIND_HOST:-127.0.0.1}:${VALKEY_PORT:-6379}:6379"
+    volumes:
+      - valkey-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "REDISCLI_AUTH=\"$${VALKEY_PASSWORD}\" valkey-cli ping | grep -q PONG"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+    networks:
+      - divinity-local
+
+  nats:
+    image: nats:2.10-alpine
+    command:
+      - "--jetstream"
+      - "--store_dir=/data"
+      - "--http_port=8222"
+      - "--server_name=divinity-local-nats"
+    ports:
+      - "${NATS_BIND_HOST:-127.0.0.1}:${NATS_CLIENT_PORT:-4222}:4222"
+      - "${NATS_BIND_HOST:-127.0.0.1}:${NATS_MONITOR_PORT:-8222}:8222"
+    volumes:
+      - nats-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- 'http://127.0.0.1:8222/healthz?js-enabled-only=true' | grep -qi ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+    networks:
+      - divinity-local
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.111.0
+    command: ["--config=/etc/otelcol/config.yml"]
+    ports:
+      - "${OTEL_BIND_HOST:-127.0.0.1}:${OTEL_GRPC_PORT:-4317}:4317"
+      - "${OTEL_BIND_HOST:-127.0.0.1}:${OTEL_HTTP_PORT:-4318}:4318"
+      - "${OTEL_BIND_HOST:-127.0.0.1}:${OTEL_HEALTH_PORT:-13133}:13133"
+      - "${OTEL_BIND_HOST:-127.0.0.1}:${OTEL_PROMETHEUS_PORT:-9464}:9464"
+    volumes:
+      - ./otel/collector-config.yml:/etc/otelcol/config.yml:ro
+    healthcheck:
+      test: ["CMD", "/otelcol-contrib", "--version"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    networks:
+      - divinity-local
+
+  prometheus:
+    image: prom/prometheus:v2.55.0
+    profiles: ["observability"]
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+    ports:
+      - "${PROMETHEUS_BIND_HOST:-127.0.0.1}:${PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    depends_on:
+      otel-collector:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:9090/-/ready >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    networks:
+      - divinity-local
+
+  grafana:
+    image: grafana/grafana-oss:11.3.0
+    profiles: ["observability"]
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-divinity_admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-divinity_grafana_dev_password}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    ports:
+      - "${GRAFANA_BIND_HOST:-127.0.0.1}:${GRAFANA_PORT:-3000}:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      prometheus:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/api/health | grep -qi ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    networks:
+      - divinity-local
+
+volumes:
+  postgres-data:
+  valkey-data:
+  nats-data:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  divinity-local:
+    driver: bridge

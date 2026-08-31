@@ -1,0 +1,129 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "Google.Protobuf/3.36.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Divinity.ContractsProto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Google.Protobuf": "3.36.0"
+        },
+        "compile": {
+          "bin/placeholder/Divinity.ContractsProto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.ContractsProto.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Google.Protobuf/3.36.0": {
+      "sha512": "wDPg8sKlmA8we1bqnC9DYKwLog4PNJ4GYTWV9FkzlGvfs3kNCSt2x0Qe31SBOeBPS2JGEZ/lNfil/Bkwx18Ufg==",
+      "type": "package",
+      "path": "google.protobuf/3.36.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "google.protobuf.3.36.0.nupkg.sha512",
+        "google.protobuf.nuspec",
+        "lib/net8.0/Google.Protobuf.dll",
+        "lib/net8.0/Google.Protobuf.pdb",
+        "lib/net8.0/Google.Protobuf.xml",
+        "lib/netstandard2.0/Google.Protobuf.dll",
+        "lib/netstandard2.0/Google.Protobuf.pdb",
+        "lib/netstandard2.0/Google.Protobuf.xml"
+      ]
+    },
+    "Divinity.ContractsProto/1.0.0": {
+      "type": "project",
+      "path": "../../packages/contracts-proto/Divinity.ContractsProto.csproj",
+      "msbuildProject": "../../packages/contracts-proto/Divinity.ContractsProto.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "Divinity.ContractsProto >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/tmp/divinity-dotnet-home/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj",
+      "projectName": "Divinity.WorldRuntime",
+      "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj",
+      "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+      "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj": {
+              "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.100"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/Divinity.ContractsProto.csproj.AssemblyReference.cache
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/Divinity.ContractsProto.GeneratedMSBuildEditorConfig.editorconfig
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/Divinity.ContractsProto.AssemblyInfoInputs.cache
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/Divinity.ContractsProto.AssemblyInfo.cs
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/Divinity.ContractsProto.csproj.CoreCompileInputs.cache
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/Divinity.ContractsProto.sourcelink.json
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/bin/Release/net9.0/Divinity.ContractsProto.deps.json
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/bin/Release/net9.0/Divinity.ContractsProto.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/bin/Release/net9.0/Divinity.ContractsProto.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/Divinity.ContractsProto.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/refint/Divinity.ContractsProto.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/Divinity.ContractsProto.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/Release/net9.0/ref/Divinity.ContractsProto.dll

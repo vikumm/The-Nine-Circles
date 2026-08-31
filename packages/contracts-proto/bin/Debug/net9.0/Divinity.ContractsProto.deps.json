@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Divinity.ContractsProto/1.0.0": {
+        "dependencies": {
+          "Google.Protobuf": "3.36.0",
+          "Grpc.Tools": "2.83.0"
+        },
+        "runtime": {
+          "Divinity.ContractsProto.dll": {}
+        }
+      },
+      "Google.Protobuf/3.36.0": {
+        "runtime": {
+          "lib/net8.0/Google.Protobuf.dll": {
+            "assemblyVersion": "3.36.0.0",
+            "fileVersion": "3.36.0.0"
+          }
+        }
+      },
+      "Grpc.Tools/2.83.0": {}
+    }
+  },
+  "libraries": {
+    "Divinity.ContractsProto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.Protobuf/3.36.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wDPg8sKlmA8we1bqnC9DYKwLog4PNJ4GYTWV9FkzlGvfs3kNCSt2x0Qe31SBOeBPS2JGEZ/lNfil/Bkwx18Ufg==",
+      "path": "google.protobuf/3.36.0",
+      "hashPath": "google.protobuf.3.36.0.nupkg.sha512"
+    },
+    "Grpc.Tools/2.83.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vK2Go/83W0v2Nn7tTP9fGrX4IjmOa93s3M0SZeFimU1vIIr2wL9yNJlIyK21y85SGm3++JncB8IF751cjoLHuQ==",
+      "path": "grpc.tools/2.83.0",
+      "hashPath": "grpc.tools.2.83.0.nupkg.sha512"
+    }
+  }
+}

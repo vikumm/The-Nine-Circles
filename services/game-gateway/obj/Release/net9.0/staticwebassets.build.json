@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "R55q4DE7KAYEUqjPxcsGi44SMho5jtQBQkz382CwboA=",
+  "Source": "Divinity.GameGateway",
+  "BasePath": "_content/Divinity.GameGateway",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

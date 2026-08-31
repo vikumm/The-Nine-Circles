@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\apps\launcher\Divinity.Launcher.csproj" />
+    <ProjectReference Include="..\..\..\services\platform-api\Divinity.PlatformApi.csproj" />
+    <ProjectReference Include="..\..\..\services\game-gateway\Divinity.GameGateway.csproj" />
+    <ProjectReference Include="..\..\..\services\world-runtime\Divinity.WorldRuntime.csproj" />
+    <ProjectReference Include="..\..\game-rules\Divinity.GameRules.csproj" />
+    <ProjectReference Include="..\Divinity.TestFixtures.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

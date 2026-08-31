@@ -1,0 +1,251 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "Google.Protobuf/3.36.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Divinity.ContractsProto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Google.Protobuf": "3.36.0"
+        },
+        "compile": {
+          "bin/placeholder/Divinity.ContractsProto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.ContractsProto.dll": {}
+        }
+      },
+      "Divinity.GameGateway/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Divinity.ContractsProto": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Divinity.GameGateway.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.GameGateway.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Divinity.GameRules/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Divinity.GameRules.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.GameRules.dll": {}
+        }
+      },
+      "Divinity.Launcher/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Divinity.Launcher.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.Launcher.dll": {}
+        }
+      },
+      "Divinity.PlatformApi/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Divinity.PlatformApi.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.PlatformApi.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Divinity.TestFixtures/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Divinity.TestFixtures.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.TestFixtures.dll": {}
+        }
+      },
+      "Divinity.WorldRuntime/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Divinity.ContractsProto": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Divinity.WorldRuntime.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.WorldRuntime.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Google.Protobuf/3.36.0": {
+      "sha512": "wDPg8sKlmA8we1bqnC9DYKwLog4PNJ4GYTWV9FkzlGvfs3kNCSt2x0Qe31SBOeBPS2JGEZ/lNfil/Bkwx18Ufg==",
+      "type": "package",
+      "path": "google.protobuf/3.36.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "google.protobuf.3.36.0.nupkg.sha512",
+        "google.protobuf.nuspec",
+        "lib/net8.0/Google.Protobuf.dll",
+        "lib/net8.0/Google.Protobuf.pdb",
+        "lib/net8.0/Google.Protobuf.xml",
+        "lib/netstandard2.0/Google.Protobuf.dll",
+        "lib/netstandard2.0/Google.Protobuf.pdb",
+        "lib/netstandard2.0/Google.Protobuf.xml"
+      ]
+    },
+    "Divinity.ContractsProto/1.0.0": {
+      "type": "project",
+      "path": "../../contracts-proto/Divinity.ContractsProto.csproj",
+      "msbuildProject": "../../contracts-proto/Divinity.ContractsProto.csproj"
+    },
+    "Divinity.GameGateway/1.0.0": {
+      "type": "project",
+      "path": "../../../services/game-gateway/Divinity.GameGateway.csproj",
+      "msbuildProject": "../../../services/game-gateway/Divinity.GameGateway.csproj"
+    },
+    "Divinity.GameRules/1.0.0": {
+      "type": "project",
+      "path": "../../game-rules/Divinity.GameRules.csproj",
+      "msbuildProject": "../../game-rules/Divinity.GameRules.csproj"
+    },
+    "Divinity.Launcher/1.0.0": {
+      "type": "project",
+      "path": "../../../apps/launcher/Divinity.Launcher.csproj",
+      "msbuildProject": "../../../apps/launcher/Divinity.Launcher.csproj"
+    },
+    "Divinity.PlatformApi/1.0.0": {
+      "type": "project",
+      "path": "../../../services/platform-api/Divinity.PlatformApi.csproj",
+      "msbuildProject": "../../../services/platform-api/Divinity.PlatformApi.csproj"
+    },
+    "Divinity.TestFixtures/1.0.0": {
+      "type": "project",
+      "path": "../Divinity.TestFixtures.csproj",
+      "msbuildProject": "../Divinity.TestFixtures.csproj"
+    },
+    "Divinity.WorldRuntime/1.0.0": {
+      "type": "project",
+      "path": "../../../services/world-runtime/Divinity.WorldRuntime.csproj",
+      "msbuildProject": "../../../services/world-runtime/Divinity.WorldRuntime.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "Divinity.GameGateway >= 1.0.0",
+      "Divinity.GameRules >= 1.0.0",
+      "Divinity.Launcher >= 1.0.0",
+      "Divinity.PlatformApi >= 1.0.0",
+      "Divinity.TestFixtures >= 1.0.0",
+      "Divinity.WorldRuntime >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/tmp/divinity-dotnet-home/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/Divinity.SmokeTests.csproj",
+      "projectName": "Divinity.SmokeTests",
+      "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/Divinity.SmokeTests.csproj",
+      "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+      "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/apps/launcher/Divinity.Launcher.csproj": {
+              "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/apps/launcher/Divinity.Launcher.csproj"
+            },
+            "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj": {
+              "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj"
+            },
+            "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/Divinity.TestFixtures.csproj": {
+              "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/Divinity.TestFixtures.csproj"
+            },
+            "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/Divinity.GameGateway.csproj": {
+              "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/Divinity.GameGateway.csproj"
+            },
+            "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/Divinity.PlatformApi.csproj": {
+              "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/Divinity.PlatformApi.csproj"
+            },
+            "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj": {
+              "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "false",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.100"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
