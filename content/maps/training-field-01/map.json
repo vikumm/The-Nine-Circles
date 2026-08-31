@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "mapId": "training-field-01",
+  "name": "Training Field 01",
+  "contentVersion": "vs004.1",
+  "bounds": {
+    "width": 96,
+    "height": 96
+  },
+  "tileSize": 1,
+  "blockedCells": [
+    { "x": 18, "y": 18 },
+    { "x": 18, "y": 19 },
+    { "x": 19, "y": 18 },
+    { "x": 34, "y": 42 },
+    { "x": 34, "y": 43 },
+    { "x": 35, "y": 42 },
+    { "x": 60, "y": 28 },
+    { "x": 61, "y": 28 },
+    { "x": 60, "y": 29 },
+    { "x": 72, "y": 66 },
+    { "x": 73, "y": 66 },
+    { "x": 72, "y": 67 }
+  ],
+  "regions": [
+    {
+      "id": "safe-spawn-01",
+      "kind": "safeSpawn",
+      "bounds": {
+        "x": 4,
+        "y": 4,
+        "width": 12,
+        "height": 12
+      }
+    },
+    {
+      "id": "training-ground",
+      "kind": "trainingGround",
+      "bounds": {
+        "x": 16,
+        "y": 4,
+        "width": 44,
+        "height": 38
+      }
+    },
+    {
+      "id": "moss-slime-field",
+      "kind": "combatZone",
+      "bounds": {
+        "x": 36,
+        "y": 36,
+        "width": 44,
+        "height": 44
+      }
+    }
+  ],
+  "spawns": [
+    {
+      "id": "player-start-01",
+      "kind": "player",
+      "entityTemplateId": "player_knight",
+      "regionId": "safe-spawn-01",
+      "x": 8,
+      "y": 8
+    },
+    {
+      "id": "moss-slime-spawn-01",
+      "kind": "monster",
+      "entityTemplateId": "mob_moss_slime_l1",
+      "regionId": "moss-slime-field",
+      "x": 48,
+      "y": 48
+    },
+    {
+      "id": "moss-slime-spawn-02",
+      "kind": "monster",
+      "entityTemplateId": "mob_moss_slime_l1",
+      "regionId": "moss-slime-field",
+      "x": 54,
+      "y": 52
+    }
+  ],
+  "safeSpawns": [
+    {
+      "id": "safe-spawn-point-01",
+      "x": 8,
+      "y": 8
+    }
+  ],
+  "triggers": [
+    {
+      "id": "enter-moss-slime-field",
+      "kind": "combatAreaEnter",
+      "bounds": {
+        "x": 36,
+        "y": 36,
+        "width": 4,
+        "height": 12
+      }
+    },
+    {
+      "id": "training-field-exit",
+      "kind": "trainingExit",
+      "bounds": {
+        "x": 88,
+        "y": 44,
+        "width": 4,
+        "height": 8
+      }
+    }
+  ]
+}

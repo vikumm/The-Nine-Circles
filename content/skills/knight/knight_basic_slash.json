@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "skillId": "knight_basic_slash",
+  "displayName": "Basic Slash",
+  "classId": "knight",
+  "authority": "server",
+  "maxRank": 1,
+  "rangeCells": 1.5,
+  "cooldownSeconds": 0.8,
+  "resourceCost": 0,
+  "effects": [
+    {
+      "type": "damage",
+      "attribute": "physical",
+      "amount": 5,
+      "durationSeconds": 0
+    }
+  ],
+  "rankProgression": [
+    {
+      "rank": 1,
+      "requiredSkillXp": 0
+    }
+  ]
+}

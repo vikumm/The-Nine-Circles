@@ -37,3 +37,18 @@ jobs:
 
       - name: VS-003 protocol tests
         run: dotnet run --project packages/contracts-proto/tests/Divinity.ContractsProto.Tests.csproj --configuration Release
+
+      - name: Restore content builder tests
+        run: dotnet restore tools/content-builder/tests/Divinity.ContentBuilder.Tests.csproj
+
+      - name: Build content schema
+        run: dotnet build packages/content-schema/Divinity.ContentSchema.csproj --configuration Release --no-restore
+
+      - name: Build content builder
+        run: dotnet build tools/content-builder/Divinity.ContentBuilder.csproj --configuration Release --no-restore
+
+      - name: VS-004 content tests
+        run: dotnet run --project tools/content-builder/tests/Divinity.ContentBuilder.Tests.csproj --configuration Release
+
+      - name: VS-004 content artifacts
+        run: dotnet run --project tools/content-builder/Divinity.ContentBuilder.csproj --configuration Release -- build --content-root content --output-root tools/content-builder/artifacts

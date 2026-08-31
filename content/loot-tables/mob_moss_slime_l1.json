@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "lootTableId": "mob_moss_slime_l1",
+  "mobTemplateId": "mob_moss_slime_l1",
+  "authority": "server",
+  "currency": {
+    "currencyId": "copper",
+    "minAmount": 1,
+    "maxAmount": 3
+  },
+  "entries": [
+    {
+      "itemId": "knight_wooden_shield_t0",
+      "rarity": "normal",
+      "weight": 80
+    },
+    {
+      "itemId": "knight_wooden_shield_t0",
+      "rarity": "good",
+      "weight": 18
+    },
+    {
+      "itemId": "knight_wooden_shield_t0",
+      "rarity": "rare",
+      "weight": 2
+    }
+  ]
+}

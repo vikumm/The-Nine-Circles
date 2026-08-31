@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "itemId": "knight_wooden_shield_t0",
+  "displayName": "Wooden Shield",
+  "classRestriction": "knight",
+  "slot": "offHand",
+  "tier": 0,
+  "authority": "server",
+  "rarityVariants": [
+    {
+      "rarity": "normal",
+      "attributes": {
+        "defense": 3,
+        "blockChancePercent": 0
+      }
+    },
+    {
+      "rarity": "good",
+      "attributes": {
+        "defense": 4,
+        "blockChancePercent": 1
+      }
+    },
+    {
+      "rarity": "rare",
+      "attributes": {
+        "defense": 5,
+        "blockChancePercent": 2
+      }
+    }
+  ]
+}

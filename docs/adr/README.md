@@ -23,3 +23,4 @@ Current ADRs:
 - ADR-0010: Task gates and Definition of Done.
 - ADR-0011: Local dependencies Docker Compose.
 - ADR-0012: Protobuf v1 contracts.
+- ADR-0013: Content schema and builder.
