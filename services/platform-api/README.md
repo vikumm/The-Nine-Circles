@@ -1,14 +1,21 @@
-# Platform API Bootstrap
+# Platform API
 
-This folder contains the VS-001 Platform API placeholder.
+This folder contains the Platform API service for MMO-VS1.
 
-Scope for VS-001:
+Current scope:
 
 - compile as an ASP.NET Core service;
 - expose `/healthz` for bootstrap smoke checks;
-- do not implement accounts, characters, inventory, economy, rewards or persistence.
+- issue VS-006 30-second game tickets through `POST /launcher/game-ticket`.
 
-Future work:
+`POST /launcher/game-ticket` requires an authenticated account id. Development and test runs may enable `X-Divinity-Dev-Account-Id` only with `DIVINITY_PLATFORM_API_ALLOW_DEV_AUTH_HEADER=true`.
 
-- VS-002 wires infrastructure dependencies.
-- VS-005 and later tasks add identity and domain behavior after their gates are green.
+Out of scope here:
+
+- long refresh sessions;
+- WSS handshake;
+- characters;
+- inventory;
+- economy;
+- rewards;
+- gameplay persistence.

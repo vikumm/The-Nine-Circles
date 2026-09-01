@@ -52,3 +52,48 @@ jobs:
 
       - name: VS-004 content artifacts
         run: dotnet run --project tools/content-builder/Divinity.ContentBuilder.csproj --configuration Release -- build --content-root content --output-root tools/content-builder/artifacts
+
+      - name: Restore launcher auth tests
+        run: dotnet restore apps/launcher/tests/Divinity.Launcher.Tests.csproj
+
+      - name: Build launcher auth tests
+        run: dotnet build apps/launcher/tests/Divinity.Launcher.Tests.csproj --configuration Release --no-restore
+
+      - name: VS-005 launcher auth tests
+        run: dotnet run --project apps/launcher/tests/Divinity.Launcher.Tests.csproj --configuration Release --no-build
+
+      - name: Start Keycloak for VS-005
+        run: docker compose -f infra/compose/compose.yml up -d keycloak
+
+      - name: Wait for Keycloak realm
+        run: |
+          for attempt in {1..60}; do
+            if curl -fsS http://127.0.0.1:8080/realms/divinity-dev/.well-known/openid-configuration >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker compose -f infra/compose/compose.yml logs keycloak
+          exit 1
+
+      - name: VS-005 Keycloak login test
+        env:
+          DIVINITY_RUN_KEYCLOAK_LOGIN_TEST: "true"
+          DIVINITY_LAUNCHER_OIDC_AUTHORITY: http://127.0.0.1:8080/realms/divinity-dev
+          DIVINITY_LAUNCHER_OIDC_CLIENT_ID: divinity-launcher-dev
+          DIVINITY_KEYCLOAK_DEV_USERNAME: divinity.dev
+          DIVINITY_KEYCLOAK_DEV_PASSWORD: divinity_dev_password
+        run: dotnet run --project apps/launcher/tests/Divinity.Launcher.Tests.csproj --configuration Release --no-build
+
+      - name: Restore game ticket tests
+        run: dotnet restore packages/test-fixtures/game-ticket-tests/Divinity.GameTicketTests.csproj
+
+      - name: Build game ticket tests
+        run: dotnet build packages/test-fixtures/game-ticket-tests/Divinity.GameTicketTests.csproj --configuration Release --no-restore
+
+      - name: VS-006 game ticket tests
+        run: dotnet run --project packages/test-fixtures/game-ticket-tests/Divinity.GameTicketTests.csproj --configuration Release --no-build
+
+      - name: Stop Keycloak
+        if: always()
+        run: docker compose -f infra/compose/compose.yml down

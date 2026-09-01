@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Net.Sockets;
 using Divinity.Contracts.V1;
 using Divinity.ContractsProto;
+using Divinity.ContractsProto.GameTickets;
 using Divinity.GameGateway;
 using Divinity.GameGateway.Protocol;
 using Divinity.WorldRuntime;
@@ -121,10 +122,18 @@ static bool UnknownPayloadTypeIsRejected()
 
 static async Task<bool> ClientHelloSmokeAsync()
 {
+    var storePath = CreateTempDirectory("vs006-gateway-protocol-smoke");
+    var previousStorePath = Environment.GetEnvironmentVariable("DIVINITY_GAME_TICKET_STORE_PATH");
+    Environment.SetEnvironmentVariable("DIVINITY_GAME_TICKET_STORE_PATH", storePath);
+
     var builder = WebApplication.CreateBuilder(Array.Empty<string>());
     var app = GatewayApp.Build(builder);
     var port = GetFreeTcpPort();
     var url = $"http://127.0.0.1:{port}";
+    var nonce = "nonce-for-contract-test";
+    var issueResult = await new GameTicketService(new FileGameTicketStore(storePath)).IssueAsync(
+        new GameTicketIssueCommand("account-protocol-smoke", "vs003-smoke", ProtocolConstants.SupportedProtocolVersion, nonce),
+        CancellationToken.None);
 
     app.Urls.Add(url);
     await app.StartAsync();
@@ -136,7 +145,12 @@ static async Task<bool> ClientHelloSmokeAsync()
             BaseAddress = new Uri(url)
         };
 
-        var requestBytes = CreateClientHelloEnvelope().ToByteArray();
+        if (!issueResult.Success)
+        {
+            return false;
+        }
+
+        var requestBytes = CreateClientHelloEnvelope(issueResult.GameTicket!, nonce).ToByteArray();
         using var content = new ByteArrayContent(requestBytes);
         content.Headers.ContentType = new MediaTypeHeaderValue("application/x-protobuf");
 
@@ -154,6 +168,8 @@ static async Task<bool> ClientHelloSmokeAsync()
     {
         await app.StopAsync();
         await app.DisposeAsync();
+        Environment.SetEnvironmentVariable("DIVINITY_GAME_TICKET_STORE_PATH", previousStorePath);
+        DeleteDirectory(storePath);
     }
 }
 
@@ -164,7 +180,7 @@ static int GetFreeTcpPort()
     return ((IPEndPoint)listener.LocalEndpoint).Port;
 }
 
-static ClientEnvelope CreateClientHelloEnvelope() => new()
+static ClientEnvelope CreateClientHelloEnvelope(string gameTicket = "ticket-for-contract-test", string nonce = "nonce-for-contract-test") => new()
 {
     ProtocolVersion = ProtocolConstants.SupportedProtocolVersion,
     Sequence = 42,
@@ -172,10 +188,25 @@ static ClientEnvelope CreateClientHelloEnvelope() => new()
     ClientHello = new ClientHello
     {
         BuildId = "vs003-smoke",
-        GameTicket = "ticket-for-contract-test",
-        ClientNonce = "nonce-for-contract-test"
+        GameTicket = gameTicket,
+        ClientNonce = nonce
     }
 };
+
+static string CreateTempDirectory(string name)
+{
+    var path = Path.Combine(Path.GetTempPath(), "divinity", name, Guid.NewGuid().ToString("N"));
+    Directory.CreateDirectory(path);
+    return path;
+}
+
+static void DeleteDirectory(string path)
+{
+    if (Directory.Exists(path))
+    {
+        Directory.Delete(path, recursive: true);
+    }
+}
 
 static ProtocolCheck Check(string name, bool passed) => new(name, passed);
 

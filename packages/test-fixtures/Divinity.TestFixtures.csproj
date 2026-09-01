@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="smoke-tests/**/*.cs" />
+    <Compile Remove="game-ticket-tests/**/*.cs" />
   </ItemGroup>
 
 </Project>

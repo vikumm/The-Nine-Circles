@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Divinity.Launcher.Tests/1.0.0": {
+        "dependencies": {
+          "Divinity.Launcher": "1.0.0"
+        },
+        "runtime": {
+          "Divinity.Launcher.Tests.dll": {}
+        }
+      },
+      "Divinity.Launcher/1.0.0": {
+        "runtime": {
+          "Divinity.Launcher.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Divinity.Launcher.Tests/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Divinity.Launcher/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

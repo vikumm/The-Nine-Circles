@@ -1,14 +1,21 @@
-# Launcher Bootstrap
+# Launcher
 
-This folder contains the VS-001 launcher placeholder.
+Minimal MMO-VS1 launcher bootstrap.
 
-Scope for VS-001:
+VS-005 adds OIDC Authorization Code with PKCE S256 using the system browser and a loopback callback. The launcher never receives a password, never creates a game session on its own and does not persist access, refresh or ID tokens.
 
-- compile as part of `Divinity.sln`;
-- expose only bootstrap metadata;
-- do not implement login, PKCE, game tickets, updates or game startup.
+Commands:
 
-Future work:
+```bash
+dotnet run --project apps/launcher/Divinity.Launcher.csproj -- status
+dotnet run --project apps/launcher/Divinity.Launcher.csproj -- login
+dotnet run --project apps/launcher/Divinity.Launcher.csproj -- logout
+```
 
-- VS-005 will replace this placeholder with the approved launcher flow.
-- Any UI framework decision that adds a dependency must be recorded in ADRs before implementation.
+Local defaults target the VS-002 Keycloak realm:
+
+- authority: `http://127.0.0.1:8080/realms/divinity-dev`;
+- client: `divinity-launcher-dev`;
+- callback: `http://127.0.0.1:{ephemeral}/callback`.
+
+Game tickets, IPC, Unity startup, patching and gameplay behavior remain out of scope until later VS tasks.

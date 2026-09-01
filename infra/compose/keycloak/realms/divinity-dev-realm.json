@@ -6,7 +6,7 @@
   "loginWithEmailAllowed": true,
   "resetPasswordAllowed": false,
   "verifyEmail": false,
-  "sslRequired": "external",
+  "sslRequired": "none",
   "clients": [
     {
       "clientId": "divinity-launcher-dev",
@@ -22,18 +22,36 @@
       "serviceAccountsEnabled": false,
       "frontchannelLogout": true,
       "redirectUris": [
-        "http://127.0.0.1:*/callback",
-        "http://localhost:*/callback"
+        "http://127.0.0.1/*",
+        "http://localhost/*"
       ],
       "webOrigins": [
-        "http://127.0.0.1:*",
-        "http://localhost:*"
+        "http://127.0.0.1",
+        "http://localhost"
       ],
       "attributes": {
         "pkce.code.challenge.method": "S256",
         "oauth2.device.authorization.grant.enabled": "false",
-        "post.logout.redirect.uris": "http://127.0.0.1:* http://localhost:*"
+        "post.logout.redirect.uris": "http://127.0.0.1/* http://localhost/*"
       }
+    }
+  ],
+  "users": [
+    {
+      "username": "divinity.dev",
+      "firstName": "Divinity",
+      "lastName": "Dev",
+      "email": "divinity.dev@example.local",
+      "enabled": true,
+      "emailVerified": true,
+      "requiredActions": [],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "divinity_dev_password",
+          "temporary": false
+        }
+      ]
     }
   ]
 }

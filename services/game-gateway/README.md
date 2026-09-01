@@ -1,14 +1,19 @@
-# Game Gateway Bootstrap
+# Game Gateway
 
-This folder contains the VS-001 Game Gateway placeholder.
+This folder contains the Game Gateway service for MMO-VS1.
 
-Scope for VS-001:
+Current scope:
 
 - compile as an ASP.NET Core service;
 - expose `/healthz` for bootstrap smoke checks;
-- do not implement WSS, tickets, sessions, leases, rate limits or gameplay routing.
+- validate Protobuf v1 `ClientEnvelope` messages;
+- consume VS-006 game tickets from `ClientHello.game_ticket`.
 
-Future work:
+Out of scope here:
 
-- VS-003 defines protocol contracts.
-- VS-007 adds authenticated WSS handshake and session lease behavior.
+- authenticated WSS sessions;
+- reconnect leases;
+- gameplay routing;
+- movement;
+- combat;
+- inventory.

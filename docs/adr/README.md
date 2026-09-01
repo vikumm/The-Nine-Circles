@@ -24,3 +24,5 @@ Current ADRs:
 - ADR-0011: Local dependencies Docker Compose.
 - ADR-0012: Protobuf v1 contracts.
 - ADR-0013: Content schema and builder.
+- ADR-0014: Launcher PKCE login.
+- ADR-0015: VS-006 game ticket.
