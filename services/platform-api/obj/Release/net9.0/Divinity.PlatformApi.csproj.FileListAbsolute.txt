@@ -55,3 +55,10 @@
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/obj/Release/net9.0/Divinity.PlatformApi.pdb
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/obj/Release/net9.0/Divinity.PlatformApi.genruntimeconfig.cache
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/obj/Release/net9.0/ref/Divinity.PlatformApi.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/bin/Release/net9.0/Google.Protobuf.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/bin/Release/net9.0/Divinity.ContractsProto.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/bin/Release/net9.0/Divinity.GameRules.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/bin/Release/net9.0/Divinity.GameRules.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/bin/Release/net9.0/Divinity.ContractsProto.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/obj/Release/net9.0/Divinity.PlatformApi.csproj.AssemblyReference.cache
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/obj/Release/net9.0/Divinity.CA8FC963.Up2Date

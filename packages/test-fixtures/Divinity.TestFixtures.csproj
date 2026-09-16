@@ -9,6 +9,10 @@
   <ItemGroup>
     <Compile Remove="smoke-tests/**/*.cs" />
     <Compile Remove="game-ticket-tests/**/*.cs" />
+    <Compile Remove="session-tests/**/*.cs" />
+    <Compile Remove="character-tests/**/*.cs" />
+    <Compile Remove="map-tests/**/*.cs" />
+    <Compile Remove="movement-tests/**/*.cs" />
   </ItemGroup>
 
 </Project>

@@ -32,3 +32,7 @@
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/obj/Release/net9.0/Divinity.WorldRuntime.pdb
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/obj/Release/net9.0/Divinity.WorldRuntime.genruntimeconfig.cache
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/obj/Release/net9.0/ref/Divinity.WorldRuntime.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/bin/Release/net9.0/Divinity.ContentSchema.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/bin/Release/net9.0/Divinity.GameRules.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/bin/Release/net9.0/Divinity.ContentSchema.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/bin/Release/net9.0/Divinity.GameRules.pdb

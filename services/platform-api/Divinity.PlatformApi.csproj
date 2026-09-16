@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../../packages/contracts-proto/Divinity.ContractsProto.csproj" />
+    <ProjectReference Include="../../packages/game-rules/Divinity.GameRules.csproj" />
   </ItemGroup>
 
 </Project>

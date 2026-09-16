@@ -4,6 +4,7 @@ public sealed class MapDefinition
 {
     public int SchemaVersion { get; init; }
     public string MapId { get; init; } = string.Empty;
+    public string StableId { get; init; } = string.Empty;
     public string Name { get; init; } = string.Empty;
     public string ContentVersion { get; init; } = string.Empty;
     public GridBounds Bounds { get; init; } = new();
@@ -148,7 +149,11 @@ public enum RegionKind
     Unknown = 0,
     SafeSpawn = 1,
     TrainingGround = 2,
-    CombatZone = 3
+    CombatZone = 3,
+    MovementCorridor = 4,
+    LeashArea = 5,
+    CollisionWall = 6,
+    EquipmentPoint = 7
 }
 
 public enum SpawnKind
@@ -162,7 +167,8 @@ public enum TriggerKind
 {
     Unknown = 0,
     TrainingExit = 1,
-    CombatAreaEnter = 2
+    CombatAreaEnter = 2,
+    EquipmentPoint = 3
 }
 
 public enum SkillEffectType

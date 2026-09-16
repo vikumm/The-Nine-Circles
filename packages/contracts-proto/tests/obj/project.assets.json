@@ -15,6 +15,16 @@
           }
         }
       },
+      "Divinity.ContentSchema/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Divinity.ContentSchema.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.ContentSchema.dll": {}
+        }
+      },
       "Divinity.ContractsProto/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -32,7 +42,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "Divinity.ContractsProto": "1.0.0"
+          "Divinity.ContractsProto": "1.0.0",
+          "Divinity.GameRules": "1.0.0",
+          "Divinity.WorldRuntime": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Divinity.GameGateway.dll": {}
@@ -44,11 +56,23 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "Divinity.GameRules/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Divinity.GameRules.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.GameRules.dll": {}
+        }
+      },
       "Divinity.WorldRuntime/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "Divinity.ContractsProto": "1.0.0"
+          "Divinity.ContentSchema": "1.0.0",
+          "Divinity.ContractsProto": "1.0.0",
+          "Divinity.GameRules": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Divinity.WorldRuntime.dll": {}
@@ -77,6 +101,11 @@
         "lib/netstandard2.0/Google.Protobuf.xml"
       ]
     },
+    "Divinity.ContentSchema/1.0.0": {
+      "type": "project",
+      "path": "../../content-schema/Divinity.ContentSchema.csproj",
+      "msbuildProject": "../../content-schema/Divinity.ContentSchema.csproj"
+    },
     "Divinity.ContractsProto/1.0.0": {
       "type": "project",
       "path": "../Divinity.ContractsProto.csproj",
@@ -86,6 +115,11 @@
       "type": "project",
       "path": "../../../services/game-gateway/Divinity.GameGateway.csproj",
       "msbuildProject": "../../../services/game-gateway/Divinity.GameGateway.csproj"
+    },
+    "Divinity.GameRules/1.0.0": {
+      "type": "project",
+      "path": "../../game-rules/Divinity.GameRules.csproj",
+      "msbuildProject": "../../game-rules/Divinity.GameRules.csproj"
     },
     "Divinity.WorldRuntime/1.0.0": {
       "type": "project",
@@ -101,7 +135,7 @@
     ]
   },
   "packageFolders": {
-    "/tmp/divinity-dotnet-home/.nuget/packages/": {}
+    "/Users/joeloliveirasilva/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -109,11 +143,11 @@
       "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/Divinity.ContractsProto.Tests.csproj",
       "projectName": "Divinity.ContractsProto.Tests",
       "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/Divinity.ContractsProto.Tests.csproj",
-      "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+      "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
       "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+        "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"

@@ -8,10 +8,10 @@ using Divinity.WorldRuntime;
 var checks = new[]
 {
     Check("launcher placeholder is scoped", LauncherInfo.ComponentName == "launcher" && !LauncherInfo.ImplementsLogin),
-    Check("platform api placeholder is scoped", PlatformApiInfo.ComponentName == "platform-api" && !PlatformApiInfo.ImplementsDomainPersistence),
-    Check("game gateway placeholder is scoped", GameGatewayInfo.ComponentName == "game-gateway" && !GameGatewayInfo.ImplementsWssHandshake),
-    Check("world runtime placeholder is scoped", WorldRuntimeInfo.ComponentName == "world-runtime" && !WorldRuntimeInfo.ImplementsMovement && !WorldRuntimeInfo.ImplementsCombat),
-    Check("game rules package is empty", GameRulesInfo.ComponentName == "game-rules" && !GameRulesInfo.ContainsGameplayRules),
+    Check("platform api character gate is scoped", PlatformApiInfo.ComponentName == "platform-api" && PlatformApiInfo.ImplementsDomainPersistence && PlatformApiInfo.CreatesKnight),
+    Check("game gateway movement gate is scoped", GameGatewayInfo.ComponentName == "game-gateway" && GameGatewayInfo.ImplementsWssHandshake && GameGatewayInfo.RoutesGameplayIntents),
+    Check("world runtime movement gate is scoped", WorldRuntimeInfo.ComponentName == "world-runtime" && WorldRuntimeInfo.UsesAuthoritativeMapArtifact && WorldRuntimeInfo.ImplementsMovement && !WorldRuntimeInfo.ImplementsCombat),
+    Check("game rules package has VS-010 movement rules", GameRulesInfo.ComponentName == "game-rules" && GameRulesInfo.ContainsBalanceData && GameRulesInfo.ContainsGameplayRules && GameRulesInfo.ContainsMovementRules),
     Check("test fixtures package is empty", TestFixturesInfo.ComponentName == "test-fixtures" && !TestFixturesInfo.ContainsGameplayFixtures)
 };
 

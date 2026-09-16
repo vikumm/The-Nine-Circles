@@ -8,7 +8,7 @@
     "net9.0": []
   },
   "packageFolders": {
-    "/tmp/divinity-dotnet-home/.nuget/packages/": {}
+    "/Users/joeloliveirasilva/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -16,11 +16,11 @@
       "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/Divinity.TestFixtures.csproj",
       "projectName": "Divinity.TestFixtures",
       "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/Divinity.TestFixtures.csproj",
-      "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+      "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
       "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+        "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -41,7 +41,7 @@
         ]
       },
       "restoreAuditProperties": {
-        "enableAudit": "false",
+        "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
       },

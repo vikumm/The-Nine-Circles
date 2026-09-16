@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Divinity.WorldRuntime")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a28de24a05982313c872fe55161f9621581f7ebe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+601d6c4b0d01e0d8cfe571ae55f5c0828686b2c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Divinity.WorldRuntime")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Divinity.WorldRuntime")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

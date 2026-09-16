@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Divinity.ContractsProto.GameTickets;
+using Divinity.GameRules.Characters;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Divinity.PlatformApi;
@@ -13,6 +14,8 @@ public static class PlatformApiApp
         builder.Services.AddSingleton(TimeProvider.System);
         builder.Services.AddSingleton<IGameTicketStore>(_ => GameTicketStoreFactory.CreateFromEnvironment());
         builder.Services.AddSingleton<GameTicketService>();
+        builder.Services.AddSingleton<ICharacterStore>(_ => CharacterStoreFactory.CreateFromEnvironment());
+        builder.Services.AddSingleton<CharacterService>();
 
         var app = builder.Build();
 
@@ -20,7 +23,8 @@ public static class PlatformApiApp
         {
             service = PlatformApiInfo.ComponentName,
             status = PlatformApiInfo.Status,
-            issuesGameTickets = PlatformApiInfo.IssuesGameTickets
+            issuesGameTickets = PlatformApiInfo.IssuesGameTickets,
+            createsKnight = PlatformApiInfo.CreatesKnight
         });
 
         app.MapPost("/launcher/game-ticket", async Task<Results<Ok<GameTicketIssueHttpResponse>, UnauthorizedHttpResult, BadRequest<GameTicketIssueErrorResponse>>> (
@@ -48,6 +52,45 @@ public static class PlatformApiApp
                 result.GameTicket!,
                 result.ExpiresAtUtc!.Value,
                 GameTicketDefaults.TimeToLive.TotalSeconds));
+        });
+
+        app.MapPost("/characters/knight", async Task<IResult> (
+            HttpContext context,
+            CharacterCreateHttpRequest request,
+            CharacterService characterService,
+            CancellationToken cancellationToken) =>
+        {
+            var accountId = ResolveAccountId(context);
+            if (accountId is null)
+            {
+                return TypedResults.Unauthorized();
+            }
+
+            var result = await characterService.CreateKnightAsync(new CreateKnightCommand(accountId, request.Name), cancellationToken);
+            return result.Status switch
+            {
+                CharacterServiceStatus.Created => TypedResults.Created($"/characters/knight/{result.Character!.CharacterId}", CharacterHttpResponse.FromCharacter(result.Character)),
+                CharacterServiceStatus.InvalidName => TypedResults.BadRequest(CharacterHttpErrorResponse.FromResult(result)),
+                CharacterServiceStatus.DuplicateName or CharacterServiceStatus.SlotOccupied => TypedResults.Conflict(CharacterHttpErrorResponse.FromResult(result)),
+                _ => TypedResults.BadRequest(CharacterHttpErrorResponse.FromResult(result))
+            };
+        });
+
+        app.MapGet("/characters/knight", async Task<IResult> (
+            HttpContext context,
+            CharacterService characterService,
+            CancellationToken cancellationToken) =>
+        {
+            var accountId = ResolveAccountId(context);
+            if (accountId is null)
+            {
+                return TypedResults.Unauthorized();
+            }
+
+            var result = await characterService.SelectKnightAsync(accountId, cancellationToken);
+            return result.Status == CharacterServiceStatus.Selected
+                ? TypedResults.Ok(CharacterHttpResponse.FromCharacter(result.Character!))
+                : TypedResults.NotFound(CharacterHttpErrorResponse.FromResult(result));
         });
 
         return app;
@@ -82,3 +125,65 @@ public sealed record GameTicketIssueHttpRequest(string BuildId, uint ProtocolVer
 public sealed record GameTicketIssueHttpResponse(string GameTicket, DateTimeOffset ExpiresAtUtc, double TtlSeconds);
 
 public sealed record GameTicketIssueErrorResponse(string Code, string Message);
+
+public sealed record CharacterCreateHttpRequest(string Name);
+
+public sealed record CharacterHttpResponse(
+    string CharacterId,
+    string DisplayName,
+    string NormalizedName,
+    string Vocation,
+    string CatalogVersion,
+    KnightStatsHttpResponse Stats,
+    string MapId,
+    string ChannelId,
+    string ContentHash,
+    CharacterPositionHttpResponse SafeSpawn)
+{
+    public static CharacterHttpResponse FromCharacter(CharacterRecord character) =>
+        new(
+            character.CharacterId,
+            character.DisplayName,
+            character.NormalizedName,
+            character.Vocation,
+            character.CatalogVersion,
+            KnightStatsHttpResponse.FromStats(character.Stats),
+            character.MapId,
+            character.ChannelId,
+            character.ContentHash,
+            new CharacterPositionHttpResponse(character.SafeSpawn.X, character.SafeSpawn.Y));
+}
+
+public sealed record KnightStatsHttpResponse(
+    int Level,
+    int MaxHp,
+    int MaxMp,
+    int Attack,
+    int Defense,
+    decimal CriticalChancePercent,
+    decimal CriticalMultiplier,
+    decimal SpeedUnitsPerSecond,
+    int HpRegenPerSecond,
+    int MpRegenPerSecond)
+{
+    public static KnightStatsHttpResponse FromStats(KnightStats stats) =>
+        new(
+            stats.Level,
+            stats.MaxHp,
+            stats.MaxMp,
+            stats.Attack,
+            stats.Defense,
+            stats.CriticalChancePercent,
+            stats.CriticalMultiplier,
+            stats.SpeedUnitsPerSecond,
+            stats.HpRegenPerSecond,
+            stats.MpRegenPerSecond);
+}
+
+public sealed record CharacterPositionHttpResponse(decimal X, decimal Y);
+
+public sealed record CharacterHttpErrorResponse(string Code, string Message)
+{
+    public static CharacterHttpErrorResponse FromResult(CharacterServiceResult result) =>
+        new(result.Status.ToString(), result.Message);
+}

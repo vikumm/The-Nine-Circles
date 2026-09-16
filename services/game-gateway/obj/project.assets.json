@@ -15,6 +15,16 @@
           }
         }
       },
+      "Divinity.ContentSchema/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Divinity.ContentSchema.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.ContentSchema.dll": {}
+        }
+      },
       "Divinity.ContractsProto/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -26,6 +36,31 @@
         },
         "runtime": {
           "bin/placeholder/Divinity.ContractsProto.dll": {}
+        }
+      },
+      "Divinity.GameRules/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Divinity.GameRules.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.GameRules.dll": {}
+        }
+      },
+      "Divinity.WorldRuntime/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Divinity.ContentSchema": "1.0.0",
+          "Divinity.ContractsProto": "1.0.0",
+          "Divinity.GameRules": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Divinity.WorldRuntime.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Divinity.WorldRuntime.dll": {}
         }
       }
     }
@@ -48,19 +83,36 @@
         "lib/netstandard2.0/Google.Protobuf.xml"
       ]
     },
+    "Divinity.ContentSchema/1.0.0": {
+      "type": "project",
+      "path": "../../packages/content-schema/Divinity.ContentSchema.csproj",
+      "msbuildProject": "../../packages/content-schema/Divinity.ContentSchema.csproj"
+    },
     "Divinity.ContractsProto/1.0.0": {
       "type": "project",
       "path": "../../packages/contracts-proto/Divinity.ContractsProto.csproj",
       "msbuildProject": "../../packages/contracts-proto/Divinity.ContractsProto.csproj"
+    },
+    "Divinity.GameRules/1.0.0": {
+      "type": "project",
+      "path": "../../packages/game-rules/Divinity.GameRules.csproj",
+      "msbuildProject": "../../packages/game-rules/Divinity.GameRules.csproj"
+    },
+    "Divinity.WorldRuntime/1.0.0": {
+      "type": "project",
+      "path": "../world-runtime/Divinity.WorldRuntime.csproj",
+      "msbuildProject": "../world-runtime/Divinity.WorldRuntime.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Divinity.ContractsProto >= 1.0.0"
+      "Divinity.ContractsProto >= 1.0.0",
+      "Divinity.GameRules >= 1.0.0",
+      "Divinity.WorldRuntime >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "/tmp/divinity-dotnet-home/.nuget/packages/": {}
+    "/Users/joeloliveirasilva/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -68,11 +120,11 @@
       "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/Divinity.GameGateway.csproj",
       "projectName": "Divinity.GameGateway",
       "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/Divinity.GameGateway.csproj",
-      "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+      "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
       "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+        "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -87,6 +139,12 @@
           "projectReferences": {
             "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj": {
               "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj"
+            },
+            "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj": {
+              "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj"
+            },
+            "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj": {
+              "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj"
             }
           }
         }

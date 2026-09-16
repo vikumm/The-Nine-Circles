@@ -24,6 +24,14 @@
           }
         }
       },
+      "Divinity.ContentSchema/1.0.0": {
+        "runtime": {
+          "Divinity.ContentSchema.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Divinity.ContractsProto/1.0.0": {
         "dependencies": {
           "Google.Protobuf": "3.36.0"
@@ -37,7 +45,9 @@
       },
       "Divinity.GameGateway/1.0.0": {
         "dependencies": {
-          "Divinity.ContractsProto": "1.0.0"
+          "Divinity.ContractsProto": "1.0.0",
+          "Divinity.GameRules": "1.0.0",
+          "Divinity.WorldRuntime": "1.0.0"
         },
         "runtime": {
           "Divinity.GameGateway.dll": {
@@ -46,9 +56,19 @@
           }
         }
       },
+      "Divinity.GameRules/1.0.0": {
+        "runtime": {
+          "Divinity.GameRules.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Divinity.WorldRuntime/1.0.0": {
         "dependencies": {
-          "Divinity.ContractsProto": "1.0.0"
+          "Divinity.ContentSchema": "1.0.0",
+          "Divinity.ContractsProto": "1.0.0",
+          "Divinity.GameRules": "1.0.0"
         },
         "runtime": {
           "Divinity.WorldRuntime.dll": {
@@ -72,12 +92,22 @@
       "path": "google.protobuf/3.36.0",
       "hashPath": "google.protobuf.3.36.0.nupkg.sha512"
     },
+    "Divinity.ContentSchema/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Divinity.ContractsProto/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "Divinity.GameGateway/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Divinity.GameRules/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

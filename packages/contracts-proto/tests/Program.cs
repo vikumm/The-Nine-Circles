@@ -19,6 +19,7 @@ checks.Add(Check("invalid protocol version rejected", InvalidProtocolVersionIsRe
 checks.Add(Check("payload over 64 KiB rejected", OversizedPayloadIsRejected()));
 checks.Add(Check("truncated payload rejected", TruncatedPayloadIsRejected()));
 checks.Add(Check("unknown payload type rejected", UnknownPayloadTypeIsRejected()));
+checks.Add(Check("move intent contract stays intent-only", MoveIntentContractIsIntentOnly()));
 checks.Add(await CheckAsync("client to gateway ClientHello smoke", ClientHelloSmokeAsync()));
 
 foreach (var check in checks)
@@ -118,6 +119,33 @@ static bool UnknownPayloadTypeIsRejected()
 
     return result.StatusCode == HttpStatusCode.BadRequest
         && result.Envelope.ServerError.Code == ErrorCode.UnknownPayloadType;
+}
+
+static bool MoveIntentContractIsIntentOnly()
+{
+    var envelope = new ClientEnvelope
+    {
+        ProtocolVersion = ProtocolConstants.SupportedProtocolVersion,
+        Sequence = 77,
+        ClientTick = 8800,
+        MoveIntent = new MoveIntent
+        {
+            Mode = MovementMode.Direction,
+            DirectionX = 1,
+            DirectionY = 1
+        }
+    };
+
+    var parsed = ClientEnvelope.Parser.ParseFrom(envelope.ToByteArray());
+
+    return parsed.PayloadCase == ClientEnvelope.PayloadOneofCase.MoveIntent
+        && parsed.MoveIntent.Mode == MovementMode.Direction
+        && parsed.MoveIntent.DirectionX == 1
+        && parsed.MoveIntent.DirectionY == 1
+        && ErrorCode.MoveRejected == (ErrorCode)23
+        && MoveIntent.Descriptor.FindFieldByName("position") is null
+        && MoveIntent.Descriptor.FindFieldByName("final_position") is null
+        && MoveIntent.Descriptor.FindFieldByName("speed") is null;
 }
 
 static async Task<bool> ClientHelloSmokeAsync()

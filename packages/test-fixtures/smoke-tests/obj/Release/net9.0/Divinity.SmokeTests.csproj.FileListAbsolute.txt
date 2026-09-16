@@ -90,3 +90,5 @@
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/obj/Release/net9.0/Divinity.SmokeTests.pdb
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/obj/Release/net9.0/Divinity.SmokeTests.genruntimeconfig.cache
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/obj/Release/net9.0/ref/Divinity.SmokeTests.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/bin/Release/net9.0/Divinity.ContentSchema.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/bin/Release/net9.0/Divinity.ContentSchema.pdb

@@ -1,8 +1,9 @@
 {
   "schemaVersion": 1,
   "mapId": "training-field-01",
+  "stableId": "map_training_field_01",
   "name": "Training Field 01",
-  "contentVersion": "vs004.1",
+  "contentVersion": "vs009.1",
   "bounds": {
     "width": 96,
     "height": 96
@@ -20,7 +21,15 @@
     { "x": 60, "y": 29 },
     { "x": 72, "y": 66 },
     { "x": 73, "y": 66 },
-    { "x": 72, "y": 67 }
+    { "x": 72, "y": 67 },
+    { "x": 32, "y": 40 },
+    { "x": 33, "y": 40 },
+    { "x": 34, "y": 40 },
+    { "x": 35, "y": 40 },
+    { "x": 36, "y": 40 },
+    { "x": 37, "y": 40 },
+    { "x": 38, "y": 40 },
+    { "x": 39, "y": 40 }
   ],
   "regions": [
     {
@@ -34,8 +43,8 @@
       }
     },
     {
-      "id": "training-ground",
-      "kind": "trainingGround",
+      "id": "movement-corridor-01",
+      "kind": "movementCorridor",
       "bounds": {
         "x": 16,
         "y": 4,
@@ -44,13 +53,43 @@
       }
     },
     {
-      "id": "moss-slime-field",
+      "id": "combat-field-01",
       "kind": "combatZone",
       "bounds": {
         "x": 36,
         "y": 36,
         "width": 44,
         "height": 44
+      }
+    },
+    {
+      "id": "leash-area-01",
+      "kind": "leashArea",
+      "bounds": {
+        "x": 38,
+        "y": 38,
+        "width": 32,
+        "height": 32
+      }
+    },
+    {
+      "id": "collision-wall-01",
+      "kind": "collisionWall",
+      "bounds": {
+        "x": 32,
+        "y": 40,
+        "width": 8,
+        "height": 1
+      }
+    },
+    {
+      "id": "equipment-point-01",
+      "kind": "equipmentPoint",
+      "bounds": {
+        "x": 12,
+        "y": 18,
+        "width": 4,
+        "height": 4
       }
     }
   ],
@@ -67,7 +106,7 @@
       "id": "moss-slime-spawn-01",
       "kind": "monster",
       "entityTemplateId": "mob_moss_slime_l1",
-      "regionId": "moss-slime-field",
+      "regionId": "combat-field-01",
       "x": 48,
       "y": 48
     },
@@ -75,7 +114,7 @@
       "id": "moss-slime-spawn-02",
       "kind": "monster",
       "entityTemplateId": "mob_moss_slime_l1",
-      "regionId": "moss-slime-field",
+      "regionId": "combat-field-01",
       "x": 54,
       "y": 52
     }
@@ -106,6 +145,16 @@
         "y": 44,
         "width": 4,
         "height": 8
+      }
+    },
+    {
+      "id": "equipment-point-enter",
+      "kind": "equipmentPoint",
+      "bounds": {
+        "x": 12,
+        "y": 18,
+        "width": 4,
+        "height": 4
       }
     }
   ]

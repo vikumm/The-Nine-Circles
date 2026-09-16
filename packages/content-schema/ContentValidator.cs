@@ -3,8 +3,27 @@ namespace Divinity.ContentSchema;
 public static class ContentValidator
 {
     private const int CurrentSchemaVersion = 1;
+    private const int RequiredMapWidth = 96;
+    private const int RequiredMapHeight = 96;
+    private const int RequiredChunkSize = 16;
+    private const string RequiredStableMapId = "map_training_field_01";
     private static readonly string[] RequiredSkillIds = ["knight_basic_slash", "knight_shield_bash_r1"];
     private static readonly ItemRarity[] RequiredShieldRarities = [ItemRarity.Normal, ItemRarity.Good, ItemRarity.Rare];
+    private static readonly RegionKind[] RequiredRegionKinds =
+    [
+        RegionKind.SafeSpawn,
+        RegionKind.MovementCorridor,
+        RegionKind.CombatZone,
+        RegionKind.LeashArea,
+        RegionKind.CollisionWall,
+        RegionKind.EquipmentPoint
+    ];
+    private static readonly TriggerKind[] RequiredTriggerKinds =
+    [
+        TriggerKind.CombatAreaEnter,
+        TriggerKind.TrainingExit,
+        TriggerKind.EquipmentPoint
+    ];
 
     public static IReadOnlyList<string> Validate(ContentDraft draft)
     {
@@ -36,6 +55,11 @@ public static class ContentValidator
             errors.Add("maps/training-field-01/map.json: mapId is required.");
         }
 
+        if (!string.Equals(map.StableId, RequiredStableMapId, StringComparison.Ordinal))
+        {
+            errors.Add($"maps/training-field-01/map.json: stableId must be '{RequiredStableMapId}'.");
+        }
+
         if (!IsPresent(map.ContentVersion))
         {
             errors.Add("maps/training-field-01/map.json: contentVersion is required.");
@@ -46,9 +70,26 @@ public static class ContentValidator
             errors.Add("maps/training-field-01/map.json: bounds width and height must be greater than zero.");
         }
 
+        if (map.Bounds.Width != RequiredMapWidth || map.Bounds.Height != RequiredMapHeight)
+        {
+            errors.Add($"maps/training-field-01/map.json: bounds must be exactly {RequiredMapWidth}x{RequiredMapHeight} cells for VS-009.");
+        }
+
+        if (map.Bounds.Width > 0
+            && map.Bounds.Height > 0
+            && (map.Bounds.Width % RequiredChunkSize != 0 || map.Bounds.Height % RequiredChunkSize != 0))
+        {
+            errors.Add($"maps/training-field-01/map.json: bounds must divide evenly into {RequiredChunkSize}x{RequiredChunkSize} chunks.");
+        }
+
         if (map.TileSize <= 0)
         {
             errors.Add("maps/training-field-01/map.json: tileSize must be greater than zero.");
+        }
+
+        if (map.TileSize != 1)
+        {
+            errors.Add("maps/training-field-01/map.json: tileSize must be exactly 1 for the VS-009 logical grid.");
         }
 
         var blockedCells = new HashSet<(int X, int Y)>();
@@ -86,6 +127,33 @@ public static class ContentValidator
             if (!IsRectInsideMap(map.Bounds, region.Bounds))
             {
                 errors.Add($"maps/training-field-01/map.json: region '{region.Id}' bounds must be inside map bounds and have positive size.");
+            }
+        }
+
+        foreach (var requiredKind in RequiredRegionKinds)
+        {
+            if (!map.Regions.Any(region => region.Kind == requiredKind))
+            {
+                errors.Add($"maps/training-field-01/map.json: required region kind '{ToJsonName(requiredKind)}' is missing.");
+            }
+        }
+
+        foreach (var collisionWall in map.Regions.Where(region => region.Kind == RegionKind.CollisionWall))
+        {
+            if (!IsRectInsideMap(map.Bounds, collisionWall.Bounds))
+            {
+                continue;
+            }
+
+            for (var y = collisionWall.Bounds.Y; y < collisionWall.Bounds.Y + collisionWall.Bounds.Height; y++)
+            {
+                for (var x = collisionWall.Bounds.X; x < collisionWall.Bounds.X + collisionWall.Bounds.Width; x++)
+                {
+                    if (!blockedCells.Contains((x, y)))
+                    {
+                        errors.Add($"maps/training-field-01/map.json: collision wall region '{collisionWall.Id}' requires blocked cell ({x},{y}).");
+                    }
+                }
             }
         }
 
@@ -163,6 +231,14 @@ public static class ContentValidator
             if (!IsRectInsideMap(map.Bounds, trigger.Bounds))
             {
                 errors.Add($"maps/training-field-01/map.json: trigger '{trigger.Id}' bounds must be inside map bounds and have positive size.");
+            }
+        }
+
+        foreach (var requiredKind in RequiredTriggerKinds)
+        {
+            if (!map.Triggers.Any(trigger => trigger.Kind == requiredKind))
+            {
+                errors.Add($"maps/training-field-01/map.json: required trigger kind '{ToJsonName(requiredKind)}' is missing.");
             }
         }
     }
@@ -375,4 +451,11 @@ public static class ContentValidator
         x >= rect.X && y >= rect.Y && x < rect.X + rect.Width && y < rect.Y + rect.Height;
 
     private static bool IsPresent(string value) => !string.IsNullOrWhiteSpace(value);
+
+    private static string ToJsonName<TEnum>(TEnum value)
+        where TEnum : struct, Enum
+    {
+        var name = value.ToString();
+        return char.ToLowerInvariant(name[0]) + name[1..];
+    }
 }

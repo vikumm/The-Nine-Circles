@@ -1,0 +1,12 @@
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/bin/Debug/net9.0/Divinity.ContentSchema.deps.json
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/bin/Debug/net9.0/Divinity.ContentSchema.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/bin/Debug/net9.0/Divinity.ContentSchema.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/Debug/net9.0/Divinity.ContentSchema.GeneratedMSBuildEditorConfig.editorconfig
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/Debug/net9.0/Divinity.ContentSchema.AssemblyInfoInputs.cache
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/Debug/net9.0/Divinity.ContentSchema.AssemblyInfo.cs
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/Debug/net9.0/Divinity.ContentSchema.csproj.CoreCompileInputs.cache
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/Debug/net9.0/Divinity.ContentSchema.sourcelink.json
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/Debug/net9.0/Divinity.ContentSchema.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/Debug/net9.0/refint/Divinity.ContentSchema.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/Debug/net9.0/Divinity.ContentSchema.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/Debug/net9.0/ref/Divinity.ContentSchema.dll

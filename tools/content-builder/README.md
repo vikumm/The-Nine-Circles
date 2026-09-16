@@ -1,6 +1,6 @@
 # Divinity.ContentBuilder
 
-Minimal VS-004 content pipeline.
+Minimal VS-004/VS-009 content pipeline.
 
 Commands:
 
@@ -14,4 +14,4 @@ The builder validates source content before writing artifacts:
 - `unity/<mapId>.visual.json` for client-side rendering/bootstrap;
 - `server/<mapId>.authoritative.json` for server-side authority.
 
-Both artifacts include the same `contentHash`. The client artifact is not an authority source.
+Both artifacts include the same `contentHash`. The VS-009 artifacts include a generated 16x16 chunk grid for the 96x96 Training Field map. The client artifact is not an authority source.

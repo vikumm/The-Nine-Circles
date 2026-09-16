@@ -5,8 +5,9 @@ namespace Divinity.WorldRuntime;
 public static class WorldRuntimeInfo
 {
     public const string ComponentName = "world-runtime";
-    public const string Status = "VS-001 bootstrap only";
-    public const bool ImplementsMovement = false;
+    public const string Status = "VS-010 authoritative movement";
+    public const bool UsesAuthoritativeMapArtifact = true;
+    public const bool ImplementsMovement = true;
     public const bool ImplementsCombat = false;
     public static bool UsesContractsProto => GameReflection.Descriptor.Package == "divinity.protocol.v1";
 }

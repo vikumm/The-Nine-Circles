@@ -31,3 +31,7 @@
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/obj/Release/net9.0/Divinity.ContractsProto.Tests.pdb
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/obj/Release/net9.0/Divinity.ContractsProto.Tests.genruntimeconfig.cache
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/obj/Release/net9.0/ref/Divinity.ContractsProto.Tests.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/bin/Release/net9.0/Divinity.ContentSchema.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/bin/Release/net9.0/Divinity.GameRules.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/bin/Release/net9.0/Divinity.ContentSchema.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/tests/bin/Release/net9.0/Divinity.GameRules.pdb

@@ -10,11 +10,11 @@
         "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/apps/launcher/Divinity.Launcher.csproj",
         "projectName": "Divinity.Launcher",
         "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/apps/launcher/Divinity.Launcher.csproj",
-        "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+        "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
         "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/apps/launcher/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+          "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -35,7 +35,67 @@
           ]
         },
         "restoreAuditProperties": {
-          "enableAudit": "false",
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/Divinity.ContentSchema.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/Divinity.ContentSchema.csproj",
+        "projectName": "Divinity.ContentSchema",
+        "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/Divinity.ContentSchema.csproj",
+        "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
+        "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
         },
@@ -70,11 +130,11 @@
         "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj",
         "projectName": "Divinity.ContractsProto",
         "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj",
-        "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+        "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
         "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+          "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -95,7 +155,7 @@
           ]
         },
         "restoreAuditProperties": {
-          "enableAudit": "false",
+          "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
         },
@@ -142,11 +202,11 @@
         "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj",
         "projectName": "Divinity.GameRules",
         "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj",
-        "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+        "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
         "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+          "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -167,7 +227,7 @@
           ]
         },
         "restoreAuditProperties": {
-          "enableAudit": "false",
+          "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
         },
@@ -202,11 +262,11 @@
         "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/Divinity.TestFixtures.csproj",
         "projectName": "Divinity.TestFixtures",
         "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/Divinity.TestFixtures.csproj",
-        "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+        "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
         "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+          "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -227,7 +287,7 @@
           ]
         },
         "restoreAuditProperties": {
-          "enableAudit": "false",
+          "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
         },
@@ -262,11 +322,11 @@
         "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/Divinity.SmokeTests.csproj",
         "projectName": "Divinity.SmokeTests",
         "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/Divinity.SmokeTests.csproj",
-        "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+        "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
         "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/test-fixtures/smoke-tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+          "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -306,7 +366,7 @@
           ]
         },
         "restoreAuditProperties": {
-          "enableAudit": "false",
+          "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
         },
@@ -341,11 +401,11 @@
         "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/Divinity.GameGateway.csproj",
         "projectName": "Divinity.GameGateway",
         "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/Divinity.GameGateway.csproj",
-        "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+        "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
         "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+          "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -360,6 +420,12 @@
             "projectReferences": {
               "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj": {
                 "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj"
+              },
+              "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj": {
+                "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj"
+              },
+              "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj": {
+                "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj"
               }
             }
           }
@@ -370,7 +436,7 @@
           ]
         },
         "restoreAuditProperties": {
-          "enableAudit": "false",
+          "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
         },
@@ -408,11 +474,11 @@
         "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/Divinity.PlatformApi.csproj",
         "projectName": "Divinity.PlatformApi",
         "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/Divinity.PlatformApi.csproj",
-        "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+        "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
         "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/platform-api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+          "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -424,7 +490,14 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj": {
+                "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj"
+              },
+              "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj": {
+                "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -433,7 +506,7 @@
           ]
         },
         "restoreAuditProperties": {
-          "enableAudit": "false",
+          "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
         },
@@ -471,11 +544,11 @@
         "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj",
         "projectName": "Divinity.WorldRuntime",
         "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/Divinity.WorldRuntime.csproj",
-        "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+        "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
         "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/world-runtime/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+          "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -488,8 +561,14 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/Divinity.ContentSchema.csproj": {
+                "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/content-schema/Divinity.ContentSchema.csproj"
+              },
               "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj": {
                 "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj"
+              },
+              "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj": {
+                "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/game-rules/Divinity.GameRules.csproj"
               }
             }
           }
@@ -500,7 +579,7 @@
           ]
         },
         "restoreAuditProperties": {
-          "enableAudit": "false",
+          "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
         },

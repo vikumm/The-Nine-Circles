@@ -26,3 +26,7 @@ Current ADRs:
 - ADR-0013: Content schema and builder.
 - ADR-0014: Launcher PKCE login.
 - ADR-0015: VS-006 game ticket.
+- ADR-0016: VS-007 WSS handshake and session lease.
+- ADR-0017: VS-008 Knight creation and selection.
+- ADR-0018: VS-009 Training Field map import.
+- ADR-0019: VS-010 authoritative MoveIntent.

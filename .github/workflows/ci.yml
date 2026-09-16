@@ -53,6 +53,15 @@ jobs:
       - name: VS-004 content artifacts
         run: dotnet run --project tools/content-builder/Divinity.ContentBuilder.csproj --configuration Release -- build --content-root content --output-root tools/content-builder/artifacts
 
+      - name: Restore map import tests
+        run: dotnet restore packages/test-fixtures/map-tests/Divinity.MapTests.csproj
+
+      - name: Build map import tests
+        run: dotnet build packages/test-fixtures/map-tests/Divinity.MapTests.csproj --configuration Release --no-restore
+
+      - name: VS-009 map import tests
+        run: dotnet run --project packages/test-fixtures/map-tests/Divinity.MapTests.csproj --configuration Release --no-build
+
       - name: Restore launcher auth tests
         run: dotnet restore apps/launcher/tests/Divinity.Launcher.Tests.csproj
 
@@ -93,6 +102,33 @@ jobs:
 
       - name: VS-006 game ticket tests
         run: dotnet run --project packages/test-fixtures/game-ticket-tests/Divinity.GameTicketTests.csproj --configuration Release --no-build
+
+      - name: Restore session tests
+        run: dotnet restore packages/test-fixtures/session-tests/Divinity.SessionTests.csproj
+
+      - name: Build session tests
+        run: dotnet build packages/test-fixtures/session-tests/Divinity.SessionTests.csproj --configuration Release --no-restore
+
+      - name: VS-007 session tests
+        run: dotnet run --project packages/test-fixtures/session-tests/Divinity.SessionTests.csproj --configuration Release --no-build
+
+      - name: Restore character tests
+        run: dotnet restore packages/test-fixtures/character-tests/Divinity.CharacterTests.csproj
+
+      - name: Build character tests
+        run: dotnet build packages/test-fixtures/character-tests/Divinity.CharacterTests.csproj --configuration Release --no-restore
+
+      - name: VS-008 character tests
+        run: dotnet run --project packages/test-fixtures/character-tests/Divinity.CharacterTests.csproj --configuration Release --no-build
+
+      - name: Restore movement tests
+        run: dotnet restore packages/test-fixtures/movement-tests/Divinity.MovementTests.csproj
+
+      - name: Build movement tests
+        run: dotnet build packages/test-fixtures/movement-tests/Divinity.MovementTests.csproj --configuration Release --no-restore
+
+      - name: VS-010 movement tests
+        run: dotnet run --project packages/test-fixtures/movement-tests/Divinity.MovementTests.csproj --configuration Release --no-build
 
       - name: Stop Keycloak
         if: always()

@@ -1,9 +1,18 @@
-# Game Rules Bootstrap
+# Game Rules
 
-This package is intentionally empty in VS-001.
+This package contains server-side rules and versioned catalog values for MMO-VS1.
 
-Rules:
+Current scope:
 
-- no balance value is introduced in this task;
-- no client-authoritative gameplay logic is allowed here or in Unity;
-- later shared rules must preserve server authority and be tested before use.
+- provide the VS-008 Knight level 1 catalog;
+- validate and normalize character names;
+- create/select exactly one Knight slot per account;
+- keep initial stats and safe spawn server-side;
+- provide VS-010 shared movement normalization and cardinal-facing helpers.
+
+Out of scope here:
+
+- four vocations;
+- combat;
+- inventory;
+- rewards.

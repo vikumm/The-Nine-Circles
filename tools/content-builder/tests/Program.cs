@@ -9,13 +9,16 @@ var contentRoot = Path.Combine(repoRoot, "content");
 
 var validLoad = ContentSourceLoader.Load(contentRoot);
 checks.Add(Check("valid Training Field content validates", validLoad.Success));
+checks.Add(Check("Training Field exposes VS-009 zones", RequiredMapZonesExist(validLoad.Catalog)));
 checks.Add(Check("lookup skill, item and loot table", RequiredLookupsExist(validLoad.Catalog)));
 checks.Add(await CheckAsync("builder writes client and server artifacts", () => BuilderWritesArtifactsAsync(contentRoot)));
 checks.Add(await CheckAsync("client and server artifacts share content hash", () => ClientAndServerArtifactsShareHashAsync(contentRoot)));
+checks.Add(await CheckAsync("builder emits 16x16 map chunks", () => BuilderEmitsChunksAsync(contentRoot)));
 checks.Add(await CheckAsync("invalid map without safe spawn fails with actionable error", () => InvalidMapFailsAsync(repoRoot, RemoveSafeSpawn, "safe spawn")));
 checks.Add(await CheckAsync("invalid map bounds fail with actionable error", () => InvalidMapFailsAsync(repoRoot, InvalidateBounds, "bounds")));
 checks.Add(await CheckAsync("spawn outside map fails with actionable error", () => InvalidMapFailsAsync(repoRoot, MoveSpawnOutsideMap, "outside map bounds")));
 checks.Add(await CheckAsync("inconsistent blocked cell fails with actionable error", () => InvalidMapFailsAsync(repoRoot, DuplicateBlockedCell, "duplicated")));
+checks.Add(await CheckAsync("collision wall missing blocked cell fails with actionable error", () => InvalidMapFailsAsync(repoRoot, RemoveCollisionWallBlockedCell, "collision wall")));
 
 foreach (var check in checks)
 {
@@ -25,11 +28,11 @@ foreach (var check in checks)
 var failures = checks.Where(check => !check.Passed).ToArray();
 if (failures.Length > 0)
 {
-    Console.Error.WriteLine($"VS-004 content tests failed: {failures.Length} check(s) failed.");
+    Console.Error.WriteLine($"VS-004/VS-009 content tests failed: {failures.Length} check(s) failed.");
     return 1;
 }
 
-Console.WriteLine("VS-004 content tests passed.");
+Console.WriteLine("VS-004/VS-009 content tests passed.");
 return 0;
 
 static bool RequiredLookupsExist(ContentCatalog? catalog) =>
@@ -37,6 +40,25 @@ static bool RequiredLookupsExist(ContentCatalog? catalog) =>
     && catalog.FindSkill("knight_shield_bash_r1") is not null
     && catalog.FindItem("knight_wooden_shield_t0") is not null
     && catalog.FindLootTable("mob_moss_slime_l1") is not null;
+
+static bool RequiredMapZonesExist(ContentCatalog? catalog)
+{
+    if (catalog is null)
+    {
+        return false;
+    }
+
+    var map = catalog.Map;
+    return map.Bounds is { Width: 96, Height: 96 }
+        && string.Equals(map.StableId, "map_training_field_01", StringComparison.Ordinal)
+        && map.Regions.Any(region => region.Kind == RegionKind.SafeSpawn)
+        && map.Regions.Any(region => region.Kind == RegionKind.MovementCorridor)
+        && map.Regions.Any(region => region.Kind == RegionKind.CombatZone)
+        && map.Regions.Any(region => region.Kind == RegionKind.LeashArea)
+        && map.Regions.Any(region => region.Kind == RegionKind.CollisionWall)
+        && map.Regions.Any(region => region.Kind == RegionKind.EquipmentPoint)
+        && map.Triggers.Any(trigger => trigger.Kind == TriggerKind.EquipmentPoint);
+}
 
 static async Task<bool> BuilderWritesArtifactsAsync(string contentRoot)
 {
@@ -78,7 +100,39 @@ static async Task<bool> ClientAndServerArtifactsShareHashAsync(string contentRoo
             && server is not null
             && !string.IsNullOrWhiteSpace(client.ContentHash)
             && string.Equals(client.ContentHash, server.ContentHash, StringComparison.Ordinal)
-            && string.Equals(client.ContentHash, result.ContentHash, StringComparison.Ordinal);
+            && string.Equals(client.ContentHash, result.ContentHash, StringComparison.Ordinal)
+            && string.Equals(client.ContentHash, server.ContentHash, StringComparison.Ordinal);
+    }
+    finally
+    {
+        DeleteDirectory(outputRoot);
+    }
+}
+
+static async Task<bool> BuilderEmitsChunksAsync(string contentRoot)
+{
+    var outputRoot = CreateTempDirectory("vs009-builder-chunks");
+    try
+    {
+        var result = await ContentBuilder.RunAsync(new ContentBuilderOptions(contentRoot, outputRoot, WriteArtifacts: true));
+        if (!result.Success || result.ClientArtifactPath is null || result.ServerArtifactPath is null)
+        {
+            return false;
+        }
+
+        var client = JsonSerializer.Deserialize<ClientContentArtifact>(
+            await File.ReadAllTextAsync(result.ClientArtifactPath),
+            ContentJson.Options);
+        var server = JsonSerializer.Deserialize<ServerContentArtifact>(
+            await File.ReadAllTextAsync(result.ServerArtifactPath),
+            ContentJson.Options);
+
+        return client?.Map.Chunks is { ChunkSize: 16, Columns: 6, Rows: 6 }
+            && server?.Chunks is { ChunkSize: 16, Columns: 6, Rows: 6 }
+            && client.Map.Chunks.Chunks.Count == 36
+            && server.Chunks.Chunks.Count == 36
+            && client.Map.Chunks.Chunks.All(chunk => chunk is { Width: 16, Height: 16 })
+            && server.Chunks.Chunks.All(chunk => chunk is { Width: 16, Height: 16 });
     }
     finally
     {
@@ -154,6 +208,22 @@ static void DuplicateBlockedCell(JsonObject map)
         ["x"] = 18,
         ["y"] = 18
     });
+}
+
+static void RemoveCollisionWallBlockedCell(JsonObject map)
+{
+    var blockedCells = map["blockedCells"]?.AsArray() ?? throw new InvalidOperationException("Map blockedCells are missing.");
+    for (var index = 0; index < blockedCells.Count; index++)
+    {
+        var cell = blockedCells[index]?.AsObject();
+        if (cell?["x"]?.GetValue<int>() == 32 && cell["y"]?.GetValue<int>() == 40)
+        {
+            blockedCells.RemoveAt(index);
+            return;
+        }
+    }
+
+    throw new InvalidOperationException("Expected collision wall blocked cell was not found.");
 }
 
 static string FindRepoRoot()

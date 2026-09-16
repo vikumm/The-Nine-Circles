@@ -99,7 +99,7 @@
     ]
   },
   "packageFolders": {
-    "/tmp/divinity-dotnet-home/.nuget/packages/": {}
+    "/Users/joeloliveirasilva/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -107,11 +107,11 @@
       "projectUniqueName": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj",
       "projectName": "Divinity.ContractsProto",
       "projectPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/Divinity.ContractsProto.csproj",
-      "packagesPath": "/tmp/divinity-dotnet-home/.nuget/packages/",
+      "packagesPath": "/Users/joeloliveirasilva/.nuget/packages/",
       "outputPath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/packages/contracts-proto/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/tmp/divinity-dotnet-home/.nuget/NuGet/NuGet.Config"
+        "/Users/joeloliveirasilva/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"

@@ -60,3 +60,12 @@
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/obj/Release/net9.0/Divinity.FDC8A467.Up2Date
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/obj/Release/net9.0/Divinity.GameGateway.genruntimeconfig.cache
 /Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/obj/Release/net9.0/ref/Divinity.GameGateway.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/bin/Release/net9.0/Divinity.WorldRuntime.deps.json
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/bin/Release/net9.0/Divinity.WorldRuntime.runtimeconfig.json
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/bin/Release/net9.0/Divinity.WorldRuntime
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/bin/Release/net9.0/Divinity.ContentSchema.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/bin/Release/net9.0/Divinity.GameRules.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/bin/Release/net9.0/Divinity.WorldRuntime.dll
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/bin/Release/net9.0/Divinity.GameRules.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/bin/Release/net9.0/Divinity.WorldRuntime.pdb
+/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/services/game-gateway/bin/Release/net9.0/Divinity.ContentSchema.pdb

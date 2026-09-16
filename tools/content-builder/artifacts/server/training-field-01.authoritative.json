@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "vs004.1",
-  "contentHash": "2c8419915d301babe541b03eb3b2c9c656bd95f9366b512406ac531f6df31874",
+  "contentVersion": "vs009.1",
+  "contentHash": "6529839f9a9e7a0f1dc939a9e72fa7b6938f588f24317b5df64fc1507136a89e",
   "map": {
     "schemaVersion": 1,
     "mapId": "training-field-01",
+    "stableId": "map_training_field_01",
     "name": "Training Field 01",
-    "contentVersion": "vs004.1",
+    "contentVersion": "vs009.1",
     "bounds": {
       "width": 96,
       "height": 96
@@ -60,6 +61,38 @@
       {
         "x": 72,
         "y": 67
+      },
+      {
+        "x": 32,
+        "y": 40
+      },
+      {
+        "x": 33,
+        "y": 40
+      },
+      {
+        "x": 34,
+        "y": 40
+      },
+      {
+        "x": 35,
+        "y": 40
+      },
+      {
+        "x": 36,
+        "y": 40
+      },
+      {
+        "x": 37,
+        "y": 40
+      },
+      {
+        "x": 38,
+        "y": 40
+      },
+      {
+        "x": 39,
+        "y": 40
       }
     ],
     "regions": [
@@ -74,8 +107,8 @@
         }
       },
       {
-        "id": "training-ground",
-        "kind": "trainingGround",
+        "id": "movement-corridor-01",
+        "kind": "movementCorridor",
         "bounds": {
           "x": 16,
           "y": 4,
@@ -84,13 +117,43 @@
         }
       },
       {
-        "id": "moss-slime-field",
+        "id": "combat-field-01",
         "kind": "combatZone",
         "bounds": {
           "x": 36,
           "y": 36,
           "width": 44,
           "height": 44
+        }
+      },
+      {
+        "id": "leash-area-01",
+        "kind": "leashArea",
+        "bounds": {
+          "x": 38,
+          "y": 38,
+          "width": 32,
+          "height": 32
+        }
+      },
+      {
+        "id": "collision-wall-01",
+        "kind": "collisionWall",
+        "bounds": {
+          "x": 32,
+          "y": 40,
+          "width": 8,
+          "height": 1
+        }
+      },
+      {
+        "id": "equipment-point-01",
+        "kind": "equipmentPoint",
+        "bounds": {
+          "x": 12,
+          "y": 18,
+          "width": 4,
+          "height": 4
         }
       }
     ],
@@ -107,7 +170,7 @@
         "id": "moss-slime-spawn-01",
         "kind": "monster",
         "entityTemplateId": "mob_moss_slime_l1",
-        "regionId": "moss-slime-field",
+        "regionId": "combat-field-01",
         "x": 48,
         "y": 48
       },
@@ -115,7 +178,7 @@
         "id": "moss-slime-spawn-02",
         "kind": "monster",
         "entityTemplateId": "mob_moss_slime_l1",
-        "regionId": "moss-slime-field",
+        "regionId": "combat-field-01",
         "x": 54,
         "y": 52
       }
@@ -147,6 +210,359 @@
           "width": 4,
           "height": 8
         }
+      },
+      {
+        "id": "equipment-point-enter",
+        "kind": "equipmentPoint",
+        "bounds": {
+          "x": 12,
+          "y": 18,
+          "width": 4,
+          "height": 4
+        }
+      }
+    ]
+  },
+  "chunks": {
+    "chunkSize": 16,
+    "columns": 6,
+    "rows": 6,
+    "chunks": [
+      {
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 16,
+        "y": 0,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 32,
+        "y": 0,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 48,
+        "y": 0,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 64,
+        "y": 0,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 80,
+        "y": 0,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 0,
+        "y": 16,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 16,
+        "y": 16,
+        "width": 16,
+        "height": 16,
+        "blockedCells": [
+          {
+            "x": 18,
+            "y": 18
+          },
+          {
+            "x": 19,
+            "y": 18
+          },
+          {
+            "x": 18,
+            "y": 19
+          }
+        ]
+      },
+      {
+        "x": 32,
+        "y": 16,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 48,
+        "y": 16,
+        "width": 16,
+        "height": 16,
+        "blockedCells": [
+          {
+            "x": 60,
+            "y": 28
+          },
+          {
+            "x": 61,
+            "y": 28
+          },
+          {
+            "x": 60,
+            "y": 29
+          }
+        ]
+      },
+      {
+        "x": 64,
+        "y": 16,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 80,
+        "y": 16,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 0,
+        "y": 32,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 16,
+        "y": 32,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 32,
+        "y": 32,
+        "width": 16,
+        "height": 16,
+        "blockedCells": [
+          {
+            "x": 32,
+            "y": 40
+          },
+          {
+            "x": 33,
+            "y": 40
+          },
+          {
+            "x": 34,
+            "y": 40
+          },
+          {
+            "x": 35,
+            "y": 40
+          },
+          {
+            "x": 36,
+            "y": 40
+          },
+          {
+            "x": 37,
+            "y": 40
+          },
+          {
+            "x": 38,
+            "y": 40
+          },
+          {
+            "x": 39,
+            "y": 40
+          },
+          {
+            "x": 34,
+            "y": 42
+          },
+          {
+            "x": 35,
+            "y": 42
+          },
+          {
+            "x": 34,
+            "y": 43
+          }
+        ]
+      },
+      {
+        "x": 48,
+        "y": 32,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 64,
+        "y": 32,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 80,
+        "y": 32,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 0,
+        "y": 48,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 16,
+        "y": 48,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 32,
+        "y": 48,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 48,
+        "y": 48,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 64,
+        "y": 48,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 80,
+        "y": 48,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 0,
+        "y": 64,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 16,
+        "y": 64,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 32,
+        "y": 64,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 48,
+        "y": 64,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 64,
+        "y": 64,
+        "width": 16,
+        "height": 16,
+        "blockedCells": [
+          {
+            "x": 72,
+            "y": 66
+          },
+          {
+            "x": 73,
+            "y": 66
+          },
+          {
+            "x": 72,
+            "y": 67
+          }
+        ]
+      },
+      {
+        "x": 80,
+        "y": 64,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 0,
+        "y": 80,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 16,
+        "y": 80,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 32,
+        "y": 80,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 48,
+        "y": 80,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 64,
+        "y": 80,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
+      },
+      {
+        "x": 80,
+        "y": 80,
+        "width": 16,
+        "height": 16,
+        "blockedCells": []
       }
     ]
   },
