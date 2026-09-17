@@ -1,3 +1,5 @@
 {
-  "dependencies": {}
+  "dependencies": {
+    "com.divinity.movement-rules": "file:../../../packages/game-rules/Movement"
+  }
 }

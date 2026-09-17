@@ -1,0 +1,7 @@
+{
+  "name": "com.divinity.movement-rules",
+  "version": "0.11.0",
+  "displayName": "Divinity Movement Rules",
+  "unity": "2021.3",
+  "description": "Shared MMO-VS1 movement math and visual client prediction helpers. This package contains no authoritative client gameplay decisions."
+}

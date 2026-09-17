@@ -11,7 +11,7 @@ var checks = new[]
     Check("platform api character gate is scoped", PlatformApiInfo.ComponentName == "platform-api" && PlatformApiInfo.ImplementsDomainPersistence && PlatformApiInfo.CreatesKnight),
     Check("game gateway movement gate is scoped", GameGatewayInfo.ComponentName == "game-gateway" && GameGatewayInfo.ImplementsWssHandshake && GameGatewayInfo.RoutesGameplayIntents),
     Check("world runtime movement gate is scoped", WorldRuntimeInfo.ComponentName == "world-runtime" && WorldRuntimeInfo.UsesAuthoritativeMapArtifact && WorldRuntimeInfo.ImplementsMovement && !WorldRuntimeInfo.ImplementsCombat),
-    Check("game rules package has VS-010 movement rules", GameRulesInfo.ComponentName == "game-rules" && GameRulesInfo.ContainsBalanceData && GameRulesInfo.ContainsGameplayRules && GameRulesInfo.ContainsMovementRules),
+    Check("game rules package has VS-011 prediction rules", GameRulesInfo.ComponentName == "game-rules" && GameRulesInfo.ContainsBalanceData && GameRulesInfo.ContainsGameplayRules && GameRulesInfo.ContainsMovementRules && GameRulesInfo.ContainsPredictionRules),
     Check("test fixtures package is empty", TestFixturesInfo.ComponentName == "test-fixtures" && !TestFixturesInfo.ContainsGameplayFixtures)
 };
 

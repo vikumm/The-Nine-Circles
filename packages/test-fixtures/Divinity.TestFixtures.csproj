@@ -13,6 +13,7 @@
     <Compile Remove="character-tests/**/*.cs" />
     <Compile Remove="map-tests/**/*.cs" />
     <Compile Remove="movement-tests/**/*.cs" />
+    <Compile Remove="prediction-tests/**/*.cs" />
   </ItemGroup>
 
 </Project>

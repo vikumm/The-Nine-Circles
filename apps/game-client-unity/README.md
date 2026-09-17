@@ -47,4 +47,12 @@ VS-010 note:
 
 - Unity may send `MoveIntent` direction or click-target messages only after the server accepts `JoinWorld`;
 - Unity must not send final position, trusted speed, collision authority or checkpoint state;
-- prediction and reconciliation are still deferred to VS-011, so this folder keeps documentation/bootstrap only for movement.
+- prediction and reconciliation are implemented in VS-011 as visual-only state on top of server authority.
+
+VS-011 note:
+
+- `Packages/manifest.json` imports `packages/game-rules/Movement` as `com.divinity.movement-rules`;
+- `Assets/Scripts/Divinity/Movement/DivinityPredictionBootstrap.cs` applies local visual prediction for the own player;
+- `Assets/Editor/DivinityPredictionVisualSmokeTest.cs` can be run in Unity batch mode to validate responsive movement;
+- snapshots and corrections from the server always override local prediction;
+- Unity still must not calculate authoritative collision, bounds, final position or checkpoint persistence.

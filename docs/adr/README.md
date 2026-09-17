@@ -30,3 +30,4 @@ Current ADRs:
 - ADR-0017: VS-008 Knight creation and selection.
 - ADR-0018: VS-009 Training Field map import.
 - ADR-0019: VS-010 authoritative MoveIntent.
+- ADR-0020: VS-011 prediction and reconciliation.

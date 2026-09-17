@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "com.divinity.movement-rules": {
+      "version": "file:../../../packages/game-rules/Movement",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    }
+  }
+}

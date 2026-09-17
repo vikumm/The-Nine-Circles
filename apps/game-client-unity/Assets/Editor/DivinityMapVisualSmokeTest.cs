@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+#nullable enable
 using System;
 using System.IO;
 using UnityEditor;
@@ -25,20 +26,24 @@ namespace Divinity.Editor
             var artifact = JsonUtility.FromJson<ClientContentArtifact>(json);
 
             Require(artifact != null, "visual artifact could not be parsed");
-            Require(!string.IsNullOrWhiteSpace(artifact.contentHash), "contentHash is required");
-            Require(artifact.map != null, "map is required");
-            Require(artifact.map.bounds != null, "map bounds are required");
-            Require(artifact.map.bounds.width == 96 && artifact.map.bounds.height == 96, "map bounds must be 96x96");
-            Require(artifact.map.chunks != null, "map chunks are required");
-            Require(artifact.map.chunks.chunkSize == 16, "chunk size must be 16");
-            Require(artifact.map.chunks.columns == 6 && artifact.map.chunks.rows == 6, "chunk grid must be 6x6");
-            Require(artifact.map.chunks.chunks != null && artifact.map.chunks.chunks.Length == 36, "chunk grid must contain 36 chunks");
-            Require(artifact.map.safeSpawns != null && artifact.map.safeSpawns.Length > 0, "safe spawn is required");
+            var parsedArtifact = artifact!;
+            Require(!string.IsNullOrWhiteSpace(parsedArtifact.contentHash), "contentHash is required");
+            Require(parsedArtifact.map != null, "map is required");
+            var map = parsedArtifact.map!;
+            Require(map.bounds != null, "map bounds are required");
+            var bounds = map.bounds!;
+            Require(bounds.width == 96 && bounds.height == 96, "map bounds must be 96x96");
+            Require(map.chunks != null, "map chunks are required");
+            var chunks = map.chunks!;
+            Require(chunks.chunkSize == 16, "chunk size must be 16");
+            Require(chunks.columns == 6 && chunks.rows == 6, "chunk grid must be 6x6");
+            Require(chunks.chunks != null && chunks.chunks.Length == 36, "chunk grid must contain 36 chunks");
+            Require(map.safeSpawns != null && map.safeSpawns.Length > 0, "safe spawn is required");
 
             var root = new GameObject("VS-009 Training Field Visual Smoke");
             root.AddComponent<DivinityMapVisualSmokeMarker>();
 
-            Debug.Log("VS-009 Training Field visual artifact loaded: " + artifact.contentHash);
+            Debug.Log("VS-009 Training Field visual artifact loaded: " + parsedArtifact.contentHash);
             EditorApplication.Exit(0);
         }
 
@@ -152,4 +157,5 @@ namespace Divinity.Editor
     {
     }
 }
+#nullable restore
 #endif

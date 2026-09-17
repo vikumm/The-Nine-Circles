@@ -10,3 +10,5 @@ VS-009 adds only content bootstrap assets:
 These files are client-side projections. They must never become authority for collision, spawn, safe spawn, bounds, movement, combat or inventory.
 
 VS-010 keeps movement authority server-side. Client assets may help render movement and map visuals, but they must not calculate the authoritative final position, collision result or checkpoint.
+
+VS-011 adds visual prediction bootstrap scripts. These scripts may move the rendered own-player transform immediately, but server `WorldSnapshot` and `Correction` remain the source of truth.

@@ -6,9 +6,9 @@ namespace Divinity.WorldRuntime.Movement;
 
 public static class WorldMovementDefaults
 {
-    public const double MaxSpeedUnitsPerSecond = 4.5d;
-    public const double MoveIntentDeltaSeconds = 0.05d;
-    public const double MaxDistancePerMoveIntent = MaxSpeedUnitsPerSecond * MoveIntentDeltaSeconds;
+    public const double MaxSpeedUnitsPerSecond = MovementTuning.MaxSpeedUnitsPerSecond;
+    public const double MoveIntentDeltaSeconds = MovementTuning.MoveIntentDeltaSeconds;
+    public const double MaxDistancePerMoveIntent = MovementTuning.MaxDistancePerMoveIntent;
     public static readonly TimeSpan SnapshotInterval = TimeSpan.FromMilliseconds(100);
     public static readonly TimeSpan CheckpointInterval = TimeSpan.FromSeconds(10);
 }
