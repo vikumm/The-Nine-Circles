@@ -56,3 +56,15 @@ VS-011 note:
 - `Assets/Editor/DivinityPredictionVisualSmokeTest.cs` can be run in Unity batch mode to validate responsive movement;
 - snapshots and corrections from the server always override local prediction;
 - Unity still must not calculate authoritative collision, bounds, final position or checkpoint persistence.
+
+VS-012 note:
+
+- Moss Slime AI runs only in World Runtime;
+- Unity may render monster `EntityState` values received from authoritative snapshots;
+- Unity must not choose monster target, path, aggro, attack, death, reward or respawn outcome.
+
+VS-013 note:
+
+- Unity may send `AttackIntent` for `knight_basic_slash` only as player intent;
+- Unity must render `CombatEvent` and `SkillStateChanged` as server results;
+- Unity must not calculate damage, crit, target HP, cooldown completion, death, XP or loot.

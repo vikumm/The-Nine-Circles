@@ -20,6 +20,8 @@ checks.Add(Check("payload over 64 KiB rejected", OversizedPayloadIsRejected()));
 checks.Add(Check("truncated payload rejected", TruncatedPayloadIsRejected()));
 checks.Add(Check("unknown payload type rejected", UnknownPayloadTypeIsRejected()));
 checks.Add(Check("move intent contract stays intent-only", MoveIntentContractIsIntentOnly()));
+checks.Add(Check("attack intent contract stays intent-only", AttackIntentContractIsIntentOnly()));
+checks.Add(Check("skill state changed contract exists", SkillStateChangedContractExists()));
 checks.Add(await CheckAsync("client to gateway ClientHello smoke", ClientHelloSmokeAsync()));
 
 foreach (var check in checks)
@@ -146,6 +148,57 @@ static bool MoveIntentContractIsIntentOnly()
         && MoveIntent.Descriptor.FindFieldByName("position") is null
         && MoveIntent.Descriptor.FindFieldByName("final_position") is null
         && MoveIntent.Descriptor.FindFieldByName("speed") is null;
+}
+
+static bool AttackIntentContractIsIntentOnly()
+{
+    var envelope = new ClientEnvelope
+    {
+        ProtocolVersion = ProtocolConstants.SupportedProtocolVersion,
+        Sequence = 78,
+        ClientTick = 8810,
+        AttackIntent = new AttackIntent
+        {
+            TargetEntityId = "monster:moss-slime-spawn-01",
+            SkillId = "knight_basic_slash",
+            ActionId = "action-vs013"
+        }
+    };
+
+    var parsed = ClientEnvelope.Parser.ParseFrom(envelope.ToByteArray());
+
+    return parsed.PayloadCase == ClientEnvelope.PayloadOneofCase.AttackIntent
+        && parsed.AttackIntent.TargetEntityId == "monster:moss-slime-spawn-01"
+        && parsed.AttackIntent.SkillId == "knight_basic_slash"
+        && ErrorCode.AttackRejected == (ErrorCode)24
+        && AttackIntent.Descriptor.FindFieldByName("damage") is null
+        && AttackIntent.Descriptor.FindFieldByName("critical") is null
+        && AttackIntent.Descriptor.FindFieldByName("target_hp") is null
+        && AttackIntent.Descriptor.FindFieldByName("cooldown_complete") is null;
+}
+
+static bool SkillStateChangedContractExists()
+{
+    var envelope = new ServerEnvelope
+    {
+        ProtocolVersion = ProtocolConstants.SupportedProtocolVersion,
+        AckSequence = 78,
+        SkillStateChanged = new SkillStateChanged
+        {
+            CharacterId = "character-vs013",
+            SkillId = "knight_basic_slash",
+            CooldownStartedServerMs = 1000,
+            CooldownEndsServerMs = 1800,
+            Available = false
+        }
+    };
+
+    var parsed = ServerEnvelope.Parser.ParseFrom(envelope.ToByteArray());
+
+    return parsed.PayloadCase == ServerEnvelope.PayloadOneofCase.SkillStateChanged
+        && parsed.SkillStateChanged.SkillId == "knight_basic_slash"
+        && parsed.SkillStateChanged.CooldownEndsServerMs == 1800
+        && !parsed.SkillStateChanged.Available;
 }
 
 static async Task<bool> ClientHelloSmokeAsync()

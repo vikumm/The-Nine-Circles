@@ -1,6 +1,7 @@
 using Divinity.Contracts.V1;
 using Divinity.GameRules.Characters;
 using Divinity.GameRules.Movement;
+using Divinity.WorldRuntime.Combat;
 using Divinity.WorldRuntime.Map;
 
 namespace Divinity.WorldRuntime.Movement;
@@ -133,6 +134,25 @@ public sealed class WorldMovementRuntime
             }
         }
     }
+
+    public WorldCombatActor? GetCombatActor(string characterId)
+    {
+        lock (_gate)
+        {
+            return _actors.TryGetValue(characterId, out var actor)
+                ? new WorldCombatActor(
+                    actor.CharacterId,
+                    actor.MapId,
+                    actor.ChannelId,
+                    actor.Position,
+                    actor.Stats,
+                    actor.MotionState.ToCombatActorState())
+                : null;
+        }
+    }
+
+    public bool SegmentTouchesBlockedOrOutOfBounds(CharacterPosition from, double targetX, double targetY) =>
+        _mapCatalog.SegmentTouchesBlockedOrOutOfBounds((double)from.X, (double)from.Y, targetX, targetY);
 
     public async Task DisconnectAsync(string characterId, string reason, CancellationToken cancellationToken)
     {

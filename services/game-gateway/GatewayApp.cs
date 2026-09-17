@@ -2,8 +2,10 @@ using Divinity.ContractsProto.GameTickets;
 using Divinity.GameGateway.Protocol;
 using Divinity.GameGateway.Session;
 using Divinity.GameRules.Characters;
+using Divinity.WorldRuntime.Combat;
 using Divinity.WorldRuntime.Map;
 using Divinity.WorldRuntime.Movement;
+using Divinity.WorldRuntime.Monsters;
 using Google.Protobuf;
 using Microsoft.AspNetCore.Http;
 
@@ -20,6 +22,8 @@ public static class GatewayApp
         builder.Services.AddSingleton<CharacterService>();
         builder.Services.AddSingleton(_ => WorldMapCatalog.LoadDefaultAsync().GetAwaiter().GetResult());
         builder.Services.AddSingleton<WorldMovementRuntime>();
+        builder.Services.AddSingleton<WorldMonsterRuntime>();
+        builder.Services.AddSingleton<WorldCombatRuntime>();
         builder.Services.AddSingleton<GatewaySessionManager>();
         builder.Services.AddSingleton<AnonymousHandshakeRateLimiter>();
         builder.Services.AddSingleton<GatewayWebSocketHandler>();
@@ -34,7 +38,8 @@ public static class GatewayApp
             implementsWssHandshake = GameGatewayInfo.ImplementsWssHandshake,
             consumesGameTickets = GameGatewayInfo.ConsumesGameTickets,
             verifiesCharacterOwnership = GameGatewayInfo.VerifiesCharacterOwnership,
-            routesGameplayIntents = GameGatewayInfo.RoutesGameplayIntents
+            routesGameplayIntents = GameGatewayInfo.RoutesGameplayIntents,
+            routesAttackIntents = GameGatewayInfo.RoutesAttackIntents
         });
 
         app.MapGet("/protocol/v1/ws", async (HttpContext context, AnonymousHandshakeRateLimiter rateLimiter, GatewayWebSocketHandler handler) =>

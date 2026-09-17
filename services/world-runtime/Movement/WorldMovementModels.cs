@@ -1,6 +1,7 @@
 using Divinity.Contracts.V1;
 using Divinity.GameRules.Characters;
 using Divinity.GameRules.Movement;
+using Divinity.WorldRuntime.Combat;
 
 namespace Divinity.WorldRuntime.Movement;
 
@@ -54,4 +55,15 @@ public enum WorldCharacterMotionState
     Alive,
     Dead,
     Stunned
+}
+
+public static class WorldCharacterMotionStateExtensions
+{
+    public static WorldCombatActorState ToCombatActorState(this WorldCharacterMotionState motionState) =>
+        motionState switch
+        {
+            WorldCharacterMotionState.Dead => WorldCombatActorState.Dead,
+            WorldCharacterMotionState.Stunned => WorldCombatActorState.Stunned,
+            _ => WorldCombatActorState.Alive
+        };
 }

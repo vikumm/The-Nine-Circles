@@ -17,13 +17,15 @@ Current scope:
 - route `MoveIntent` to World Runtime after join;
 - rate limit `MoveIntent` to 20 messages per second per authenticated session;
 - return authoritative `WorldSnapshot`, `Correction` or `ServerError` responses for movement.
+- route VS-013 `AttackIntent` to World Runtime after join;
+- return server-authored `CombatEvent`, `SkillStateChanged` or `ServerError` responses for Basic Slash.
 
 Out of scope here:
 
 - durable multi-node WSS session persistence;
 - reconnect leases;
 - client-side prediction/reconciliation;
-- combat;
+- Shield Bash, loot, XP and final combat reward flow;
 - inventory.
 
 VS-007 note:
@@ -37,3 +39,9 @@ VS-010 note:
 - the Gateway does not decide final movement positions locally;
 - movement decisions are delegated to `services/world-runtime`;
 - normal disconnect asks World Runtime to persist the last authoritative checkpoint.
+
+VS-013 note:
+
+- the Gateway does not calculate damage, range, cooldown, crit, HP or death;
+- Basic Slash decisions are delegated to `services/world-runtime`;
+- the client still sends only intents.

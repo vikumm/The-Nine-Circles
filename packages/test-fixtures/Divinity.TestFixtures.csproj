@@ -14,6 +14,8 @@
     <Compile Remove="map-tests/**/*.cs" />
     <Compile Remove="movement-tests/**/*.cs" />
     <Compile Remove="prediction-tests/**/*.cs" />
+    <Compile Remove="monster-ai-tests/**/*.cs" />
+    <Compile Remove="basic-attack-tests/**/*.cs" />
   </ItemGroup>
 
 </Project>

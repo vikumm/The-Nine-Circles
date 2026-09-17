@@ -139,6 +139,24 @@ jobs:
       - name: VS-011 prediction tests
         run: dotnet run --project packages/test-fixtures/prediction-tests/Divinity.PredictionTests.csproj --configuration Release --no-build
 
+      - name: Restore monster AI tests
+        run: dotnet restore packages/test-fixtures/monster-ai-tests/Divinity.MonsterAiTests.csproj
+
+      - name: Build monster AI tests
+        run: dotnet build packages/test-fixtures/monster-ai-tests/Divinity.MonsterAiTests.csproj --configuration Release --no-restore
+
+      - name: VS-012 monster AI tests
+        run: dotnet run --project packages/test-fixtures/monster-ai-tests/Divinity.MonsterAiTests.csproj --configuration Release --no-build
+
+      - name: Restore basic attack tests
+        run: dotnet restore packages/test-fixtures/basic-attack-tests/Divinity.BasicAttackTests.csproj
+
+      - name: Build basic attack tests
+        run: dotnet build packages/test-fixtures/basic-attack-tests/Divinity.BasicAttackTests.csproj --configuration Release --no-restore
+
+      - name: VS-013 basic attack tests
+        run: dotnet run --project packages/test-fixtures/basic-attack-tests/Divinity.BasicAttackTests.csproj --configuration Release --no-build
+
       - name: Stop Keycloak
         if: always()
         run: docker compose -f infra/compose/compose.yml down

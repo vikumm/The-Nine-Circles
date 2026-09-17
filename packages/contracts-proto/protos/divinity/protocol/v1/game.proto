@@ -35,6 +35,7 @@ message ServerEnvelope {
     InventoryDelta inventory_delta = 14;
     Correction correction = 15;
     ServerError server_error = 16;
+    SkillStateChanged skill_state_changed = 17;
   }
 }
 
@@ -142,6 +143,14 @@ message CombatEvent {
   repeated StatusEffectApplied status_effects = 8;
 }
 
+message SkillStateChanged {
+  string character_id = 1;
+  string skill_id = 2;
+  uint64 cooldown_started_server_ms = 3;
+  uint64 cooldown_ends_server_ms = 4;
+  bool available = 5;
+}
+
 enum CombatResult {
   COMBAT_RESULT_UNSPECIFIED = 0;
   COMBAT_RESULT_HIT = 1;
@@ -226,6 +235,7 @@ enum ErrorCode {
   ERROR_CODE_RECONNECT_UNSUPPORTED = 21;
   ERROR_CODE_SESSION_NOT_JOINED = 22;
   ERROR_CODE_MOVE_REJECTED = 23;
+  ERROR_CODE_ATTACK_REJECTED = 24;
 }
 
 message CharacterStats {

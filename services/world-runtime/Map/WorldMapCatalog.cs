@@ -21,6 +21,7 @@ public sealed class WorldMapCatalog
     public string ContentHash => Artifact.ContentHash;
     public MapDefinition Map => Artifact.Map;
     public SafeSpawn? PrimarySafeSpawn => Map.SafeSpawns.FirstOrDefault();
+    public IReadOnlyList<MapSpawn> MonsterSpawns => Map.Spawns.Where(spawn => spawn.Kind == SpawnKind.Monster).ToArray();
 
     public static WorldMapCatalog FromArtifact(ServerContentArtifact artifact) => new(artifact);
 
@@ -81,6 +82,18 @@ public sealed class WorldMapCatalog
     public bool IsInsideSafeSpawn(int x, int y) =>
         Map.Regions.Any(region => region.Kind == RegionKind.SafeSpawn && Contains(region.Bounds, x, y));
 
+    public MapRegion? FindRegion(string regionId) =>
+        Map.Regions.FirstOrDefault(region => string.Equals(region.Id, regionId, StringComparison.Ordinal));
+
+    public bool IsInsideRegion(string regionId, double x, double y)
+    {
+        var region = FindRegion(regionId);
+        return region is not null && Contains(region.Bounds, x, y);
+    }
+
+    public bool IsInsideRegionKind(RegionKind kind, double x, double y) =>
+        Map.Regions.Any(region => region.Kind == kind && Contains(region.Bounds, x, y));
+
     private static string FindDefaultArtifactPath()
     {
         var current = new DirectoryInfo(Directory.GetCurrentDirectory());
@@ -99,5 +112,8 @@ public sealed class WorldMapCatalog
     }
 
     private static bool Contains(GridRect rect, int x, int y) =>
+        x >= rect.X && y >= rect.Y && x < rect.X + rect.Width && y < rect.Y + rect.Height;
+
+    private static bool Contains(GridRect rect, double x, double y) =>
         x >= rect.X && y >= rect.Y && x < rect.X + rect.Width && y < rect.Y + rect.Height;
 }

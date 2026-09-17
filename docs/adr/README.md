@@ -31,3 +31,5 @@ Current ADRs:
 - ADR-0018: VS-009 Training Field map import.
 - ADR-0019: VS-010 authoritative MoveIntent.
 - ADR-0020: VS-011 prediction and reconciliation.
+- ADR-0021: VS-012 Moss Slime AI.
+- ADR-0022: VS-013 basic attack authority.

@@ -7,6 +7,8 @@ public static class ContentValidator
     private const int RequiredMapHeight = 96;
     private const int RequiredChunkSize = 16;
     private const string RequiredStableMapId = "map_training_field_01";
+    private const string RequiredMossSlimeTemplateId = "mob_moss_slime_l1";
+    private const int MaxMossSlimeSpawns = 30;
     private static readonly string[] RequiredSkillIds = ["knight_basic_slash", "knight_shield_bash_r1"];
     private static readonly ItemRarity[] RequiredShieldRarities = [ItemRarity.Normal, ItemRarity.Good, ItemRarity.Rare];
     private static readonly RegionKind[] RequiredRegionKinds =
@@ -107,6 +109,7 @@ public static class ContentValidator
             }
         }
 
+        var regionsById = new Dictionary<string, MapRegion>(StringComparer.Ordinal);
         var regionIds = new HashSet<string>(StringComparer.Ordinal);
         foreach (var region in map.Regions)
         {
@@ -117,6 +120,10 @@ public static class ContentValidator
             else if (!regionIds.Add(region.Id))
             {
                 errors.Add($"maps/training-field-01/map.json: region id '{region.Id}' is duplicated.");
+            }
+            else
+            {
+                regionsById[region.Id] = region;
             }
 
             if (region.Kind == RegionKind.Unknown)
@@ -213,6 +220,41 @@ public static class ContentValidator
             if (IsPresent(spawn.RegionId) && !regionIds.Contains(spawn.RegionId))
             {
                 errors.Add($"maps/training-field-01/map.json: spawn '{spawn.Id}' references unknown region '{spawn.RegionId}'.");
+            }
+
+            if (IsPresent(spawn.RegionId) && regionsById.TryGetValue(spawn.RegionId, out var spawnRegion))
+            {
+                if (!Contains(spawnRegion.Bounds, spawn.X, spawn.Y))
+                {
+                    errors.Add($"maps/training-field-01/map.json: spawn '{spawn.Id}' must be inside region '{spawn.RegionId}'.");
+                }
+
+                if (spawn.Kind == SpawnKind.Monster && spawnRegion.Kind != RegionKind.CombatZone)
+                {
+                    errors.Add($"maps/training-field-01/map.json: monster spawn '{spawn.Id}' must be inside a combat zone region.");
+                }
+            }
+        }
+
+        var monsterSpawns = map.Spawns.Where(spawn => spawn.Kind == SpawnKind.Monster).ToArray();
+        var mossSlimeSpawns = monsterSpawns
+            .Where(spawn => string.Equals(spawn.EntityTemplateId, RequiredMossSlimeTemplateId, StringComparison.Ordinal))
+            .ToArray();
+        if (mossSlimeSpawns.Length == 0)
+        {
+            errors.Add($"maps/training-field-01/map.json: at least one monster spawn for '{RequiredMossSlimeTemplateId}' is required.");
+        }
+
+        if (mossSlimeSpawns.Length > MaxMossSlimeSpawns)
+        {
+            errors.Add($"maps/training-field-01/map.json: '{RequiredMossSlimeTemplateId}' spawns must not exceed {MaxMossSlimeSpawns} active instances.");
+        }
+
+        foreach (var monsterSpawn in monsterSpawns)
+        {
+            if (!string.Equals(monsterSpawn.EntityTemplateId, RequiredMossSlimeTemplateId, StringComparison.Ordinal))
+            {
+                errors.Add($"maps/training-field-01/map.json: monster spawn '{monsterSpawn.Id}' uses unsupported template '{monsterSpawn.EntityTemplateId}' for VS-012.");
             }
         }
 

@@ -8,6 +8,7 @@ Scope:
 - C# generation through the .NET build;
 - short-lived game-ticket issue and consume models;
 - client messages are intents only;
+- VS-013 `AttackIntent`, `CombatEvent`, `SkillStateChanged` and attack rejection code;
 - no balance, AI, pathfinding, reward persistence or UI behavior.
 
 The conceptual envelope size limit is 64 KiB. Gateways must reject larger payloads before expensive parsing.

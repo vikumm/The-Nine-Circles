@@ -4,8 +4,10 @@ using Divinity.ContractsProto;
 using Divinity.ContractsProto.GameTickets;
 using Divinity.GameGateway.Session;
 using Divinity.GameRules.Characters;
+using Divinity.WorldRuntime.Combat;
 using Divinity.WorldRuntime.Map;
 using Divinity.WorldRuntime.Movement;
+using Divinity.WorldRuntime.Monsters;
 using Google.Protobuf;
 
 namespace Divinity.GameGateway.Protocol;
@@ -15,6 +17,8 @@ public sealed class GatewayWebSocketHandler
     private readonly GameTicketService _ticketService;
     private readonly CharacterService _characterService;
     private readonly WorldMovementRuntime _worldRuntime;
+    private readonly WorldMonsterRuntime _monsterRuntime;
+    private readonly WorldCombatRuntime _combatRuntime;
     private readonly GatewaySessionManager _sessionManager;
     private readonly ILogger<GatewayWebSocketHandler> _logger;
 
@@ -22,12 +26,16 @@ public sealed class GatewayWebSocketHandler
         GameTicketService ticketService,
         CharacterService characterService,
         WorldMovementRuntime worldRuntime,
+        WorldMonsterRuntime monsterRuntime,
+        WorldCombatRuntime combatRuntime,
         GatewaySessionManager sessionManager,
         ILogger<GatewayWebSocketHandler> logger)
     {
         _ticketService = ticketService;
         _characterService = characterService;
         _worldRuntime = worldRuntime;
+        _monsterRuntime = monsterRuntime;
+        _combatRuntime = combatRuntime;
         _sessionManager = sessionManager;
         _logger = logger;
     }
@@ -95,6 +103,7 @@ public sealed class GatewayWebSocketHandler
                 if (!string.IsNullOrWhiteSpace(session.CharacterId))
                 {
                     await _worldRuntime.DisconnectAsync(session.CharacterId, disconnectReason, CancellationToken.None);
+                    _monsterRuntime.DisconnectPlayer(session.CharacterId);
                 }
 
                 _sessionManager.Disconnect(connectionId, disconnectReason);
@@ -138,6 +147,9 @@ public sealed class GatewayWebSocketHandler
                 case ClientEnvelope.PayloadOneofCase.MoveIntent:
                     await HandleMoveIntentAsync(socket, connectionId, session, envelope, cancellationToken);
                     break;
+                case ClientEnvelope.PayloadOneofCase.AttackIntent:
+                    await HandleAttackIntentAsync(socket, connectionId, session, envelope, cancellationToken);
+                    break;
                 case ClientEnvelope.PayloadOneofCase.Heartbeat:
                     await HandleHeartbeatAsync(socket, connectionId, session, envelope.Sequence, cancellationToken);
                     break;
@@ -150,7 +162,7 @@ public sealed class GatewayWebSocketHandler
                 default:
                     await SendEnvelopeAsync(
                         socket,
-                        CreateServerErrorEnvelope(ErrorCode.UnknownPayloadType, "Authenticated VS-010 WSS accepts JoinWorld, MoveIntent, Heartbeat and ReconnectRequest stub.", envelope.Sequence, connectionId),
+                        CreateServerErrorEnvelope(ErrorCode.UnknownPayloadType, "Authenticated WSS accepts JoinWorld, MoveIntent, AttackIntent, Heartbeat and ReconnectRequest stub.", envelope.Sequence, connectionId),
                         cancellationToken);
                     break;
             }
@@ -195,6 +207,11 @@ public sealed class GatewayWebSocketHandler
         if (result.Status == JoinLeaseStatus.Joined)
         {
             var worldJoin = await _worldRuntime.JoinAsync(character, cancellationToken);
+            _monsterRuntime.UpsertPlayer(
+                worldJoin.CharacterId,
+                (double)worldJoin.Position.X,
+                (double)worldJoin.Position.Y,
+                hp: worldJoin.Stats.Hp);
             await SendEnvelopeAsync(
                 socket,
                 new ServerEnvelope
@@ -276,7 +293,18 @@ public sealed class GatewayWebSocketHandler
 
         if (result.Snapshot is not null)
         {
+            _monsterRuntime.UpsertPlayer(
+                session.CharacterId,
+                (double)result.Position.X,
+                (double)result.Position.Y);
             await SendEnvelopeAsync(socket, CreateSnapshotEnvelope(result.Snapshot, envelope.Sequence), cancellationToken);
+        }
+        else if (result.Accepted)
+        {
+            _monsterRuntime.UpsertPlayer(
+                session.CharacterId,
+                (double)result.Position.X,
+                (double)result.Position.Y);
         }
         else if (result.Correction is not null)
         {
@@ -300,6 +328,58 @@ public sealed class GatewayWebSocketHandler
 
         _logger.LogInformation(
             "gateway_ws event=move_intent connection_id={ConnectionId} account_pseudonym={AccountPseudonym} result={Result} error_code={ErrorCode}",
+            connectionId,
+            session.AccountPseudonym,
+            result.Status,
+            result.ErrorCode);
+    }
+
+    private async Task HandleAttackIntentAsync(WebSocket socket, string connectionId, GatewaySession session, ClientEnvelope envelope, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(session.CharacterId))
+        {
+            await SendEnvelopeAsync(
+                socket,
+                CreateServerErrorEnvelope(ErrorCode.SessionNotJoined, "JoinWorld is required before AttackIntent.", envelope.Sequence, connectionId),
+                cancellationToken);
+            return;
+        }
+
+        var result = _combatRuntime.ApplyBasicAttack(session.CharacterId, envelope.Sequence, envelope.AttackIntent);
+        if (result.CombatEvent is not null)
+        {
+            await SendEnvelopeAsync(
+                socket,
+                new ServerEnvelope
+                {
+                    ProtocolVersion = ProtocolConstants.SupportedProtocolVersion,
+                    AckSequence = envelope.Sequence,
+                    CombatEvent = result.CombatEvent
+                },
+                cancellationToken);
+        }
+        else if (result.SkillStateChanged is not null)
+        {
+            await SendEnvelopeAsync(
+                socket,
+                new ServerEnvelope
+                {
+                    ProtocolVersion = ProtocolConstants.SupportedProtocolVersion,
+                    AckSequence = envelope.Sequence,
+                    SkillStateChanged = result.SkillStateChanged
+                },
+                cancellationToken);
+        }
+        else
+        {
+            await SendEnvelopeAsync(
+                socket,
+                CreateServerErrorEnvelope(result.ErrorCode, result.Message, envelope.Sequence, connectionId),
+                cancellationToken);
+        }
+
+        _logger.LogInformation(
+            "gateway_ws event=attack_intent connection_id={ConnectionId} account_pseudonym={AccountPseudonym} result={Result} error_code={ErrorCode}",
             connectionId,
             session.AccountPseudonym,
             result.Status,
