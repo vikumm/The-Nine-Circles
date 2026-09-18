@@ -36,6 +36,7 @@ message ServerEnvelope {
     Correction correction = 15;
     ServerError server_error = 16;
     SkillStateChanged skill_state_changed = 17;
+    CharacterProgressed character_progressed = 18;
   }
 }
 
@@ -109,6 +110,8 @@ message JoinAccepted {
   Vector2 position = 4;
   CharacterStats stats = 5;
   string content_hash = 6;
+  string reconnect_token = 7;
+  uint32 reconnect_ttl_seconds = 8;
 }
 
 message WorldSnapshot {
@@ -141,6 +144,7 @@ message CombatEvent {
   int32 damage = 6;
   int32 target_hp = 7;
   repeated StatusEffectApplied status_effects = 8;
+  string kill_id = 9;
 }
 
 message SkillStateChanged {
@@ -149,6 +153,14 @@ message SkillStateChanged {
   uint64 cooldown_started_server_ms = 3;
   uint64 cooldown_ends_server_ms = 4;
   bool available = 5;
+}
+
+message CharacterProgressed {
+  string character_id = 1;
+  string skill_id = 2;
+  uint32 skill_xp = 3;
+  uint32 skill_rank = 4;
+  uint32 max_rank = 5;
 }
 
 enum CombatResult {
@@ -188,6 +200,9 @@ message InventorySlot {
 message EquipmentItem {
   EquipmentSlot slot = 1;
   string item_instance_id = 2;
+  uint32 durability = 3;
+  uint32 max_durability = 4;
+  bool attributes_active = 5;
 }
 
 message Correction {
@@ -236,6 +251,9 @@ enum ErrorCode {
   ERROR_CODE_SESSION_NOT_JOINED = 22;
   ERROR_CODE_MOVE_REJECTED = 23;
   ERROR_CODE_ATTACK_REJECTED = 24;
+  ERROR_CODE_CAST_REJECTED = 25;
+  ERROR_CODE_INVENTORY_REJECTED = 26;
+  ERROR_CODE_RECONNECT_REJECTED = 27;
 }
 
 message CharacterStats {

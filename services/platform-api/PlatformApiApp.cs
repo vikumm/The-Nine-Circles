@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Divinity.ContractsProto.GameTickets;
 using Divinity.GameRules.Characters;
+using Divinity.PlatformApi.Observability;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Divinity.PlatformApi;
@@ -24,7 +25,9 @@ public static class PlatformApiApp
             service = PlatformApiInfo.ComponentName,
             status = PlatformApiInfo.Status,
             issuesGameTickets = PlatformApiInfo.IssuesGameTickets,
-            createsKnight = PlatformApiInfo.CreatesKnight
+            createsKnight = PlatformApiInfo.CreatesKnight,
+            exposesTelemetry = PlatformApiInfo.ExposesTelemetry,
+            avoidsSecretLogs = PlatformApiInfo.AvoidsSecretLogs
         });
 
         app.MapPost("/launcher/game-ticket", async Task<Results<Ok<GameTicketIssueHttpResponse>, UnauthorizedHttpResult, BadRequest<GameTicketIssueErrorResponse>>> (
@@ -36,12 +39,15 @@ public static class PlatformApiApp
             var accountId = ResolveAccountId(context);
             if (accountId is null)
             {
+                PlatformTelemetry.RecordGameTicket("unauthorized");
                 return TypedResults.Unauthorized();
             }
 
+            using var activity = PlatformTelemetry.StartActivity("divinity.platform.game_ticket", "game_ticket_issue", AccountPseudonym(accountId));
             var result = await ticketService.IssueAsync(
                 new GameTicketIssueCommand(accountId, request.BuildId, request.ProtocolVersion, request.Nonce),
                 cancellationToken);
+            PlatformTelemetry.RecordGameTicket(result.Status.ToString());
 
             if (!result.Success)
             {
@@ -63,10 +69,13 @@ public static class PlatformApiApp
             var accountId = ResolveAccountId(context);
             if (accountId is null)
             {
+                PlatformTelemetry.RecordCharacter("create_knight", "unauthorized");
                 return TypedResults.Unauthorized();
             }
 
+            using var activity = PlatformTelemetry.StartActivity("divinity.platform.character_create", "character_create", AccountPseudonym(accountId));
             var result = await characterService.CreateKnightAsync(new CreateKnightCommand(accountId, request.Name), cancellationToken);
+            PlatformTelemetry.RecordCharacter("create_knight", result.Status.ToString());
             return result.Status switch
             {
                 CharacterServiceStatus.Created => TypedResults.Created($"/characters/knight/{result.Character!.CharacterId}", CharacterHttpResponse.FromCharacter(result.Character)),
@@ -84,10 +93,13 @@ public static class PlatformApiApp
             var accountId = ResolveAccountId(context);
             if (accountId is null)
             {
+                PlatformTelemetry.RecordCharacter("select_knight", "unauthorized");
                 return TypedResults.Unauthorized();
             }
 
+            using var activity = PlatformTelemetry.StartActivity("divinity.platform.character_select", "character_select", AccountPseudonym(accountId));
             var result = await characterService.SelectKnightAsync(accountId, cancellationToken);
+            PlatformTelemetry.RecordCharacter("select_knight", result.Status.ToString());
             return result.Status == CharacterServiceStatus.Selected
                 ? TypedResults.Ok(CharacterHttpResponse.FromCharacter(result.Character!))
                 : TypedResults.NotFound(CharacterHttpErrorResponse.FromResult(result));
@@ -118,6 +130,9 @@ public static class PlatformApiApp
 
         return null;
     }
+
+    private static string AccountPseudonym(string accountId) =>
+        Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(accountId))).ToLowerInvariant()[..16];
 }
 
 public sealed record GameTicketIssueHttpRequest(string BuildId, uint ProtocolVersion, string Nonce);

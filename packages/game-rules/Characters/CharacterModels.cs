@@ -85,4 +85,7 @@ public sealed record CharacterCheckpointRecord(
     CharacterPosition Position,
     ulong LastSequence,
     string Reason,
-    DateTimeOffset RecordedAtUtc);
+    DateTimeOffset RecordedAtUtc,
+    int? CurrentHp = null,
+    int? CurrentMp = null,
+    int? Level = null);

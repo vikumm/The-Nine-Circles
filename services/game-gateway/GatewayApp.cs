@@ -1,7 +1,9 @@
 using Divinity.ContractsProto.GameTickets;
+using Divinity.GameGateway.Observability;
 using Divinity.GameGateway.Protocol;
 using Divinity.GameGateway.Session;
 using Divinity.GameRules.Characters;
+using Divinity.GameRules.Inventory;
 using Divinity.WorldRuntime.Combat;
 using Divinity.WorldRuntime.Map;
 using Divinity.WorldRuntime.Movement;
@@ -24,6 +26,7 @@ public static class GatewayApp
         builder.Services.AddSingleton<WorldMovementRuntime>();
         builder.Services.AddSingleton<WorldMonsterRuntime>();
         builder.Services.AddSingleton<WorldCombatRuntime>();
+        builder.Services.AddSingleton(_ => InventoryEquipmentService.FromEnvironment());
         builder.Services.AddSingleton<GatewaySessionManager>();
         builder.Services.AddSingleton<AnonymousHandshakeRateLimiter>();
         builder.Services.AddSingleton<GatewayWebSocketHandler>();
@@ -39,7 +42,13 @@ public static class GatewayApp
             consumesGameTickets = GameGatewayInfo.ConsumesGameTickets,
             verifiesCharacterOwnership = GameGatewayInfo.VerifiesCharacterOwnership,
             routesGameplayIntents = GameGatewayInfo.RoutesGameplayIntents,
-            routesAttackIntents = GameGatewayInfo.RoutesAttackIntents
+            routesAttackIntents = GameGatewayInfo.RoutesAttackIntents,
+            routesCastIntents = GameGatewayInfo.RoutesCastIntents,
+            routesInventoryIntents = GameGatewayInfo.RoutesInventoryIntents,
+            supportsReconnect = GameGatewayInfo.SupportsReconnect,
+            implementsCategoryRateLimits = GameGatewayInfo.ImplementsCategoryRateLimits,
+            exposesTelemetry = GameGatewayInfo.ExposesTelemetry,
+            maxEnvelopeBytes = GameGatewayInfo.MaxEnvelopeBytes
         });
 
         app.MapGet("/protocol/v1/ws", async (HttpContext context, AnonymousHandshakeRateLimiter rateLimiter, GatewayWebSocketHandler handler) =>
@@ -47,6 +56,7 @@ public static class GatewayApp
             var remoteAddress = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
             if (!rateLimiter.TryAcquire(remoteAddress))
             {
+                GatewayTelemetry.RecordRateLimit(GatewayRateLimitCategory.Join);
                 context.Response.StatusCode = StatusCodes.Status429TooManyRequests;
                 await context.Response.WriteAsync("HANDSHAKE_RATE_LIMITED", context.RequestAborted);
                 return;
@@ -71,6 +81,7 @@ public static class GatewayApp
             var response = body.TooLarge
                 ? ProtocolV1Handler.CreatePayloadTooLargeResponse()
                 : await ProtocolV1Handler.HandleClientEnvelopeAsync(body.Payload, ticketService, cancellationToken);
+            GatewayTelemetry.RecordMessage("ClientHelloHttp", response.Envelope.ServerError.Code.ToString());
 
             httpResponse.StatusCode = (int)response.StatusCode;
             httpResponse.ContentType = "application/x-protobuf";

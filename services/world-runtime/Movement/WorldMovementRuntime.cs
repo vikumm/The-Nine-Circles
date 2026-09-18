@@ -2,7 +2,9 @@ using Divinity.Contracts.V1;
 using Divinity.GameRules.Characters;
 using Divinity.GameRules.Movement;
 using Divinity.WorldRuntime.Combat;
+using Divinity.WorldRuntime.Equipment;
 using Divinity.WorldRuntime.Map;
+using Divinity.WorldRuntime.Observability;
 
 namespace Divinity.WorldRuntime.Movement;
 
@@ -10,14 +12,22 @@ public sealed class WorldMovementRuntime
 {
     private readonly object _gate = new();
     private readonly Dictionary<string, WorldActorState> _actors = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, WorldPendingDeathState> _pendingDeaths = new(StringComparer.Ordinal);
     private readonly ICharacterStore _characterStore;
+    private readonly WorldEquipmentRuntime _equipmentRuntime;
     private readonly WorldMapCatalog _mapCatalog;
     private readonly TimeProvider _timeProvider;
     private ulong _nextSnapshotId = 1;
+    private ulong _nextCombatEventId = 1;
 
-    public WorldMovementRuntime(ICharacterStore characterStore, WorldMapCatalog mapCatalog, TimeProvider? timeProvider = null)
+    public WorldMovementRuntime(
+        ICharacterStore characterStore,
+        WorldMapCatalog mapCatalog,
+        TimeProvider? timeProvider = null,
+        WorldEquipmentRuntime? equipmentRuntime = null)
     {
         _characterStore = characterStore;
+        _equipmentRuntime = equipmentRuntime ?? new WorldEquipmentRuntime();
         _mapCatalog = mapCatalog;
         _timeProvider = timeProvider ?? TimeProvider.System;
     }
@@ -25,30 +35,90 @@ public sealed class WorldMovementRuntime
     public WorldJoinMapValidationResult ValidateJoin(WorldJoinMapRequest request) =>
         new WorldJoinMapValidator(_mapCatalog).Validate(request);
 
+    public int ActiveActorCount
+    {
+        get
+        {
+            lock (_gate)
+            {
+                return _actors.Count;
+            }
+        }
+    }
+
     public async Task<WorldJoinResult> JoinAsync(CharacterRecord character, CancellationToken cancellationToken)
     {
         var now = _timeProvider.GetUtcNow();
         var checkpoint = await _characterStore.GetCheckpointAsync(character.CharacterId, cancellationToken);
         var spawn = ResolveSpawn(character, checkpoint);
-        var stats = ToCharacterStats(character.Stats);
+        CharacterStats stats;
+        CharacterCheckpointRecord? respawnCheckpoint = null;
         WorldActorState actor;
 
         lock (_gate)
         {
-            actor = new WorldActorState(
-                character.CharacterId,
-                _mapCatalog.Map.MapId,
-                character.ChannelId,
-                _mapCatalog.ContentHash,
-                character.Stats,
-                spawn.X,
-                spawn.Y,
-                CardinalDirection.South,
-                now,
-                now + WorldMovementDefaults.CheckpointInterval);
+            if (_actors.TryGetValue(character.CharacterId, out var existingActor))
+            {
+                actor = existingActor;
+                actor.DisconnectedAtUtc = null;
+                actor.DisconnectGraceExpiresAtUtc = null;
+                actor.MarkSnapshotPublished(now);
+                stats = ToCharacterStats(actor);
+            }
+            else
+            {
+                _pendingDeaths.Remove(character.CharacterId, out var pendingDeath);
+                if (pendingDeath is not null)
+                {
+                    spawn = pendingDeath.Position;
+                }
 
-            actor.MarkSnapshotPublished(now);
-            _actors[character.CharacterId] = actor;
+                actor = new WorldActorState(
+                    character.CharacterId,
+                    _mapCatalog.Map.MapId,
+                    character.ChannelId,
+                    _mapCatalog.ContentHash,
+                    character.Vocation,
+                    character.Stats,
+                    spawn.X,
+                    spawn.Y,
+                    CardinalDirection.South,
+                    now,
+                    now + WorldMovementDefaults.CheckpointInterval);
+                if (checkpoint?.CurrentHp is not null)
+                {
+                    actor.CurrentHp = Math.Max(0, Math.Min(checkpoint.CurrentHp.Value, actor.Stats.MaxHp));
+                }
+
+                if (checkpoint?.CurrentMp is not null)
+                {
+                    actor.CurrentMp = Math.Max(0, Math.Min(checkpoint.CurrentMp.Value, actor.Stats.MaxMp));
+                }
+
+                if (pendingDeath is not null)
+                {
+                    actor.CurrentHp = 0;
+                    actor.CurrentMp = pendingDeath.CurrentMp;
+                    actor.MotionState = WorldCharacterMotionState.Dead;
+                    actor.DeathStartedAtUtc = pendingDeath.DeathStartedAtUtc;
+                    actor.RespawnAtUtc = pendingDeath.RespawnAtUtc;
+
+                    if (now >= pendingDeath.RespawnAtUtc)
+                    {
+                        RespawnActor(actor, now);
+                        respawnCheckpoint = CreateCheckpoint(actor, "respawn", now);
+                    }
+                }
+
+                actor.MarkSnapshotPublished(now);
+                _actors[character.CharacterId] = actor;
+                stats = ToCharacterStats(actor);
+            }
+        }
+
+        if (respawnCheckpoint is not null)
+        {
+            await _characterStore.StoreCheckpointAsync(respawnCheckpoint, cancellationToken);
         }
 
         return new WorldJoinResult(
@@ -131,6 +201,21 @@ public sealed class WorldMovementRuntime
             if (_actors.TryGetValue(characterId, out var actor))
             {
                 actor.MotionState = motionState;
+                if (motionState == WorldCharacterMotionState.Dead)
+                {
+                    actor.CurrentHp = 0;
+                }
+            }
+        }
+    }
+
+    public void MarkCombatActivity(string characterId)
+    {
+        lock (_gate)
+        {
+            if (_actors.TryGetValue(characterId, out var actor))
+            {
+                actor.LastCombatAtUtc = _timeProvider.GetUtcNow();
             }
         }
     }
@@ -145,24 +230,184 @@ public sealed class WorldMovementRuntime
                     actor.MapId,
                     actor.ChannelId,
                     actor.Position,
-                    actor.Stats,
+                    actor.Vocation,
+                    actor.Stats with { Defense = actor.Stats.Defense + _equipmentRuntime.GetDefenseBonus(actor.CharacterId) },
                     actor.MotionState.ToCombatActorState())
                 : null;
         }
     }
 
+    public WorldCharacterDamageResult ApplyDamageToCharacter(
+        string characterId,
+        int damage,
+        string sourceEntityId,
+        string skillId)
+    {
+        lock (_gate)
+        {
+            if (!_actors.TryGetValue(characterId, out var actor))
+            {
+                return new WorldCharacterDamageResult(
+                    WorldCharacterDamageStatus.MissingActor,
+                    "Character actor is not joined.",
+                    characterId,
+                    DamageApplied: 0,
+                    TargetHp: 0,
+                    Snapshot: null,
+                    CombatEvent: null,
+                    InventoryDelta: null,
+                    RespawnAtUtc: null);
+            }
+
+            if (actor.MotionState == WorldCharacterMotionState.Dead || actor.CurrentHp <= 0)
+            {
+                return new WorldCharacterDamageResult(
+                    WorldCharacterDamageStatus.AlreadyDead,
+                    "Character is already dead.",
+                    characterId,
+                    DamageApplied: 0,
+                    TargetHp: actor.CurrentHp,
+                    Snapshot: null,
+                    CombatEvent: null,
+                    InventoryDelta: null,
+                    RespawnAtUtc: actor.RespawnAtUtc);
+            }
+
+            var now = _timeProvider.GetUtcNow();
+            actor.LastCombatAtUtc = now;
+            var damageApplied = Math.Max(1, damage);
+            actor.CurrentHp = Math.Max(0, actor.CurrentHp - damageApplied);
+            if (actor.CurrentHp > 0)
+            {
+                return new WorldCharacterDamageResult(
+                    WorldCharacterDamageStatus.Damaged,
+                    "Character damaged.",
+                    characterId,
+                    damageApplied,
+                    actor.CurrentHp,
+                    CreateSnapshot(actor, actor.LastAcceptedSequence),
+                    CreateCharacterCombatEvent(actor, sourceEntityId, skillId, damageApplied, killed: false),
+                    InventoryDelta: null,
+                    RespawnAtUtc: null);
+            }
+
+            actor.MotionState = WorldCharacterMotionState.Dead;
+            actor.DeathStartedAtUtc = now;
+            actor.RespawnAtUtc = now + CharacterLifeCatalog.DeathScreenDuration;
+            var durability = _equipmentRuntime.ApplyDeathDurabilityLoss(characterId);
+
+            return new WorldCharacterDamageResult(
+                WorldCharacterDamageStatus.Killed,
+                "Character killed; respawn pending at Safe Spawn.",
+                characterId,
+                damageApplied,
+                actor.CurrentHp,
+                CreateSnapshot(actor, actor.LastAcceptedSequence),
+                CreateCharacterCombatEvent(actor, sourceEntityId, skillId, damageApplied, killed: true),
+                durability.InventoryDelta,
+                actor.RespawnAtUtc);
+        }
+    }
+
+    public async Task<IReadOnlyList<WorldCharacterRespawnResult>> RespawnDueCharactersAsync(CancellationToken cancellationToken)
+    {
+        List<CharacterCheckpointRecord> checkpoints = [];
+        List<WorldCharacterRespawnResult> results = [];
+
+        lock (_gate)
+        {
+            var now = _timeProvider.GetUtcNow();
+            foreach (var actor in _actors.Values)
+            {
+                if (actor.MotionState != WorldCharacterMotionState.Dead
+                    || actor.RespawnAtUtc is null
+                    || now < actor.RespawnAtUtc)
+                {
+                    continue;
+                }
+
+                RespawnActor(actor, now);
+                var checkpoint = CreateCheckpoint(actor, "respawn", now);
+                checkpoints.Add(checkpoint);
+                results.Add(new WorldCharacterRespawnResult(
+                    actor.CharacterId,
+                    actor.Position,
+                    ToCharacterStats(actor.Stats),
+                    CreateSnapshot(actor, actor.LastAcceptedSequence),
+                    CheckpointStored: true));
+            }
+
+            foreach (var pending in _pendingDeaths.Values
+                .Where(pending => now >= pending.RespawnAtUtc)
+                .ToArray())
+            {
+                var checkpoint = new CharacterCheckpointRecord(
+                    pending.CharacterId,
+                    pending.MapId,
+                    ResolveSafeSpawn(),
+                    pending.LastAcceptedSequence,
+                    "respawn",
+                    now);
+                checkpoints.Add(checkpoint);
+                _pendingDeaths.Remove(pending.CharacterId);
+            }
+        }
+
+        foreach (var checkpoint in checkpoints)
+        {
+            await _characterStore.StoreCheckpointAsync(checkpoint, cancellationToken);
+        }
+
+        return results;
+    }
+
     public bool SegmentTouchesBlockedOrOutOfBounds(CharacterPosition from, double targetX, double targetY) =>
         _mapCatalog.SegmentTouchesBlockedOrOutOfBounds((double)from.X, (double)from.Y, targetX, targetY);
 
-    public async Task DisconnectAsync(string characterId, string reason, CancellationToken cancellationToken)
+    public async Task<WorldCharacterDisconnectResult> DisconnectAsync(string characterId, string reason, CancellationToken cancellationToken)
     {
         CharacterCheckpointRecord? checkpoint = null;
+        WorldCharacterDisconnectResult result;
 
         lock (_gate)
         {
             if (_actors.Remove(characterId, out var actor))
             {
-                checkpoint = CreateCheckpoint(actor, reason, _timeProvider.GetUtcNow());
+                var now = _timeProvider.GetUtcNow();
+                checkpoint = CreateCheckpoint(actor, reason, now);
+                var retainForCombatGrace = IsAbruptDisconnect(reason) && IsInCombatGrace(actor, now);
+                if (retainForCombatGrace)
+                {
+                    actor.DisconnectedAtUtc = now;
+                    actor.DisconnectGraceExpiresAtUtc = now + WorldMovementDefaults.CombatDisconnectGrace;
+                    _actors[characterId] = actor;
+                    result = new WorldCharacterDisconnectResult(
+                        characterId,
+                        ActorRetained: true,
+                        CheckpointStored: true,
+                        actor.DisconnectGraceExpiresAtUtc,
+                        reason);
+                }
+                else if (actor.MotionState == WorldCharacterMotionState.Dead && actor.RespawnAtUtc is not null && actor.DeathStartedAtUtc is not null)
+                {
+                    _pendingDeaths[characterId] = new WorldPendingDeathState(
+                        actor.CharacterId,
+                        actor.MapId,
+                        actor.Position,
+                        actor.CurrentMp,
+                        actor.LastAcceptedSequence,
+                        actor.DeathStartedAtUtc.Value,
+                        actor.RespawnAtUtc.Value);
+                    result = new WorldCharacterDisconnectResult(characterId, ActorRetained: false, CheckpointStored: true, null, reason);
+                }
+                else
+                {
+                    result = new WorldCharacterDisconnectResult(characterId, ActorRetained: false, CheckpointStored: true, null, reason);
+                }
+            }
+            else
+            {
+                result = new WorldCharacterDisconnectResult(characterId, ActorRetained: false, CheckpointStored: false, null, reason);
             }
         }
 
@@ -170,6 +415,40 @@ public sealed class WorldMovementRuntime
         {
             await _characterStore.StoreCheckpointAsync(checkpoint, cancellationToken);
         }
+
+        return result;
+    }
+
+    public async Task<IReadOnlyList<WorldCharacterDisconnectResult>> ExpireDisconnectGraceAsync(CancellationToken cancellationToken)
+    {
+        List<CharacterCheckpointRecord> checkpoints = [];
+        List<WorldCharacterDisconnectResult> results = [];
+
+        lock (_gate)
+        {
+            var now = _timeProvider.GetUtcNow();
+            foreach (var actor in _actors.Values
+                .Where(actor => actor.DisconnectGraceExpiresAtUtc is not null && actor.DisconnectGraceExpiresAtUtc <= now)
+                .ToArray())
+            {
+                _actors.Remove(actor.CharacterId);
+                var checkpoint = CreateCheckpoint(actor, "disconnect_grace_expired", now);
+                checkpoints.Add(checkpoint);
+                results.Add(new WorldCharacterDisconnectResult(
+                    actor.CharacterId,
+                    ActorRetained: false,
+                    CheckpointStored: true,
+                    actor.DisconnectGraceExpiresAtUtc,
+                    "disconnect_grace_expired"));
+            }
+        }
+
+        foreach (var checkpoint in checkpoints)
+        {
+            await _characterStore.StoreCheckpointAsync(checkpoint, cancellationToken);
+        }
+
+        return results;
     }
 
     public async Task SaveAllCheckpointsAsync(string reason, CancellationToken cancellationToken)
@@ -347,6 +626,28 @@ public sealed class WorldMovementRuntime
         return character.SafeSpawn;
     }
 
+    private CharacterPosition ResolveSafeSpawn()
+    {
+        var safeSpawn = _mapCatalog.PrimarySafeSpawn;
+        return safeSpawn is not null && _mapCatalog.IsNavigable(safeSpawn.X, safeSpawn.Y)
+            ? new CharacterPosition(safeSpawn.X, safeSpawn.Y)
+            : KnightCatalog.SafeSpawn;
+    }
+
+    private void RespawnActor(WorldActorState actor, DateTimeOffset now)
+    {
+        var safeSpawn = ResolveSafeSpawn();
+        actor.PositionX = (double)safeSpawn.X;
+        actor.PositionY = (double)safeSpawn.Y;
+        actor.Facing = CardinalDirection.South;
+        actor.CurrentHp = actor.Stats.MaxHp;
+        actor.CurrentMp = actor.Stats.MaxMp;
+        actor.MotionState = WorldCharacterMotionState.Alive;
+        actor.DeathStartedAtUtc = null;
+        actor.RespawnAtUtc = null;
+        actor.NextCheckpointAtUtc = now + WorldMovementDefaults.CheckpointInterval;
+    }
+
     private WorldSnapshot CreateSnapshot(WorldActorState actor, ulong ackSequence)
     {
         var snapshotId = _nextSnapshotId++;
@@ -362,11 +663,41 @@ public sealed class WorldMovementRuntime
                     Kind = EntityKind.Player,
                     Position = ToVector2(actor.Position),
                     Level = (uint)actor.Stats.Level,
-                    Hp = actor.Stats.MaxHp,
-                    Mp = actor.Stats.MaxMp
+                    Hp = actor.CurrentHp,
+                    Mp = actor.CurrentMp
                 }
             }
         };
+    }
+
+    private CombatEvent CreateCharacterCombatEvent(
+        WorldActorState actor,
+        string sourceEntityId,
+        string skillId,
+        int damageApplied,
+        bool killed)
+    {
+        var combatEvent = new CombatEvent
+        {
+            EventId = $"combat:{_nextCombatEventId++}",
+            SourceEntityId = sourceEntityId,
+            TargetEntityId = actor.CharacterId,
+            SkillId = skillId,
+            Result = CombatResult.Hit,
+            Damage = damageApplied,
+            TargetHp = actor.CurrentHp
+        };
+
+        if (killed)
+        {
+            combatEvent.StatusEffects.Add(new StatusEffectApplied
+            {
+                EffectId = CharacterLifeCatalog.DeathEffectId,
+                DurationMs = (uint)CharacterLifeCatalog.DeathScreenDuration.TotalMilliseconds
+            });
+        }
+
+        return combatEvent;
     }
 
     private static CharacterCheckpointRecord CreateCheckpoint(WorldActorState actor, string reason, DateTimeOffset nowUtc) =>
@@ -376,7 +707,10 @@ public sealed class WorldMovementRuntime
             actor.Position,
             actor.LastAcceptedSequence,
             reason,
-            nowUtc);
+            nowUtc,
+            actor.CurrentHp,
+            actor.CurrentMp,
+            actor.Stats.Level);
 
     private static WorldMovementResult Rejected(
         WorldMovementStatus status,
@@ -401,8 +735,10 @@ public sealed class WorldMovementRuntime
         WorldActorState actor,
         ulong sequence,
         ErrorCode errorCode,
-        CorrectionReason correctionReason) =>
-        new(
+        CorrectionReason correctionReason)
+    {
+        WorldRuntimeTelemetry.RecordMovementCorrection(correctionReason.ToString());
+        return new WorldMovementResult(
             status,
             message,
             actor.Position,
@@ -417,6 +753,7 @@ public sealed class WorldMovementRuntime
             },
             errorCode,
             CheckpointStored: false);
+    }
 
     private static CharacterStats ToCharacterStats(KnightStats stats) =>
         new()
@@ -424,6 +761,14 @@ public sealed class WorldMovementRuntime
             Level = (uint)stats.Level,
             Hp = stats.MaxHp,
             Mp = stats.MaxMp
+        };
+
+    private static CharacterStats ToCharacterStats(WorldActorState actor) =>
+        new()
+        {
+            Level = (uint)actor.Stats.Level,
+            Hp = actor.CurrentHp,
+            Mp = actor.CurrentMp
         };
 
     private static Vector2 ToVector2(CharacterPosition position) =>
@@ -440,6 +785,7 @@ public sealed class WorldMovementRuntime
             string mapId,
             string channelId,
             string contentHash,
+            string vocation,
             KnightStats stats,
             decimal positionX,
             decimal positionY,
@@ -451,10 +797,13 @@ public sealed class WorldMovementRuntime
             MapId = mapId;
             ChannelId = channelId;
             ContentHash = contentHash;
+            Vocation = vocation;
             Stats = stats;
             PositionX = (double)positionX;
             PositionY = (double)positionY;
             Facing = facing;
+            CurrentHp = stats.MaxHp;
+            CurrentMp = stats.MaxMp;
             LastSnapshotAtUtc = lastSnapshotAtUtc;
             NextCheckpointAtUtc = nextCheckpointAtUtc;
         }
@@ -463,19 +812,45 @@ public sealed class WorldMovementRuntime
         public string MapId { get; }
         public string ChannelId { get; }
         public string ContentHash { get; }
+        public string Vocation { get; }
         public KnightStats Stats { get; }
         public double PositionX { get; set; }
         public double PositionY { get; set; }
         public CardinalDirection Facing { get; set; }
+        public int CurrentHp { get; set; }
+        public int CurrentMp { get; set; }
         public ulong LastAcceptedSequence { get; set; }
         public ulong LastClientTick { get; set; }
         public WorldCharacterMotionState MotionState { get; set; } = WorldCharacterMotionState.Alive;
+        public DateTimeOffset? DeathStartedAtUtc { get; set; }
+        public DateTimeOffset? RespawnAtUtc { get; set; }
+        public DateTimeOffset? LastCombatAtUtc { get; set; }
+        public DateTimeOffset? DisconnectedAtUtc { get; set; }
+        public DateTimeOffset? DisconnectGraceExpiresAtUtc { get; set; }
         public DateTimeOffset LastSnapshotAtUtc { get; private set; }
         public DateTimeOffset NextCheckpointAtUtc { get; set; }
         public CharacterPosition Position => new((decimal)PositionX, (decimal)PositionY);
 
         public void MarkSnapshotPublished(DateTimeOffset nowUtc) => LastSnapshotAtUtc = nowUtc;
     }
+
+    private static bool IsAbruptDisconnect(string reason) =>
+        reason.Contains("abrupt", StringComparison.OrdinalIgnoreCase)
+        || reason.Contains("transport", StringComparison.OrdinalIgnoreCase)
+        || reason.Contains("cancel", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsInCombatGrace(WorldActorState actor, DateTimeOffset now) =>
+        actor.LastCombatAtUtc is not null &&
+        now - actor.LastCombatAtUtc.Value <= WorldMovementDefaults.CombatDisconnectGrace;
+
+    private sealed record WorldPendingDeathState(
+        string CharacterId,
+        string MapId,
+        CharacterPosition Position,
+        int CurrentMp,
+        ulong LastAcceptedSequence,
+        DateTimeOffset DeathStartedAtUtc,
+        DateTimeOffset RespawnAtUtc);
 
     private readonly record struct ResolvedMove(
         bool Success,

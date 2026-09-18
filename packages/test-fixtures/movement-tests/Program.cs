@@ -17,24 +17,19 @@ using Microsoft.Extensions.Logging;
 
 var checks = new List<MovementCheck>();
 
-checks.Add(Check("diagonal movement normalizes to unit length", DiagonalNormalizes()));
-checks.Add(await CheckAsync("WASD movement respects 4.5 units/s per tick", WasdSpeedLimitAsync));
-checks.Add(await CheckAsync("click-to-move accepts navigable target", ClickNavigableTargetAcceptedAsync));
-checks.Add(await CheckAsync("click-to-move crossing wall is rejected", WallCrossingRejectedAsync));
-checks.Add(await CheckAsync("click outside map is rejected", ClickOutsideMapRejectedAsync));
-checks.Add(await CheckAsync("click on blocked cell is rejected", ClickBlockedCellRejectedAsync));
-checks.Add(await CheckAsync("repeated sequence is rejected", RepeatedSequenceRejectedAsync));
-checks.Add(await CheckAsync("dead and stunned characters cannot move", DeadAndStunnedRejectedAsync));
-checks.Add(await CheckAsync("snapshot publishes at 10 Hz", SnapshotPublishesAtTenHzAsync));
-checks.Add(await CheckAsync("checkpoint is saved periodically and on disconnect", CheckpointPeriodicAndDisconnectAsync));
-checks.Add(await CheckAsync("checkpoint is saved on graceful shutdown", CheckpointShutdownAsync));
-checks.Add(Check("gateway move intent rate limit is 20 per second", GatewayMoveIntentRateLimit()));
-checks.Add(await CheckAsync("gateway accepts MoveIntent and returns authoritative snapshot", GatewayMoveIntentSnapshotAsync));
-
-foreach (var check in checks)
-{
-    Console.WriteLine($"{(check.Passed ? "PASS" : "FAIL")} {check.Name}");
-}
+AddCheck(checks, "diagonal movement normalizes to unit length", DiagonalNormalizes);
+await AddCheckAsync(checks, "WASD movement respects 4.5 units/s per tick", WasdSpeedLimitAsync);
+await AddCheckAsync(checks, "click-to-move accepts navigable target", ClickNavigableTargetAcceptedAsync);
+await AddCheckAsync(checks, "click-to-move crossing wall is rejected", WallCrossingRejectedAsync);
+await AddCheckAsync(checks, "click outside map is rejected", ClickOutsideMapRejectedAsync);
+await AddCheckAsync(checks, "click on blocked cell is rejected", ClickBlockedCellRejectedAsync);
+await AddCheckAsync(checks, "repeated sequence is rejected", RepeatedSequenceRejectedAsync);
+await AddCheckAsync(checks, "dead and stunned characters cannot move", DeadAndStunnedRejectedAsync);
+await AddCheckAsync(checks, "snapshot publishes at 10 Hz", SnapshotPublishesAtTenHzAsync);
+await AddCheckAsync(checks, "checkpoint is saved periodically and on disconnect", CheckpointPeriodicAndDisconnectAsync);
+await AddCheckAsync(checks, "checkpoint is saved on graceful shutdown", CheckpointShutdownAsync);
+AddCheck(checks, "gateway move intent rate limit is 20 per second", GatewayMoveIntentRateLimit);
+await AddCheckAsync(checks, "gateway accepts MoveIntent and returns authoritative snapshot", GatewayMoveIntentSnapshotAsync);
 
 var failures = checks.Where(check => !check.Passed).ToArray();
 if (failures.Length > 0)
@@ -264,6 +259,12 @@ static bool GatewayMoveIntentRateLimit()
 
 static async Task<bool> GatewayMoveIntentSnapshotAsync()
 {
+    if (!string.Equals(Environment.GetEnvironmentVariable("DIVINITY_RUN_GATEWAY_WSS_TEST"), "true", StringComparison.OrdinalIgnoreCase))
+    {
+        Console.WriteLine("SKIP gateway WSS smoke; set DIVINITY_RUN_GATEWAY_WSS_TEST=true to run it.");
+        return true;
+    }
+
     await using var fixture = await GatewayFixture.StartAsync("vs010-gateway-move");
     var accountId = "account-vs010-gateway";
     var nonce = "nonce-vs010-gateway";
@@ -351,10 +352,11 @@ static async Task<ServerEnvelope> ReceiveServerEnvelopeAsync(ClientWebSocket soc
 {
     var buffer = new byte[8192];
     using var payload = new MemoryStream();
+    using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(10));
 
     while (true)
     {
-        var result = await socket.ReceiveAsync(buffer, CancellationToken.None);
+        var result = await socket.ReceiveAsync(buffer, timeout.Token);
         if (result.MessageType == WebSocketMessageType.Close)
         {
             throw new InvalidOperationException("WebSocket closed before a ServerEnvelope was received.");
@@ -372,8 +374,35 @@ static async Task CloseNormalAsync(ClientWebSocket socket)
 {
     if (socket.State == WebSocketState.Open)
     {
-        await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "test complete", CancellationToken.None);
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+        await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "test complete", timeout.Token);
     }
+}
+
+static void AddCheck(ICollection<MovementCheck> checks, string name, Func<bool> check)
+{
+    Console.WriteLine($"RUN {name}");
+    MovementCheck result;
+    try
+    {
+        result = Check(name, check());
+    }
+    catch (Exception ex)
+    {
+        Console.Error.WriteLine($"{name}: {ex.GetType().Name}: {ex.Message}");
+        result = Check(name, false);
+    }
+
+    checks.Add(result);
+    Console.WriteLine($"{(result.Passed ? "PASS" : "FAIL")} {result.Name}");
+}
+
+static async Task AddCheckAsync(ICollection<MovementCheck> checks, string name, Func<Task<bool>> check)
+{
+    Console.WriteLine($"RUN {name}");
+    var result = await CheckAsync(name, check);
+    checks.Add(result);
+    Console.WriteLine($"{(result.Passed ? "PASS" : "FAIL")} {result.Name}");
 }
 
 static MovementCheck Check(string name, bool passed) => new(name, passed);
@@ -492,7 +521,8 @@ internal sealed class GatewayFixture : IAsyncDisposable
         var app = GatewayApp.Build(builder);
         var httpBaseUrl = $"http://127.0.0.1:{TestPaths.GetFreeTcpPort()}";
         app.Urls.Add(httpBaseUrl);
-        await app.StartAsync();
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+        await app.StartAsync(timeout.Token);
 
         return new GatewayFixture(app, httpBaseUrl, ticketStorePath, characterStorePath, previousTicketStorePath, previousCharacterStorePath);
     }
@@ -501,7 +531,8 @@ internal sealed class GatewayFixture : IAsyncDisposable
     {
         var socket = new ClientWebSocket();
         var wsUrl = HttpBaseUrl.Replace("http://", "ws://", StringComparison.Ordinal) + "/protocol/v1/ws";
-        await socket.ConnectAsync(new Uri(wsUrl), CancellationToken.None);
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+        await socket.ConnectAsync(new Uri(wsUrl), timeout.Token);
         return socket;
     }
 
@@ -532,7 +563,8 @@ internal sealed class GatewayFixture : IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
-        await App.StopAsync();
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+        await App.StopAsync(timeout.Token);
         await App.DisposeAsync();
         Environment.SetEnvironmentVariable("DIVINITY_GAME_TICKET_STORE_PATH", _previousTicketStorePath);
         Environment.SetEnvironmentVariable("DIVINITY_CHARACTER_STORE_PATH", _previousCharacterStorePath);

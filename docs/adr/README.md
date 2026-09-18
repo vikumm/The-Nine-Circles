@@ -33,3 +33,10 @@ Current ADRs:
 - ADR-0020: VS-011 prediction and reconciliation.
 - ADR-0021: VS-012 Moss Slime AI.
 - ADR-0022: VS-013 basic attack authority.
+- ADR-0023: VS-014 Shield Bash control authority.
+- ADR-0024: VS-015 death, respawn and durability authority.
+- ADR-0025: VS-016 reward transaction authority.
+- ADR-0026: VS-017 inventory and equipment authority.
+- ADR-0027: VS-018 reconnect authority.
+- ADR-0028: VS-019 load bot scope.
+- ADR-0029: VS-020 hardening and observability gate.

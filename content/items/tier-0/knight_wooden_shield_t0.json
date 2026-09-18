@@ -4,7 +4,10 @@
   "displayName": "Wooden Shield",
   "classRestriction": "knight",
   "slot": "offHand",
+  "minLevel": 1,
   "tier": 0,
+  "durabilityMax": 20,
+  "bind": "onEquip",
   "authority": "server",
   "rarityVariants": [
     {

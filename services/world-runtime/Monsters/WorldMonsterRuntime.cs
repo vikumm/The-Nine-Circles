@@ -3,6 +3,7 @@ using Divinity.Contracts.V1;
 using Divinity.GameRules.Characters;
 using Divinity.GameRules.Monsters;
 using Divinity.WorldRuntime.Map;
+using Divinity.WorldRuntime.Movement;
 
 namespace Divinity.WorldRuntime.Monsters;
 
@@ -10,6 +11,7 @@ public sealed class WorldMonsterRuntime
 {
     private readonly object _gate = new();
     private readonly WorldMapCatalog _mapCatalog;
+    private readonly WorldMovementRuntime? _movementRuntime;
     private readonly TimeProvider _timeProvider;
     private readonly List<WorldMonsterState> _monsters = [];
     private readonly Dictionary<string, WorldMonsterPlayerState> _players = new(StringComparer.Ordinal);
@@ -17,9 +19,13 @@ public sealed class WorldMonsterRuntime
     private ulong _nextCombatEventId = 1;
     private ulong _nextKillId = 1;
 
-    public WorldMonsterRuntime(WorldMapCatalog mapCatalog, TimeProvider? timeProvider = null)
+    public WorldMonsterRuntime(
+        WorldMapCatalog mapCatalog,
+        TimeProvider? timeProvider = null,
+        WorldMovementRuntime? movementRuntime = null)
     {
         _mapCatalog = mapCatalog;
+        _movementRuntime = movementRuntime;
         _timeProvider = timeProvider ?? TimeProvider.System;
 
         var now = _timeProvider.GetUtcNow();
@@ -184,6 +190,21 @@ public sealed class WorldMonsterRuntime
         }
     }
 
+    public bool ApplyStunToMonster(string entityId, TimeSpan duration)
+    {
+        lock (_gate)
+        {
+            var monster = _monsters.FirstOrDefault(candidate => string.Equals(candidate.EntityId, entityId, StringComparison.Ordinal));
+            if (monster is null || !monster.Active)
+            {
+                return false;
+            }
+
+            monster.StunnedUntilUtc = _timeProvider.GetUtcNow() + duration;
+            return true;
+        }
+    }
+
     public WorldMonsterTickResult Tick(TimeSpan delta)
     {
         lock (_gate)
@@ -207,6 +228,16 @@ public sealed class WorldMonsterRuntime
         {
             TryRespawn(monster, now);
             return;
+        }
+
+        if (monster.IsStunned(now))
+        {
+            return;
+        }
+
+        if (monster.StunnedUntilUtc is not null && monster.StunnedUntilUtc <= now)
+        {
+            monster.StunnedUntilUtc = null;
         }
 
         if (monster.AiState == MonsterAiState.Return)
@@ -285,14 +316,36 @@ public sealed class WorldMonsterRuntime
             return;
         }
 
-        target.Hp = Math.Max(0, target.Hp - MossSlimeCatalog.Level1.Attack);
+        var movementDamage = _movementRuntime?.ApplyDamageToCharacter(
+            target.CharacterId,
+            MossSlimeCatalog.Level1.Attack,
+            monster.EntityId,
+            MossSlimeCatalog.BasicAttackSkillId);
+
+        if (movementDamage is not null && movementDamage.Accepted)
+        {
+            target.Hp = movementDamage.TargetHp;
+            target.Alive = movementDamage.TargetHp > 0;
+        }
+        else if (movementDamage?.Status == WorldCharacterDamageStatus.AlreadyDead)
+        {
+            target.Hp = 0;
+            target.Alive = false;
+            monster.NextAttackAtUtc = now + MossSlimeCatalog.Level1.AttackCooldown;
+            return;
+        }
+        else
+        {
+            target.Hp = Math.Max(0, target.Hp - MossSlimeCatalog.Level1.Attack);
+        }
+
         if (target.Hp == 0)
         {
             target.Alive = false;
         }
 
         monster.NextAttackAtUtc = now + MossSlimeCatalog.Level1.AttackCooldown;
-        combatEvents.Add(new CombatEvent
+        combatEvents.Add(movementDamage?.CombatEvent ?? new CombatEvent
         {
             EventId = $"combat:{_nextCombatEventId++}",
             SourceEntityId = monster.EntityId,
@@ -438,6 +491,7 @@ public sealed class WorldMonsterRuntime
             NextWanderAtUtc = monster.NextWanderAtUtc,
             NextAttackAtUtc = monster.NextAttackAtUtc,
             RespawnAtUtc = monster.RespawnAtUtc,
+            StunnedUntilUtc = monster.StunnedUntilUtc,
             LastKillId = monster.LastKillId,
             PathRecalculationCount = monster.PathRecalculationCount
         };

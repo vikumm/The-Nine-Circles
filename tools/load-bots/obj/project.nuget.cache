@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "sKxWp5n9oO8=",
+  "success": true,
+  "projectFilePath": "/Users/joeloliveirasilva/Documents/Projetos/Divinity/The-Nine-Circles/tools/load-bots/Divinity.LoadBots.csproj",
+  "expectedPackageFiles": [
+    "/Users/joeloliveirasilva/.nuget/packages/google.protobuf/3.36.0/google.protobuf.3.36.0.nupkg.sha512"
+  ],
+  "logs": []
+}

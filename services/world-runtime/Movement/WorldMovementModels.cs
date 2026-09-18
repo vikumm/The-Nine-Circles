@@ -12,6 +12,7 @@ public static class WorldMovementDefaults
     public const double MaxDistancePerMoveIntent = MovementTuning.MaxDistancePerMoveIntent;
     public static readonly TimeSpan SnapshotInterval = TimeSpan.FromMilliseconds(100);
     public static readonly TimeSpan CheckpointInterval = TimeSpan.FromSeconds(10);
+    public static readonly TimeSpan CombatDisconnectGrace = TimeSpan.FromSeconds(10);
 }
 
 public sealed record WorldJoinResult(
@@ -36,6 +37,42 @@ public sealed record WorldMovementResult(
 {
     public bool Accepted => Status is WorldMovementStatus.Accepted or WorldMovementStatus.Noop;
 }
+
+public sealed record WorldCharacterDamageResult(
+    WorldCharacterDamageStatus Status,
+    string Message,
+    string CharacterId,
+    int DamageApplied,
+    int TargetHp,
+    WorldSnapshot? Snapshot,
+    CombatEvent? CombatEvent,
+    InventoryDelta? InventoryDelta,
+    DateTimeOffset? RespawnAtUtc)
+{
+    public bool Accepted => Status is WorldCharacterDamageStatus.Damaged or WorldCharacterDamageStatus.Killed;
+}
+
+public enum WorldCharacterDamageStatus
+{
+    Damaged,
+    Killed,
+    MissingActor,
+    AlreadyDead
+}
+
+public sealed record WorldCharacterRespawnResult(
+    string CharacterId,
+    CharacterPosition Position,
+    CharacterStats Stats,
+    WorldSnapshot? Snapshot,
+    bool CheckpointStored);
+
+public sealed record WorldCharacterDisconnectResult(
+    string CharacterId,
+    bool ActorRetained,
+    bool CheckpointStored,
+    DateTimeOffset? CombatGraceExpiresAtUtc,
+    string Reason);
 
 public enum WorldMovementStatus
 {

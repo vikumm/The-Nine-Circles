@@ -68,3 +68,36 @@ VS-013 note:
 - Unity may send `AttackIntent` for `knight_basic_slash` only as player intent;
 - Unity must render `CombatEvent` and `SkillStateChanged` as server results;
 - Unity must not calculate damage, crit, target HP, cooldown completion, death, XP or loot.
+
+VS-014 note:
+
+- Unity may send `CastIntent` for `knight_shield_bash_r1` only as player intent;
+- Unity may render server `CombatEvent`, `SkillStateChanged` and `CharacterProgressed` payloads;
+- Unity must not choose MP cost, stun duration, skill XP, rank, cooldown completion, damage, target HP or death outcome.
+
+VS-015 note:
+
+- Unity may render the 5 second death screen from server `StatusEffectApplied(effect_id = "death_screen")`;
+- Unity may render `CombatEvent.kill_id` and preliminary equipment durability fields from `InventoryDelta`;
+- Unity must not revive locally, choose respawn position, calculate durability loss, decide equipment attributes or mint kill ids.
+
+VS-017 note:
+
+- Unity may render a 20-slot inventory grid, OffHand equipment, rarity tooltip, defense comparison and currency balance from server state;
+- Unity may send `EquipItemIntent` and `UnequipItemIntent` with the last acknowledged `inventory_version`;
+- Unity must not change item owner, item location, bind state, rarity, durability, defense, block chance, pending rewards or currency locally;
+- failed inventory mutations must wait for a fresh server `InventoryDelta` or read model before retrying.
+
+VS-018 note:
+
+- Unity may cache the short-lived `JoinAccepted.reconnect_token` only for transient reconnect;
+- reconnect must start with a fresh `ClientHello` game ticket and then send `ReconnectRequest`;
+- Unity may render restored `JoinAccepted`, `WorldSnapshot` and `InventoryDelta`;
+- Unity must not replay old `RewardGranted`, snapshots, HP/MP, position, inventory or equipment as authoritative state.
+
+VS-020 note:
+
+- `Assets/Editor/DivinityQaProfileSmokeTest.cs` is the local QA bootstrap for the 1920x1080, 60 FPS profiling gate;
+- the script samples frame budget, managed memory and GC timing without adding gameplay authority to the client;
+- the release gate must run the Unity batch mode QA command from the runbook on a Windows QA machine;
+- Unity still must not enforce rate limits, validate rewards, mint tokens, decide reconnect success or author gameplay outcomes.

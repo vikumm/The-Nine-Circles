@@ -70,9 +70,11 @@ public sealed class WorldMonsterState
     public DateTimeOffset NextWanderAtUtc { get; internal set; }
     public DateTimeOffset NextAttackAtUtc { get; internal set; }
     public DateTimeOffset? RespawnAtUtc { get; internal set; }
+    public DateTimeOffset? StunnedUntilUtc { get; internal set; }
     public string? LastKillId { get; internal set; }
     public int PathRecalculationCount { get; internal set; }
     public bool Active => AiState != MonsterAiState.Dead;
+    public bool IsStunned(DateTimeOffset nowUtc) => StunnedUntilUtc is not null && StunnedUntilUtc > nowUtc;
 }
 
 public sealed class WorldMonsterPlayerState

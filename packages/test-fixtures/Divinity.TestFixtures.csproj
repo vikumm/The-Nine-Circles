@@ -16,6 +16,12 @@
     <Compile Remove="prediction-tests/**/*.cs" />
     <Compile Remove="monster-ai-tests/**/*.cs" />
     <Compile Remove="basic-attack-tests/**/*.cs" />
+    <Compile Remove="shield-bash-tests/**/*.cs" />
+    <Compile Remove="death-respawn-tests/**/*.cs" />
+    <Compile Remove="reward-transaction-tests/**/*.cs" />
+    <Compile Remove="inventory-equipment-tests/**/*.cs" />
+    <Compile Remove="reconnect-tests/**/*.cs" />
+    <Compile Remove="load-bot-tests/**/*.cs" />
   </ItemGroup>
 
 </Project>

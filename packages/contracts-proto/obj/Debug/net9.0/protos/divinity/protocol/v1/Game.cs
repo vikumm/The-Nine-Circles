@@ -39,7 +39,7 @@ namespace Divinity.Contracts.V1 {
             "aXR5LnByb3RvY29sLnYxLlVuZXF1aXBJdGVtSW50ZW50SAASNAoJaGVhcnRi",
             "ZWF0GBEgASgLMh8uZGl2aW5pdHkucHJvdG9jb2wudjEuSGVhcnRiZWF0SAAS",
             "QwoRcmVjb25uZWN0X3JlcXVlc3QYEiABKAsyJi5kaXZpbml0eS5wcm90b2Nv",
-            "bC52MS5SZWNvbm5lY3RSZXF1ZXN0SABCCQoHcGF5bG9hZCKKBAoOU2VydmVy",
+            "bC52MS5SZWNvbm5lY3RSZXF1ZXN0SABCCQoHcGF5bG9hZCKdBQoOU2VydmVy",
             "RW52ZWxvcGUSGAoQcHJvdG9jb2xfdmVyc2lvbhgBIAEoDRITCgtzZXJ2ZXJf",
             "dGljaxgCIAEoBBIUCgxhY2tfc2VxdWVuY2UYAyABKAQSOwoNam9pbl9hY2Nl",
             "cHRlZBgKIAEoCzIiLmRpdmluaXR5LnByb3RvY29sLnYxLkpvaW5BY2NlcHRl",
@@ -51,101 +51,116 @@ namespace Divinity.Contracts.V1 {
             "cHJvdG9jb2wudjEuSW52ZW50b3J5RGVsdGFIABI2Cgpjb3JyZWN0aW9uGA8g",
             "ASgLMiAuZGl2aW5pdHkucHJvdG9jb2wudjEuQ29ycmVjdGlvbkgAEjkKDHNl",
             "cnZlcl9lcnJvchgQIAEoCzIhLmRpdmluaXR5LnByb3RvY29sLnYxLlNlcnZl",
-            "ckVycm9ySABCCQoHcGF5bG9hZCJKCgtDbGllbnRIZWxsbxIQCghidWlsZF9p",
-            "ZBgBIAEoCRITCgtnYW1lX3RpY2tldBgCIAEoCRIUCgxjbGllbnRfbm9uY2UY",
-            "AyABKAkiUQoJSm9pbldvcmxkEhQKDGNoYXJhY3Rlcl9pZBgBIAEoCRIYChBy",
-            "ZXF1ZXN0ZWRfbWFwX2lkGAIgASgJEhQKDGNvbnRlbnRfaGFzaBgDIAEoCSKM",
-            "AQoKTW92ZUludGVudBIwCgRtb2RlGAEgASgOMiIuZGl2aW5pdHkucHJvdG9j",
-            "b2wudjEuTW92ZW1lbnRNb2RlEhMKC2RpcmVjdGlvbl94GAIgASgCEhMKC2Rp",
-            "cmVjdGlvbl95GAMgASgCEhAKCHRhcmdldF94GAQgASgCEhAKCHRhcmdldF95",
-            "GAUgASgCIk0KDEF0dGFja0ludGVudBIYChB0YXJnZXRfZW50aXR5X2lkGAEg",
-            "ASgJEhAKCHNraWxsX2lkGAIgASgJEhEKCWFjdGlvbl9pZBgDIAEoCSJLCgpD",
-            "YXN0SW50ZW50EhAKCHNraWxsX2lkGAEgASgJEhgKEHRhcmdldF9lbnRpdHlf",
-            "aWQYAiABKAkSEQoJYWN0aW9uX2lkGAMgASgJInkKD0VxdWlwSXRlbUludGVu",
-            "dBIYChBpdGVtX2luc3RhbmNlX2lkGAEgASgJEjEKBHNsb3QYAiABKA4yIy5k",
-            "aXZpbml0eS5wcm90b2NvbC52MS5FcXVpcG1lbnRTbG90EhkKEWludmVudG9y",
-            "eV92ZXJzaW9uGAMgASgEImEKEVVuZXF1aXBJdGVtSW50ZW50EjEKBHNsb3QY",
-            "ASABKA4yIy5kaXZpbml0eS5wcm90b2NvbC52MS5FcXVpcG1lbnRTbG90EhkK",
-            "EWludmVudG9yeV92ZXJzaW9uGAIgASgEIiMKCUhlYXJ0YmVhdBIWCg5jbGll",
-            "bnRfdGltZV9tcxgBIAEoBCJLChBSZWNvbm5lY3RSZXF1ZXN0EhcKD3JlY29u",
-            "bmVjdF90b2tlbhgBIAEoCRIeChZwcmV2aW91c19jb25uZWN0aW9uX2lkGAIg",
-            "ASgJIsQBCgxKb2luQWNjZXB0ZWQSFAoMY2hhcmFjdGVyX2lkGAEgASgJEg4K",
-            "Bm1hcF9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJEi8KCHBvc2l0aW9u",
-            "GAQgASgLMh0uZGl2aW5pdHkucHJvdG9jb2wudjEuVmVjdG9yMhIzCgVzdGF0",
-            "cxgFIAEoCzIkLmRpdmluaXR5LnByb3RvY29sLnYxLkNoYXJhY3RlclN0YXRz",
-            "EhQKDGNvbnRlbnRfaGFzaBgGIAEoCSJpCg1Xb3JsZFNuYXBzaG90EhMKC3Nu",
-            "YXBzaG90X2lkGAEgASgEEg4KBm1hcF9pZBgCIAEoCRIzCghlbnRpdGllcxgD",
-            "IAMoCzIhLmRpdmluaXR5LnByb3RvY29sLnYxLkVudGl0eVN0YXRlIqgBCgtF",
-            "bnRpdHlTdGF0ZRIRCgllbnRpdHlfaWQYASABKAkSLgoEa2luZBgCIAEoDjIg",
-            "LmRpdmluaXR5LnByb3RvY29sLnYxLkVudGl0eUtpbmQSLwoIcG9zaXRpb24Y",
-            "AyABKAsyHS5kaXZpbml0eS5wcm90b2NvbC52MS5WZWN0b3IyEg0KBWxldmVs",
-            "GAQgASgNEgoKAmhwGAUgASgFEgoKAm1wGAYgASgFIv8BCgtDb21iYXRFdmVu",
-            "dBIQCghldmVudF9pZBgBIAEoCRIYChBzb3VyY2VfZW50aXR5X2lkGAIgASgJ",
-            "EhgKEHRhcmdldF9lbnRpdHlfaWQYAyABKAkSEAoIc2tpbGxfaWQYBCABKAkS",
-            "MgoGcmVzdWx0GAUgASgOMiIuZGl2aW5pdHkucHJvdG9jb2wudjEuQ29tYmF0",
-            "UmVzdWx0Eg4KBmRhbWFnZRgGIAEoBRIRCgl0YXJnZXRfaHAYByABKAUSQQoO",
-            "c3RhdHVzX2VmZmVjdHMYCCADKAsyKS5kaXZpbml0eS5wcm90b2NvbC52MS5T",
-            "dGF0dXNFZmZlY3RBcHBsaWVkIj0KE1N0YXR1c0VmZmVjdEFwcGxpZWQSEQoJ",
-            "ZWZmZWN0X2lkGAEgASgJEhMKC2R1cmF0aW9uX21zGAIgASgNIooBCg1SZXdh",
-            "cmRHcmFudGVkEhIKCnJld2FyZF9rZXkYASABKAkSFAoMY2hhcmFjdGVyX2lk",
-            "GAIgASgJEgoKAnhwGAMgASgNEhAKCHNraWxsX3hwGAQgASgNEhYKDmN1cnJl",
-            "bmN5X2RlbHRhGAUgASgNEhkKEWl0ZW1faW5zdGFuY2VfaWRzGAYgAygJIrEB",
-            "Cg5JbnZlbnRvcnlEZWx0YRIZChFpbnZlbnRvcnlfdmVyc2lvbhgBIAEoBBIy",
-            "CgVzbG90cxgCIAMoCzIjLmRpdmluaXR5LnByb3RvY29sLnYxLkludmVudG9y",
-            "eVNsb3QSNgoJZXF1aXBtZW50GAMgAygLMiMuZGl2aW5pdHkucHJvdG9jb2wu",
-            "djEuRXF1aXBtZW50SXRlbRIYChBjdXJyZW5jeV9iYWxhbmNlGAQgASgNIj0K",
-            "DUludmVudG9yeVNsb3QSEgoKc2xvdF9pbmRleBgBIAEoDRIYChBpdGVtX2lu",
-            "c3RhbmNlX2lkGAIgASgJIlwKDUVxdWlwbWVudEl0ZW0SMQoEc2xvdBgBIAEo",
-            "DjIjLmRpdmluaXR5LnByb3RvY29sLnYxLkVxdWlwbWVudFNsb3QSGAoQaXRl",
-            "bV9pbnN0YW5jZV9pZBgCIAEoCSKWAQoKQ29ycmVjdGlvbhIRCgllbnRpdHlf",
-            "aWQYASABKAkSPQoWYXV0aG9yaXRhdGl2ZV9wb3NpdGlvbhgCIAEoCzIdLmRp",
-            "dmluaXR5LnByb3RvY29sLnYxLlZlY3RvcjISNgoGcmVhc29uGAMgASgOMiYu",
-            "ZGl2aW5pdHkucHJvdG9jb2wudjEuQ29ycmVjdGlvblJlYXNvbiJlCgtTZXJ2",
-            "ZXJFcnJvchItCgRjb2RlGAEgASgOMh8uZGl2aW5pdHkucHJvdG9jb2wudjEu",
-            "RXJyb3JDb2RlEg8KB21lc3NhZ2UYAiABKAkSFgoOY29ycmVsYXRpb25faWQY",
-            "AyABKAkiNwoOQ2hhcmFjdGVyU3RhdHMSDQoFbGV2ZWwYASABKA0SCgoCaHAY",
-            "AiABKAUSCgoCbXAYAyABKAUiHwoHVmVjdG9yMhIJCgF4GAEgASgCEgkKAXkY",
-            "AiABKAIqagoMTW92ZW1lbnRNb2RlEh0KGU1PVkVNRU5UX01PREVfVU5TUEVD",
-            "SUZJRUQQABIbChdNT1ZFTUVOVF9NT0RFX0RJUkVDVElPThABEh4KGk1PVkVN",
-            "RU5UX01PREVfQ0xJQ0tfVEFSR0VUEAIqTAoNRXF1aXBtZW50U2xvdBIeChpF",
-            "UVVJUE1FTlRfU0xPVF9VTlNQRUNJRklFRBAAEhsKF0VRVUlQTUVOVF9TTE9U",
-            "X09GRl9IQU5EEAEqWgoKRW50aXR5S2luZBIbChdFTlRJVFlfS0lORF9VTlNQ",
-            "RUNJRklFRBAAEhYKEkVOVElUWV9LSU5EX1BMQVlFUhABEhcKE0VOVElUWV9L",
-            "SU5EX01PTlNURVIQAiqUAQoMQ29tYmF0UmVzdWx0Eh0KGUNPTUJBVF9SRVNV",
-            "TFRfVU5TUEVDSUZJRUQQABIVChFDT01CQVRfUkVTVUxUX0hJVBABEhoKFkNP",
-            "TUJBVF9SRVNVTFRfQ1JJVElDQUwQAhIWChJDT01CQVRfUkVTVUxUX01JU1MQ",
-            "AxIaChZDT01CQVRfUkVTVUxUX1JFSkVDVEVEEAQqyQEKEENvcnJlY3Rpb25S",
-            "ZWFzb24SIQodQ09SUkVDVElPTl9SRUFTT05fVU5TUEVDSUZJRUQQABInCiND",
-            "T1JSRUNUSU9OX1JFQVNPTl9QUk9UT0NPTF9SRUpFQ1RFRBABEh8KG0NPUlJF",
-            "Q1RJT05fUkVBU09OX0NPTExJU0lPThACEiEKHUNPUlJFQ1RJT05fUkVBU09O",
-            "X1NQRUVEX0xJTUlUEAMSJQohQ09SUkVDVElPTl9SRUFTT05fU0VRVUVOQ0Vf",
-            "UkVQTEFZEAQqkwcKCUVycm9yQ29kZRIaChZFUlJPUl9DT0RFX1VOU1BFQ0lG",
-            "SUVEEAASKwonRVJST1JfQ09ERV9VTlNVUFBPUlRFRF9QUk9UT0NPTF9WRVJT",
-            "SU9OEAESIAocRVJST1JfQ09ERV9QQVlMT0FEX1RPT19MQVJHRRACEiAKHEVS",
-            "Uk9SX0NPREVfTUFMRk9STUVEX1BBWUxPQUQQAxIjCh9FUlJPUl9DT0RFX1VO",
-            "S05PV05fUEFZTE9BRF9UWVBFEAQSLworRVJST1JfQ09ERV9DTElFTlRfSEVM",
-            "TE9fQUNDRVBURURfTk9fU0VTU0lPThAFEiMKH0VSUk9SX0NPREVfR0FNRV9U",
-            "SUNLRVRfUkVRVUlSRUQQBhIkCiBFUlJPUl9DT0RFX0dBTUVfVElDS0VUX01B",
-            "TEZPUk1FRBAHEiIKHkVSUk9SX0NPREVfR0FNRV9USUNLRVRfSU5WQUxJRBAI",
-            "EiIKHkVSUk9SX0NPREVfR0FNRV9USUNLRVRfRVhQSVJFRBAJEiEKHUVSUk9S",
-            "X0NPREVfR0FNRV9USUNLRVRfUkVVU0VEEAoSKQolRVJST1JfQ09ERV9HQU1F",
-            "X1RJQ0tFVF9CVUlMRF9NSVNNQVRDSBALEiwKKEVSUk9SX0NPREVfR0FNRV9U",
-            "SUNLRVRfUFJPVE9DT0xfTUlTTUFUQ0gQDBIpCiVFUlJPUl9DT0RFX0dBTUVf",
-            "VElDS0VUX05PTkNFX01JU01BVENIEA0SLAooRVJST1JfQ09ERV9DTElFTlRf",
-            "SEVMTE9fQUNDRVBURURfU0VTU0lPThAOEiUKIUVSUk9SX0NPREVfSEFORFNI",
-            "QUtFX1JBVEVfTElNSVRFRBAPEiEKHUVSUk9SX0NPREVfSEFORFNIQUtFX1JF",
-            "UVVJUkVEEBASJQohRVJST1JfQ09ERV9TRVNTSU9OX0xFQVNFX0NPTkZMSUNU",
-            "EBESIgoeRVJST1JfQ09ERV9DSEFSQUNURVJfTk9UX09XTkVEEBISHAoYRVJS",
-            "T1JfQ09ERV9IRUFSVEJFQVRfQUNLEBMSIQodRVJST1JfQ09ERV9IRUFSVEJF",
-            "QVRfUkVKRUNURUQQFBIkCiBFUlJPUl9DT0RFX1JFQ09OTkVDVF9VTlNVUFBP",
-            "UlRFRBAVEiEKHUVSUk9SX0NPREVfU0VTU0lPTl9OT1RfSk9JTkVEEBYSHAoY",
-            "RVJST1JfQ09ERV9NT1ZFX1JFSkVDVEVEEBdCGKoCFURpdmluaXR5LkNvbnRy",
-            "YWN0cy5WMWIGcHJvdG8z"));
+            "ckVycm9ySAASRgoTc2tpbGxfc3RhdGVfY2hhbmdlZBgRIAEoCzInLmRpdmlu",
+            "aXR5LnByb3RvY29sLnYxLlNraWxsU3RhdGVDaGFuZ2VkSAASSQoUY2hhcmFj",
+            "dGVyX3Byb2dyZXNzZWQYEiABKAsyKS5kaXZpbml0eS5wcm90b2NvbC52MS5D",
+            "aGFyYWN0ZXJQcm9ncmVzc2VkSABCCQoHcGF5bG9hZCJKCgtDbGllbnRIZWxs",
+            "bxIQCghidWlsZF9pZBgBIAEoCRITCgtnYW1lX3RpY2tldBgCIAEoCRIUCgxj",
+            "bGllbnRfbm9uY2UYAyABKAkiUQoJSm9pbldvcmxkEhQKDGNoYXJhY3Rlcl9p",
+            "ZBgBIAEoCRIYChByZXF1ZXN0ZWRfbWFwX2lkGAIgASgJEhQKDGNvbnRlbnRf",
+            "aGFzaBgDIAEoCSKMAQoKTW92ZUludGVudBIwCgRtb2RlGAEgASgOMiIuZGl2",
+            "aW5pdHkucHJvdG9jb2wudjEuTW92ZW1lbnRNb2RlEhMKC2RpcmVjdGlvbl94",
+            "GAIgASgCEhMKC2RpcmVjdGlvbl95GAMgASgCEhAKCHRhcmdldF94GAQgASgC",
+            "EhAKCHRhcmdldF95GAUgASgCIk0KDEF0dGFja0ludGVudBIYChB0YXJnZXRf",
+            "ZW50aXR5X2lkGAEgASgJEhAKCHNraWxsX2lkGAIgASgJEhEKCWFjdGlvbl9p",
+            "ZBgDIAEoCSJLCgpDYXN0SW50ZW50EhAKCHNraWxsX2lkGAEgASgJEhgKEHRh",
+            "cmdldF9lbnRpdHlfaWQYAiABKAkSEQoJYWN0aW9uX2lkGAMgASgJInkKD0Vx",
+            "dWlwSXRlbUludGVudBIYChBpdGVtX2luc3RhbmNlX2lkGAEgASgJEjEKBHNs",
+            "b3QYAiABKA4yIy5kaXZpbml0eS5wcm90b2NvbC52MS5FcXVpcG1lbnRTbG90",
+            "EhkKEWludmVudG9yeV92ZXJzaW9uGAMgASgEImEKEVVuZXF1aXBJdGVtSW50",
+            "ZW50EjEKBHNsb3QYASABKA4yIy5kaXZpbml0eS5wcm90b2NvbC52MS5FcXVp",
+            "cG1lbnRTbG90EhkKEWludmVudG9yeV92ZXJzaW9uGAIgASgEIiMKCUhlYXJ0",
+            "YmVhdBIWCg5jbGllbnRfdGltZV9tcxgBIAEoBCJLChBSZWNvbm5lY3RSZXF1",
+            "ZXN0EhcKD3JlY29ubmVjdF90b2tlbhgBIAEoCRIeChZwcmV2aW91c19jb25u",
+            "ZWN0aW9uX2lkGAIgASgJIvwBCgxKb2luQWNjZXB0ZWQSFAoMY2hhcmFjdGVy",
+            "X2lkGAEgASgJEg4KBm1hcF9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJ",
+            "Ei8KCHBvc2l0aW9uGAQgASgLMh0uZGl2aW5pdHkucHJvdG9jb2wudjEuVmVj",
+            "dG9yMhIzCgVzdGF0cxgFIAEoCzIkLmRpdmluaXR5LnByb3RvY29sLnYxLkNo",
+            "YXJhY3RlclN0YXRzEhQKDGNvbnRlbnRfaGFzaBgGIAEoCRIXCg9yZWNvbm5l",
+            "Y3RfdG9rZW4YByABKAkSHQoVcmVjb25uZWN0X3R0bF9zZWNvbmRzGAggASgN",
+            "ImkKDVdvcmxkU25hcHNob3QSEwoLc25hcHNob3RfaWQYASABKAQSDgoGbWFw",
+            "X2lkGAIgASgJEjMKCGVudGl0aWVzGAMgAygLMiEuZGl2aW5pdHkucHJvdG9j",
+            "b2wudjEuRW50aXR5U3RhdGUiqAEKC0VudGl0eVN0YXRlEhEKCWVudGl0eV9p",
+            "ZBgBIAEoCRIuCgRraW5kGAIgASgOMiAuZGl2aW5pdHkucHJvdG9jb2wudjEu",
+            "RW50aXR5S2luZBIvCghwb3NpdGlvbhgDIAEoCzIdLmRpdmluaXR5LnByb3Rv",
+            "Y29sLnYxLlZlY3RvcjISDQoFbGV2ZWwYBCABKA0SCgoCaHAYBSABKAUSCgoC",
+            "bXAYBiABKAUikAIKC0NvbWJhdEV2ZW50EhAKCGV2ZW50X2lkGAEgASgJEhgK",
+            "EHNvdXJjZV9lbnRpdHlfaWQYAiABKAkSGAoQdGFyZ2V0X2VudGl0eV9pZBgD",
+            "IAEoCRIQCghza2lsbF9pZBgEIAEoCRIyCgZyZXN1bHQYBSABKA4yIi5kaXZp",
+            "bml0eS5wcm90b2NvbC52MS5Db21iYXRSZXN1bHQSDgoGZGFtYWdlGAYgASgF",
+            "EhEKCXRhcmdldF9ocBgHIAEoBRJBCg5zdGF0dXNfZWZmZWN0cxgIIAMoCzIp",
+            "LmRpdmluaXR5LnByb3RvY29sLnYxLlN0YXR1c0VmZmVjdEFwcGxpZWQSDwoH",
+            "a2lsbF9pZBgJIAEoCSKTAQoRU2tpbGxTdGF0ZUNoYW5nZWQSFAoMY2hhcmFj",
+            "dGVyX2lkGAEgASgJEhAKCHNraWxsX2lkGAIgASgJEiIKGmNvb2xkb3duX3N0",
+            "YXJ0ZWRfc2VydmVyX21zGAMgASgEEh8KF2Nvb2xkb3duX2VuZHNfc2VydmVy",
+            "X21zGAQgASgEEhEKCWF2YWlsYWJsZRgFIAEoCCJ1ChNDaGFyYWN0ZXJQcm9n",
+            "cmVzc2VkEhQKDGNoYXJhY3Rlcl9pZBgBIAEoCRIQCghza2lsbF9pZBgCIAEo",
+            "CRIQCghza2lsbF94cBgDIAEoDRISCgpza2lsbF9yYW5rGAQgASgNEhAKCG1h",
+            "eF9yYW5rGAUgASgNIj0KE1N0YXR1c0VmZmVjdEFwcGxpZWQSEQoJZWZmZWN0",
+            "X2lkGAEgASgJEhMKC2R1cmF0aW9uX21zGAIgASgNIooBCg1SZXdhcmRHcmFu",
+            "dGVkEhIKCnJld2FyZF9rZXkYASABKAkSFAoMY2hhcmFjdGVyX2lkGAIgASgJ",
+            "EgoKAnhwGAMgASgNEhAKCHNraWxsX3hwGAQgASgNEhYKDmN1cnJlbmN5X2Rl",
+            "bHRhGAUgASgNEhkKEWl0ZW1faW5zdGFuY2VfaWRzGAYgAygJIrEBCg5JbnZl",
+            "bnRvcnlEZWx0YRIZChFpbnZlbnRvcnlfdmVyc2lvbhgBIAEoBBIyCgVzbG90",
+            "cxgCIAMoCzIjLmRpdmluaXR5LnByb3RvY29sLnYxLkludmVudG9yeVNsb3QS",
+            "NgoJZXF1aXBtZW50GAMgAygLMiMuZGl2aW5pdHkucHJvdG9jb2wudjEuRXF1",
+            "aXBtZW50SXRlbRIYChBjdXJyZW5jeV9iYWxhbmNlGAQgASgNIj0KDUludmVu",
+            "dG9yeVNsb3QSEgoKc2xvdF9pbmRleBgBIAEoDRIYChBpdGVtX2luc3RhbmNl",
+            "X2lkGAIgASgJIqMBCg1FcXVpcG1lbnRJdGVtEjEKBHNsb3QYASABKA4yIy5k",
+            "aXZpbml0eS5wcm90b2NvbC52MS5FcXVpcG1lbnRTbG90EhgKEGl0ZW1faW5z",
+            "dGFuY2VfaWQYAiABKAkSEgoKZHVyYWJpbGl0eRgDIAEoDRIWCg5tYXhfZHVy",
+            "YWJpbGl0eRgEIAEoDRIZChFhdHRyaWJ1dGVzX2FjdGl2ZRgFIAEoCCKWAQoK",
+            "Q29ycmVjdGlvbhIRCgllbnRpdHlfaWQYASABKAkSPQoWYXV0aG9yaXRhdGl2",
+            "ZV9wb3NpdGlvbhgCIAEoCzIdLmRpdmluaXR5LnByb3RvY29sLnYxLlZlY3Rv",
+            "cjISNgoGcmVhc29uGAMgASgOMiYuZGl2aW5pdHkucHJvdG9jb2wudjEuQ29y",
+            "cmVjdGlvblJlYXNvbiJlCgtTZXJ2ZXJFcnJvchItCgRjb2RlGAEgASgOMh8u",
+            "ZGl2aW5pdHkucHJvdG9jb2wudjEuRXJyb3JDb2RlEg8KB21lc3NhZ2UYAiAB",
+            "KAkSFgoOY29ycmVsYXRpb25faWQYAyABKAkiNwoOQ2hhcmFjdGVyU3RhdHMS",
+            "DQoFbGV2ZWwYASABKA0SCgoCaHAYAiABKAUSCgoCbXAYAyABKAUiHwoHVmVj",
+            "dG9yMhIJCgF4GAEgASgCEgkKAXkYAiABKAIqagoMTW92ZW1lbnRNb2RlEh0K",
+            "GU1PVkVNRU5UX01PREVfVU5TUEVDSUZJRUQQABIbChdNT1ZFTUVOVF9NT0RF",
+            "X0RJUkVDVElPThABEh4KGk1PVkVNRU5UX01PREVfQ0xJQ0tfVEFSR0VUEAIq",
+            "TAoNRXF1aXBtZW50U2xvdBIeChpFUVVJUE1FTlRfU0xPVF9VTlNQRUNJRklF",
+            "RBAAEhsKF0VRVUlQTUVOVF9TTE9UX09GRl9IQU5EEAEqWgoKRW50aXR5S2lu",
+            "ZBIbChdFTlRJVFlfS0lORF9VTlNQRUNJRklFRBAAEhYKEkVOVElUWV9LSU5E",
+            "X1BMQVlFUhABEhcKE0VOVElUWV9LSU5EX01PTlNURVIQAiqUAQoMQ29tYmF0",
+            "UmVzdWx0Eh0KGUNPTUJBVF9SRVNVTFRfVU5TUEVDSUZJRUQQABIVChFDT01C",
+            "QVRfUkVTVUxUX0hJVBABEhoKFkNPTUJBVF9SRVNVTFRfQ1JJVElDQUwQAhIW",
+            "ChJDT01CQVRfUkVTVUxUX01JU1MQAxIaChZDT01CQVRfUkVTVUxUX1JFSkVD",
+            "VEVEEAQqyQEKEENvcnJlY3Rpb25SZWFzb24SIQodQ09SUkVDVElPTl9SRUFT",
+            "T05fVU5TUEVDSUZJRUQQABInCiNDT1JSRUNUSU9OX1JFQVNPTl9QUk9UT0NP",
+            "TF9SRUpFQ1RFRBABEh8KG0NPUlJFQ1RJT05fUkVBU09OX0NPTExJU0lPThAC",
+            "EiEKHUNPUlJFQ1RJT05fUkVBU09OX1NQRUVEX0xJTUlUEAMSJQohQ09SUkVD",
+            "VElPTl9SRUFTT05fU0VRVUVOQ0VfUkVQTEFZEAQqlwgKCUVycm9yQ29kZRIa",
+            "ChZFUlJPUl9DT0RFX1VOU1BFQ0lGSUVEEAASKwonRVJST1JfQ09ERV9VTlNV",
+            "UFBPUlRFRF9QUk9UT0NPTF9WRVJTSU9OEAESIAocRVJST1JfQ09ERV9QQVlM",
+            "T0FEX1RPT19MQVJHRRACEiAKHEVSUk9SX0NPREVfTUFMRk9STUVEX1BBWUxP",
+            "QUQQAxIjCh9FUlJPUl9DT0RFX1VOS05PV05fUEFZTE9BRF9UWVBFEAQSLwor",
+            "RVJST1JfQ09ERV9DTElFTlRfSEVMTE9fQUNDRVBURURfTk9fU0VTU0lPThAF",
+            "EiMKH0VSUk9SX0NPREVfR0FNRV9USUNLRVRfUkVRVUlSRUQQBhIkCiBFUlJP",
+            "Ul9DT0RFX0dBTUVfVElDS0VUX01BTEZPUk1FRBAHEiIKHkVSUk9SX0NPREVf",
+            "R0FNRV9USUNLRVRfSU5WQUxJRBAIEiIKHkVSUk9SX0NPREVfR0FNRV9USUNL",
+            "RVRfRVhQSVJFRBAJEiEKHUVSUk9SX0NPREVfR0FNRV9USUNLRVRfUkVVU0VE",
+            "EAoSKQolRVJST1JfQ09ERV9HQU1FX1RJQ0tFVF9CVUlMRF9NSVNNQVRDSBAL",
+            "EiwKKEVSUk9SX0NPREVfR0FNRV9USUNLRVRfUFJPVE9DT0xfTUlTTUFUQ0gQ",
+            "DBIpCiVFUlJPUl9DT0RFX0dBTUVfVElDS0VUX05PTkNFX01JU01BVENIEA0S",
+            "LAooRVJST1JfQ09ERV9DTElFTlRfSEVMTE9fQUNDRVBURURfU0VTU0lPThAO",
+            "EiUKIUVSUk9SX0NPREVfSEFORFNIQUtFX1JBVEVfTElNSVRFRBAPEiEKHUVS",
+            "Uk9SX0NPREVfSEFORFNIQUtFX1JFUVVJUkVEEBASJQohRVJST1JfQ09ERV9T",
+            "RVNTSU9OX0xFQVNFX0NPTkZMSUNUEBESIgoeRVJST1JfQ09ERV9DSEFSQUNU",
+            "RVJfTk9UX09XTkVEEBISHAoYRVJST1JfQ09ERV9IRUFSVEJFQVRfQUNLEBMS",
+            "IQodRVJST1JfQ09ERV9IRUFSVEJFQVRfUkVKRUNURUQQFBIkCiBFUlJPUl9D",
+            "T0RFX1JFQ09OTkVDVF9VTlNVUFBPUlRFRBAVEiEKHUVSUk9SX0NPREVfU0VT",
+            "U0lPTl9OT1RfSk9JTkVEEBYSHAoYRVJST1JfQ09ERV9NT1ZFX1JFSkVDVEVE",
+            "EBcSHgoaRVJST1JfQ09ERV9BVFRBQ0tfUkVKRUNURUQQGBIcChhFUlJPUl9D",
+            "T0RFX0NBU1RfUkVKRUNURUQQGRIhCh1FUlJPUl9DT0RFX0lOVkVOVE9SWV9S",
+            "RUpFQ1RFRBAaEiEKHUVSUk9SX0NPREVfUkVDT05ORUNUX1JFSkVDVEVEEBtC",
+            "GKoCFURpdmluaXR5LkNvbnRyYWN0cy5WMWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Divinity.Contracts.V1.MovementMode), typeof(global::Divinity.Contracts.V1.EquipmentSlot), typeof(global::Divinity.Contracts.V1.EntityKind), typeof(global::Divinity.Contracts.V1.CombatResult), typeof(global::Divinity.Contracts.V1.CorrectionReason), typeof(global::Divinity.Contracts.V1.ErrorCode), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.ClientEnvelope), global::Divinity.Contracts.V1.ClientEnvelope.Parser, new[]{ "ProtocolVersion", "Sequence", "ClientTick", "ClientHello", "JoinWorld", "MoveIntent", "AttackIntent", "CastIntent", "EquipItemIntent", "UnequipItemIntent", "Heartbeat", "ReconnectRequest" }, new[]{ "Payload" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.ServerEnvelope), global::Divinity.Contracts.V1.ServerEnvelope.Parser, new[]{ "ProtocolVersion", "ServerTick", "AckSequence", "JoinAccepted", "WorldSnapshot", "CombatEvent", "RewardGranted", "InventoryDelta", "Correction", "ServerError" }, new[]{ "Payload" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.ServerEnvelope), global::Divinity.Contracts.V1.ServerEnvelope.Parser, new[]{ "ProtocolVersion", "ServerTick", "AckSequence", "JoinAccepted", "WorldSnapshot", "CombatEvent", "RewardGranted", "InventoryDelta", "Correction", "ServerError", "SkillStateChanged", "CharacterProgressed" }, new[]{ "Payload" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.ClientHello), global::Divinity.Contracts.V1.ClientHello.Parser, new[]{ "BuildId", "GameTicket", "ClientNonce" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.JoinWorld), global::Divinity.Contracts.V1.JoinWorld.Parser, new[]{ "CharacterId", "RequestedMapId", "ContentHash" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.MoveIntent), global::Divinity.Contracts.V1.MoveIntent.Parser, new[]{ "Mode", "DirectionX", "DirectionY", "TargetX", "TargetY" }, null, null, null, null),
@@ -155,15 +170,17 @@ namespace Divinity.Contracts.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.UnequipItemIntent), global::Divinity.Contracts.V1.UnequipItemIntent.Parser, new[]{ "Slot", "InventoryVersion" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.Heartbeat), global::Divinity.Contracts.V1.Heartbeat.Parser, new[]{ "ClientTimeMs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.ReconnectRequest), global::Divinity.Contracts.V1.ReconnectRequest.Parser, new[]{ "ReconnectToken", "PreviousConnectionId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.JoinAccepted), global::Divinity.Contracts.V1.JoinAccepted.Parser, new[]{ "CharacterId", "MapId", "ChannelId", "Position", "Stats", "ContentHash" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.JoinAccepted), global::Divinity.Contracts.V1.JoinAccepted.Parser, new[]{ "CharacterId", "MapId", "ChannelId", "Position", "Stats", "ContentHash", "ReconnectToken", "ReconnectTtlSeconds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.WorldSnapshot), global::Divinity.Contracts.V1.WorldSnapshot.Parser, new[]{ "SnapshotId", "MapId", "Entities" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.EntityState), global::Divinity.Contracts.V1.EntityState.Parser, new[]{ "EntityId", "Kind", "Position", "Level", "Hp", "Mp" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.CombatEvent), global::Divinity.Contracts.V1.CombatEvent.Parser, new[]{ "EventId", "SourceEntityId", "TargetEntityId", "SkillId", "Result", "Damage", "TargetHp", "StatusEffects" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.CombatEvent), global::Divinity.Contracts.V1.CombatEvent.Parser, new[]{ "EventId", "SourceEntityId", "TargetEntityId", "SkillId", "Result", "Damage", "TargetHp", "StatusEffects", "KillId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.SkillStateChanged), global::Divinity.Contracts.V1.SkillStateChanged.Parser, new[]{ "CharacterId", "SkillId", "CooldownStartedServerMs", "CooldownEndsServerMs", "Available" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.CharacterProgressed), global::Divinity.Contracts.V1.CharacterProgressed.Parser, new[]{ "CharacterId", "SkillId", "SkillXp", "SkillRank", "MaxRank" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.StatusEffectApplied), global::Divinity.Contracts.V1.StatusEffectApplied.Parser, new[]{ "EffectId", "DurationMs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.RewardGranted), global::Divinity.Contracts.V1.RewardGranted.Parser, new[]{ "RewardKey", "CharacterId", "Xp", "SkillXp", "CurrencyDelta", "ItemInstanceIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.InventoryDelta), global::Divinity.Contracts.V1.InventoryDelta.Parser, new[]{ "InventoryVersion", "Slots", "Equipment", "CurrencyBalance" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.InventorySlot), global::Divinity.Contracts.V1.InventorySlot.Parser, new[]{ "SlotIndex", "ItemInstanceId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.EquipmentItem), global::Divinity.Contracts.V1.EquipmentItem.Parser, new[]{ "Slot", "ItemInstanceId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.EquipmentItem), global::Divinity.Contracts.V1.EquipmentItem.Parser, new[]{ "Slot", "ItemInstanceId", "Durability", "MaxDurability", "AttributesActive" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.Correction), global::Divinity.Contracts.V1.Correction.Parser, new[]{ "EntityId", "AuthoritativePosition", "Reason" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.ServerError), global::Divinity.Contracts.V1.ServerError.Parser, new[]{ "Code", "Message", "CorrelationId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Divinity.Contracts.V1.CharacterStats), global::Divinity.Contracts.V1.CharacterStats.Parser, new[]{ "Level", "Hp", "Mp" }, null, null, null, null),
@@ -232,6 +249,10 @@ namespace Divinity.Contracts.V1 {
     [pbr::OriginalName("ERROR_CODE_RECONNECT_UNSUPPORTED")] ReconnectUnsupported = 21,
     [pbr::OriginalName("ERROR_CODE_SESSION_NOT_JOINED")] SessionNotJoined = 22,
     [pbr::OriginalName("ERROR_CODE_MOVE_REJECTED")] MoveRejected = 23,
+    [pbr::OriginalName("ERROR_CODE_ATTACK_REJECTED")] AttackRejected = 24,
+    [pbr::OriginalName("ERROR_CODE_CAST_REJECTED")] CastRejected = 25,
+    [pbr::OriginalName("ERROR_CODE_INVENTORY_REJECTED")] InventoryRejected = 26,
+    [pbr::OriginalName("ERROR_CODE_RECONNECT_REJECTED")] ReconnectRejected = 27,
   }
 
   #endregion
@@ -1073,6 +1094,12 @@ namespace Divinity.Contracts.V1 {
         case PayloadOneofCase.ServerError:
           ServerError = other.ServerError.Clone();
           break;
+        case PayloadOneofCase.SkillStateChanged:
+          SkillStateChanged = other.SkillStateChanged.Clone();
+          break;
+        case PayloadOneofCase.CharacterProgressed:
+          CharacterProgressed = other.CharacterProgressed.Clone();
+          break;
       }
 
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -1204,6 +1231,30 @@ namespace Divinity.Contracts.V1 {
       }
     }
 
+    /// <summary>Field number for the "skill_state_changed" field.</summary>
+    public const int SkillStateChangedFieldNumber = 17;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Divinity.Contracts.V1.SkillStateChanged SkillStateChanged {
+      get { return payloadCase_ == PayloadOneofCase.SkillStateChanged ? (global::Divinity.Contracts.V1.SkillStateChanged) payload_ : null; }
+      set {
+        payload_ = value;
+        payloadCase_ = value == null ? PayloadOneofCase.None : PayloadOneofCase.SkillStateChanged;
+      }
+    }
+
+    /// <summary>Field number for the "character_progressed" field.</summary>
+    public const int CharacterProgressedFieldNumber = 18;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Divinity.Contracts.V1.CharacterProgressed CharacterProgressed {
+      get { return payloadCase_ == PayloadOneofCase.CharacterProgressed ? (global::Divinity.Contracts.V1.CharacterProgressed) payload_ : null; }
+      set {
+        payload_ = value;
+        payloadCase_ = value == null ? PayloadOneofCase.None : PayloadOneofCase.CharacterProgressed;
+      }
+    }
+
     private object payload_;
     /// <summary>Enum of possible cases for the "payload" oneof.</summary>
     public enum PayloadOneofCase {
@@ -1215,6 +1266,8 @@ namespace Divinity.Contracts.V1 {
       InventoryDelta = 14,
       Correction = 15,
       ServerError = 16,
+      SkillStateChanged = 17,
+      CharacterProgressed = 18,
     }
     private PayloadOneofCase payloadCase_ = PayloadOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1255,6 +1308,8 @@ namespace Divinity.Contracts.V1 {
       if (!object.Equals(InventoryDelta, other.InventoryDelta)) return false;
       if (!object.Equals(Correction, other.Correction)) return false;
       if (!object.Equals(ServerError, other.ServerError)) return false;
+      if (!object.Equals(SkillStateChanged, other.SkillStateChanged)) return false;
+      if (!object.Equals(CharacterProgressed, other.CharacterProgressed)) return false;
       if (PayloadCase != other.PayloadCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1273,6 +1328,8 @@ namespace Divinity.Contracts.V1 {
       if (payloadCase_ == PayloadOneofCase.InventoryDelta) hash ^= InventoryDelta.GetHashCode();
       if (payloadCase_ == PayloadOneofCase.Correction) hash ^= Correction.GetHashCode();
       if (payloadCase_ == PayloadOneofCase.ServerError) hash ^= ServerError.GetHashCode();
+      if (payloadCase_ == PayloadOneofCase.SkillStateChanged) hash ^= SkillStateChanged.GetHashCode();
+      if (payloadCase_ == PayloadOneofCase.CharacterProgressed) hash ^= CharacterProgressed.GetHashCode();
       hash ^= (int) payloadCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1332,6 +1389,14 @@ namespace Divinity.Contracts.V1 {
         output.WriteRawTag(130, 1);
         output.WriteMessage(ServerError);
       }
+      if (payloadCase_ == PayloadOneofCase.SkillStateChanged) {
+        output.WriteRawTag(138, 1);
+        output.WriteMessage(SkillStateChanged);
+      }
+      if (payloadCase_ == PayloadOneofCase.CharacterProgressed) {
+        output.WriteRawTag(146, 1);
+        output.WriteMessage(CharacterProgressed);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1382,6 +1447,14 @@ namespace Divinity.Contracts.V1 {
         output.WriteRawTag(130, 1);
         output.WriteMessage(ServerError);
       }
+      if (payloadCase_ == PayloadOneofCase.SkillStateChanged) {
+        output.WriteRawTag(138, 1);
+        output.WriteMessage(SkillStateChanged);
+      }
+      if (payloadCase_ == PayloadOneofCase.CharacterProgressed) {
+        output.WriteRawTag(146, 1);
+        output.WriteMessage(CharacterProgressed);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1421,6 +1494,12 @@ namespace Divinity.Contracts.V1 {
       }
       if (payloadCase_ == PayloadOneofCase.ServerError) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(ServerError);
+      }
+      if (payloadCase_ == PayloadOneofCase.SkillStateChanged) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(SkillStateChanged);
+      }
+      if (payloadCase_ == PayloadOneofCase.CharacterProgressed) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(CharacterProgressed);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1485,6 +1564,18 @@ namespace Divinity.Contracts.V1 {
             ServerError = new global::Divinity.Contracts.V1.ServerError();
           }
           ServerError.MergeFrom(other.ServerError);
+          break;
+        case PayloadOneofCase.SkillStateChanged:
+          if (SkillStateChanged == null) {
+            SkillStateChanged = new global::Divinity.Contracts.V1.SkillStateChanged();
+          }
+          SkillStateChanged.MergeFrom(other.SkillStateChanged);
+          break;
+        case PayloadOneofCase.CharacterProgressed:
+          if (CharacterProgressed == null) {
+            CharacterProgressed = new global::Divinity.Contracts.V1.CharacterProgressed();
+          }
+          CharacterProgressed.MergeFrom(other.CharacterProgressed);
           break;
       }
 
@@ -1582,6 +1673,24 @@ namespace Divinity.Contracts.V1 {
             ServerError = subBuilder;
             break;
           }
+          case 138: {
+            global::Divinity.Contracts.V1.SkillStateChanged subBuilder = new global::Divinity.Contracts.V1.SkillStateChanged();
+            if (payloadCase_ == PayloadOneofCase.SkillStateChanged) {
+              subBuilder.MergeFrom(SkillStateChanged);
+            }
+            input.ReadMessage(subBuilder);
+            SkillStateChanged = subBuilder;
+            break;
+          }
+          case 146: {
+            global::Divinity.Contracts.V1.CharacterProgressed subBuilder = new global::Divinity.Contracts.V1.CharacterProgressed();
+            if (payloadCase_ == PayloadOneofCase.CharacterProgressed) {
+              subBuilder.MergeFrom(CharacterProgressed);
+            }
+            input.ReadMessage(subBuilder);
+            CharacterProgressed = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -1674,6 +1783,24 @@ namespace Divinity.Contracts.V1 {
             }
             input.ReadMessage(subBuilder);
             ServerError = subBuilder;
+            break;
+          }
+          case 138: {
+            global::Divinity.Contracts.V1.SkillStateChanged subBuilder = new global::Divinity.Contracts.V1.SkillStateChanged();
+            if (payloadCase_ == PayloadOneofCase.SkillStateChanged) {
+              subBuilder.MergeFrom(SkillStateChanged);
+            }
+            input.ReadMessage(subBuilder);
+            SkillStateChanged = subBuilder;
+            break;
+          }
+          case 146: {
+            global::Divinity.Contracts.V1.CharacterProgressed subBuilder = new global::Divinity.Contracts.V1.CharacterProgressed();
+            if (payloadCase_ == PayloadOneofCase.CharacterProgressed) {
+              subBuilder.MergeFrom(CharacterProgressed);
+            }
+            input.ReadMessage(subBuilder);
+            CharacterProgressed = subBuilder;
             break;
           }
         }
@@ -4098,6 +4225,8 @@ namespace Divinity.Contracts.V1 {
       position_ = other.position_ != null ? other.position_.Clone() : null;
       stats_ = other.stats_ != null ? other.stats_.Clone() : null;
       contentHash_ = other.contentHash_;
+      reconnectToken_ = other.reconnectToken_;
+      reconnectTtlSeconds_ = other.reconnectTtlSeconds_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4179,6 +4308,30 @@ namespace Divinity.Contracts.V1 {
       }
     }
 
+    /// <summary>Field number for the "reconnect_token" field.</summary>
+    public const int ReconnectTokenFieldNumber = 7;
+    private string reconnectToken_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ReconnectToken {
+      get { return reconnectToken_; }
+      set {
+        reconnectToken_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "reconnect_ttl_seconds" field.</summary>
+    public const int ReconnectTtlSecondsFieldNumber = 8;
+    private uint reconnectTtlSeconds_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint ReconnectTtlSeconds {
+      get { return reconnectTtlSeconds_; }
+      set {
+        reconnectTtlSeconds_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -4200,6 +4353,8 @@ namespace Divinity.Contracts.V1 {
       if (!object.Equals(Position, other.Position)) return false;
       if (!object.Equals(Stats, other.Stats)) return false;
       if (ContentHash != other.ContentHash) return false;
+      if (ReconnectToken != other.ReconnectToken) return false;
+      if (ReconnectTtlSeconds != other.ReconnectTtlSeconds) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4213,6 +4368,8 @@ namespace Divinity.Contracts.V1 {
       if (position_ != null) hash ^= Position.GetHashCode();
       if (stats_ != null) hash ^= Stats.GetHashCode();
       if (ContentHash.Length != 0) hash ^= ContentHash.GetHashCode();
+      if (ReconnectToken.Length != 0) hash ^= ReconnectToken.GetHashCode();
+      if (ReconnectTtlSeconds != 0) hash ^= ReconnectTtlSeconds.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4255,6 +4412,14 @@ namespace Divinity.Contracts.V1 {
         output.WriteRawTag(50);
         output.WriteString(ContentHash);
       }
+      if (ReconnectToken.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(ReconnectToken);
+      }
+      if (ReconnectTtlSeconds != 0) {
+        output.WriteRawTag(64);
+        output.WriteUInt32(ReconnectTtlSeconds);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4289,6 +4454,14 @@ namespace Divinity.Contracts.V1 {
         output.WriteRawTag(50);
         output.WriteString(ContentHash);
       }
+      if (ReconnectToken.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(ReconnectToken);
+      }
+      if (ReconnectTtlSeconds != 0) {
+        output.WriteRawTag(64);
+        output.WriteUInt32(ReconnectTtlSeconds);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4316,6 +4489,12 @@ namespace Divinity.Contracts.V1 {
       }
       if (ContentHash.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ContentHash);
+      }
+      if (ReconnectToken.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ReconnectToken);
+      }
+      if (ReconnectTtlSeconds != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ReconnectTtlSeconds);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4352,6 +4531,12 @@ namespace Divinity.Contracts.V1 {
       }
       if (other.ContentHash.Length != 0) {
         ContentHash = other.ContentHash;
+      }
+      if (other.ReconnectToken.Length != 0) {
+        ReconnectToken = other.ReconnectToken;
+      }
+      if (other.ReconnectTtlSeconds != 0) {
+        ReconnectTtlSeconds = other.ReconnectTtlSeconds;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4402,6 +4587,14 @@ namespace Divinity.Contracts.V1 {
             ContentHash = input.ReadString();
             break;
           }
+          case 58: {
+            ReconnectToken = input.ReadString();
+            break;
+          }
+          case 64: {
+            ReconnectTtlSeconds = input.ReadUInt32();
+            break;
+          }
         }
       }
     #endif
@@ -4449,6 +4642,14 @@ namespace Divinity.Contracts.V1 {
           }
           case 50: {
             ContentHash = input.ReadString();
+            break;
+          }
+          case 58: {
+            ReconnectToken = input.ReadString();
+            break;
+          }
+          case 64: {
+            ReconnectTtlSeconds = input.ReadUInt32();
             break;
           }
         }
@@ -5154,6 +5355,7 @@ namespace Divinity.Contracts.V1 {
       damage_ = other.damage_;
       targetHp_ = other.targetHp_;
       statusEffects_ = other.statusEffects_.Clone();
+      killId_ = other.killId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5258,6 +5460,18 @@ namespace Divinity.Contracts.V1 {
       get { return statusEffects_; }
     }
 
+    /// <summary>Field number for the "kill_id" field.</summary>
+    public const int KillIdFieldNumber = 9;
+    private string killId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string KillId {
+      get { return killId_; }
+      set {
+        killId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -5281,6 +5495,7 @@ namespace Divinity.Contracts.V1 {
       if (Damage != other.Damage) return false;
       if (TargetHp != other.TargetHp) return false;
       if(!statusEffects_.Equals(other.statusEffects_)) return false;
+      if (KillId != other.KillId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5296,6 +5511,7 @@ namespace Divinity.Contracts.V1 {
       if (Damage != 0) hash ^= Damage.GetHashCode();
       if (TargetHp != 0) hash ^= TargetHp.GetHashCode();
       hash ^= statusEffects_.GetHashCode();
+      if (KillId.Length != 0) hash ^= KillId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5343,6 +5559,10 @@ namespace Divinity.Contracts.V1 {
         output.WriteInt32(TargetHp);
       }
       statusEffects_.WriteTo(output, _repeated_statusEffects_codec);
+      if (KillId.Length != 0) {
+        output.WriteRawTag(74);
+        output.WriteString(KillId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5382,6 +5602,10 @@ namespace Divinity.Contracts.V1 {
         output.WriteInt32(TargetHp);
       }
       statusEffects_.WriteTo(ref output, _repeated_statusEffects_codec);
+      if (KillId.Length != 0) {
+        output.WriteRawTag(74);
+        output.WriteString(KillId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5414,6 +5638,9 @@ namespace Divinity.Contracts.V1 {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(TargetHp);
       }
       size += statusEffects_.CalculateSize(_repeated_statusEffects_codec);
+      if (KillId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(KillId);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5448,6 +5675,9 @@ namespace Divinity.Contracts.V1 {
         TargetHp = other.TargetHp;
       }
       statusEffects_.Add(other.statusEffects_);
+      if (other.KillId.Length != 0) {
+        KillId = other.KillId;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -5497,6 +5727,10 @@ namespace Divinity.Contracts.V1 {
           }
           case 66: {
             statusEffects_.AddEntriesFrom(input, _repeated_statusEffects_codec);
+            break;
+          }
+          case 74: {
+            KillId = input.ReadString();
             break;
           }
         }
@@ -5550,6 +5784,702 @@ namespace Divinity.Contracts.V1 {
             statusEffects_.AddEntriesFrom(ref input, _repeated_statusEffects_codec);
             break;
           }
+          case 74: {
+            KillId = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class SkillStateChanged : pb::IMessage<SkillStateChanged>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SkillStateChanged> _parser = new pb::MessageParser<SkillStateChanged>(() => new SkillStateChanged());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SkillStateChanged> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SkillStateChanged() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SkillStateChanged(SkillStateChanged other) : this() {
+      characterId_ = other.characterId_;
+      skillId_ = other.skillId_;
+      cooldownStartedServerMs_ = other.cooldownStartedServerMs_;
+      cooldownEndsServerMs_ = other.cooldownEndsServerMs_;
+      available_ = other.available_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SkillStateChanged Clone() {
+      return new SkillStateChanged(this);
+    }
+
+    /// <summary>Field number for the "character_id" field.</summary>
+    public const int CharacterIdFieldNumber = 1;
+    private string characterId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string CharacterId {
+      get { return characterId_; }
+      set {
+        characterId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "skill_id" field.</summary>
+    public const int SkillIdFieldNumber = 2;
+    private string skillId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string SkillId {
+      get { return skillId_; }
+      set {
+        skillId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "cooldown_started_server_ms" field.</summary>
+    public const int CooldownStartedServerMsFieldNumber = 3;
+    private ulong cooldownStartedServerMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong CooldownStartedServerMs {
+      get { return cooldownStartedServerMs_; }
+      set {
+        cooldownStartedServerMs_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cooldown_ends_server_ms" field.</summary>
+    public const int CooldownEndsServerMsFieldNumber = 4;
+    private ulong cooldownEndsServerMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong CooldownEndsServerMs {
+      get { return cooldownEndsServerMs_; }
+      set {
+        cooldownEndsServerMs_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "available" field.</summary>
+    public const int AvailableFieldNumber = 5;
+    private bool available_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Available {
+      get { return available_; }
+      set {
+        available_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SkillStateChanged);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SkillStateChanged other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (CharacterId != other.CharacterId) return false;
+      if (SkillId != other.SkillId) return false;
+      if (CooldownStartedServerMs != other.CooldownStartedServerMs) return false;
+      if (CooldownEndsServerMs != other.CooldownEndsServerMs) return false;
+      if (Available != other.Available) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (CharacterId.Length != 0) hash ^= CharacterId.GetHashCode();
+      if (SkillId.Length != 0) hash ^= SkillId.GetHashCode();
+      if (CooldownStartedServerMs != 0UL) hash ^= CooldownStartedServerMs.GetHashCode();
+      if (CooldownEndsServerMs != 0UL) hash ^= CooldownEndsServerMs.GetHashCode();
+      if (Available != false) hash ^= Available.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (CharacterId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(CharacterId);
+      }
+      if (SkillId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SkillId);
+      }
+      if (CooldownStartedServerMs != 0UL) {
+        output.WriteRawTag(24);
+        output.WriteUInt64(CooldownStartedServerMs);
+      }
+      if (CooldownEndsServerMs != 0UL) {
+        output.WriteRawTag(32);
+        output.WriteUInt64(CooldownEndsServerMs);
+      }
+      if (Available != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(Available);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (CharacterId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(CharacterId);
+      }
+      if (SkillId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SkillId);
+      }
+      if (CooldownStartedServerMs != 0UL) {
+        output.WriteRawTag(24);
+        output.WriteUInt64(CooldownStartedServerMs);
+      }
+      if (CooldownEndsServerMs != 0UL) {
+        output.WriteRawTag(32);
+        output.WriteUInt64(CooldownEndsServerMs);
+      }
+      if (Available != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(Available);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (CharacterId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CharacterId);
+      }
+      if (SkillId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SkillId);
+      }
+      if (CooldownStartedServerMs != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(CooldownStartedServerMs);
+      }
+      if (CooldownEndsServerMs != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(CooldownEndsServerMs);
+      }
+      if (Available != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SkillStateChanged other) {
+      if (other == null) {
+        return;
+      }
+      if (other.CharacterId.Length != 0) {
+        CharacterId = other.CharacterId;
+      }
+      if (other.SkillId.Length != 0) {
+        SkillId = other.SkillId;
+      }
+      if (other.CooldownStartedServerMs != 0UL) {
+        CooldownStartedServerMs = other.CooldownStartedServerMs;
+      }
+      if (other.CooldownEndsServerMs != 0UL) {
+        CooldownEndsServerMs = other.CooldownEndsServerMs;
+      }
+      if (other.Available != false) {
+        Available = other.Available;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            CharacterId = input.ReadString();
+            break;
+          }
+          case 18: {
+            SkillId = input.ReadString();
+            break;
+          }
+          case 24: {
+            CooldownStartedServerMs = input.ReadUInt64();
+            break;
+          }
+          case 32: {
+            CooldownEndsServerMs = input.ReadUInt64();
+            break;
+          }
+          case 40: {
+            Available = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            CharacterId = input.ReadString();
+            break;
+          }
+          case 18: {
+            SkillId = input.ReadString();
+            break;
+          }
+          case 24: {
+            CooldownStartedServerMs = input.ReadUInt64();
+            break;
+          }
+          case 32: {
+            CooldownEndsServerMs = input.ReadUInt64();
+            break;
+          }
+          case 40: {
+            Available = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class CharacterProgressed : pb::IMessage<CharacterProgressed>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<CharacterProgressed> _parser = new pb::MessageParser<CharacterProgressed>(() => new CharacterProgressed());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<CharacterProgressed> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[16]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CharacterProgressed() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CharacterProgressed(CharacterProgressed other) : this() {
+      characterId_ = other.characterId_;
+      skillId_ = other.skillId_;
+      skillXp_ = other.skillXp_;
+      skillRank_ = other.skillRank_;
+      maxRank_ = other.maxRank_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CharacterProgressed Clone() {
+      return new CharacterProgressed(this);
+    }
+
+    /// <summary>Field number for the "character_id" field.</summary>
+    public const int CharacterIdFieldNumber = 1;
+    private string characterId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string CharacterId {
+      get { return characterId_; }
+      set {
+        characterId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "skill_id" field.</summary>
+    public const int SkillIdFieldNumber = 2;
+    private string skillId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string SkillId {
+      get { return skillId_; }
+      set {
+        skillId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "skill_xp" field.</summary>
+    public const int SkillXpFieldNumber = 3;
+    private uint skillXp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint SkillXp {
+      get { return skillXp_; }
+      set {
+        skillXp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "skill_rank" field.</summary>
+    public const int SkillRankFieldNumber = 4;
+    private uint skillRank_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint SkillRank {
+      get { return skillRank_; }
+      set {
+        skillRank_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_rank" field.</summary>
+    public const int MaxRankFieldNumber = 5;
+    private uint maxRank_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint MaxRank {
+      get { return maxRank_; }
+      set {
+        maxRank_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as CharacterProgressed);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(CharacterProgressed other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (CharacterId != other.CharacterId) return false;
+      if (SkillId != other.SkillId) return false;
+      if (SkillXp != other.SkillXp) return false;
+      if (SkillRank != other.SkillRank) return false;
+      if (MaxRank != other.MaxRank) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (CharacterId.Length != 0) hash ^= CharacterId.GetHashCode();
+      if (SkillId.Length != 0) hash ^= SkillId.GetHashCode();
+      if (SkillXp != 0) hash ^= SkillXp.GetHashCode();
+      if (SkillRank != 0) hash ^= SkillRank.GetHashCode();
+      if (MaxRank != 0) hash ^= MaxRank.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (CharacterId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(CharacterId);
+      }
+      if (SkillId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SkillId);
+      }
+      if (SkillXp != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(SkillXp);
+      }
+      if (SkillRank != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(SkillRank);
+      }
+      if (MaxRank != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(MaxRank);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (CharacterId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(CharacterId);
+      }
+      if (SkillId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SkillId);
+      }
+      if (SkillXp != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(SkillXp);
+      }
+      if (SkillRank != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(SkillRank);
+      }
+      if (MaxRank != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(MaxRank);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (CharacterId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CharacterId);
+      }
+      if (SkillId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SkillId);
+      }
+      if (SkillXp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(SkillXp);
+      }
+      if (SkillRank != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(SkillRank);
+      }
+      if (MaxRank != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MaxRank);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(CharacterProgressed other) {
+      if (other == null) {
+        return;
+      }
+      if (other.CharacterId.Length != 0) {
+        CharacterId = other.CharacterId;
+      }
+      if (other.SkillId.Length != 0) {
+        SkillId = other.SkillId;
+      }
+      if (other.SkillXp != 0) {
+        SkillXp = other.SkillXp;
+      }
+      if (other.SkillRank != 0) {
+        SkillRank = other.SkillRank;
+      }
+      if (other.MaxRank != 0) {
+        MaxRank = other.MaxRank;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            CharacterId = input.ReadString();
+            break;
+          }
+          case 18: {
+            SkillId = input.ReadString();
+            break;
+          }
+          case 24: {
+            SkillXp = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            SkillRank = input.ReadUInt32();
+            break;
+          }
+          case 40: {
+            MaxRank = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            CharacterId = input.ReadString();
+            break;
+          }
+          case 18: {
+            SkillId = input.ReadString();
+            break;
+          }
+          case 24: {
+            SkillXp = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            SkillRank = input.ReadUInt32();
+            break;
+          }
+          case 40: {
+            MaxRank = input.ReadUInt32();
+            break;
+          }
         }
       }
     }
@@ -5572,7 +6502,7 @@ namespace Divinity.Contracts.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5807,7 +6737,7 @@ namespace Divinity.Contracts.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6179,7 +7109,7 @@ namespace Divinity.Contracts.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6466,7 +7396,7 @@ namespace Divinity.Contracts.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6701,7 +7631,7 @@ namespace Divinity.Contracts.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6723,6 +7653,9 @@ namespace Divinity.Contracts.V1 {
     public EquipmentItem(EquipmentItem other) : this() {
       slot_ = other.slot_;
       itemInstanceId_ = other.itemInstanceId_;
+      durability_ = other.durability_;
+      maxDurability_ = other.maxDurability_;
+      attributesActive_ = other.attributesActive_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -6756,6 +7689,42 @@ namespace Divinity.Contracts.V1 {
       }
     }
 
+    /// <summary>Field number for the "durability" field.</summary>
+    public const int DurabilityFieldNumber = 3;
+    private uint durability_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint Durability {
+      get { return durability_; }
+      set {
+        durability_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_durability" field.</summary>
+    public const int MaxDurabilityFieldNumber = 4;
+    private uint maxDurability_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint MaxDurability {
+      get { return maxDurability_; }
+      set {
+        maxDurability_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "attributes_active" field.</summary>
+    public const int AttributesActiveFieldNumber = 5;
+    private bool attributesActive_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool AttributesActive {
+      get { return attributesActive_; }
+      set {
+        attributesActive_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -6773,6 +7742,9 @@ namespace Divinity.Contracts.V1 {
       }
       if (Slot != other.Slot) return false;
       if (ItemInstanceId != other.ItemInstanceId) return false;
+      if (Durability != other.Durability) return false;
+      if (MaxDurability != other.MaxDurability) return false;
+      if (AttributesActive != other.AttributesActive) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -6782,6 +7754,9 @@ namespace Divinity.Contracts.V1 {
       int hash = 1;
       if (Slot != global::Divinity.Contracts.V1.EquipmentSlot.Unspecified) hash ^= Slot.GetHashCode();
       if (ItemInstanceId.Length != 0) hash ^= ItemInstanceId.GetHashCode();
+      if (Durability != 0) hash ^= Durability.GetHashCode();
+      if (MaxDurability != 0) hash ^= MaxDurability.GetHashCode();
+      if (AttributesActive != false) hash ^= AttributesActive.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -6808,6 +7783,18 @@ namespace Divinity.Contracts.V1 {
         output.WriteRawTag(18);
         output.WriteString(ItemInstanceId);
       }
+      if (Durability != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Durability);
+      }
+      if (MaxDurability != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(MaxDurability);
+      }
+      if (AttributesActive != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(AttributesActive);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -6826,6 +7813,18 @@ namespace Divinity.Contracts.V1 {
         output.WriteRawTag(18);
         output.WriteString(ItemInstanceId);
       }
+      if (Durability != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Durability);
+      }
+      if (MaxDurability != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(MaxDurability);
+      }
+      if (AttributesActive != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(AttributesActive);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -6841,6 +7840,15 @@ namespace Divinity.Contracts.V1 {
       }
       if (ItemInstanceId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ItemInstanceId);
+      }
+      if (Durability != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Durability);
+      }
+      if (MaxDurability != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MaxDurability);
+      }
+      if (AttributesActive != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -6859,6 +7867,15 @@ namespace Divinity.Contracts.V1 {
       }
       if (other.ItemInstanceId.Length != 0) {
         ItemInstanceId = other.ItemInstanceId;
+      }
+      if (other.Durability != 0) {
+        Durability = other.Durability;
+      }
+      if (other.MaxDurability != 0) {
+        MaxDurability = other.MaxDurability;
+      }
+      if (other.AttributesActive != false) {
+        AttributesActive = other.AttributesActive;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -6885,6 +7902,18 @@ namespace Divinity.Contracts.V1 {
           }
           case 18: {
             ItemInstanceId = input.ReadString();
+            break;
+          }
+          case 24: {
+            Durability = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            MaxDurability = input.ReadUInt32();
+            break;
+          }
+          case 40: {
+            AttributesActive = input.ReadBool();
             break;
           }
         }
@@ -6914,6 +7943,18 @@ namespace Divinity.Contracts.V1 {
             ItemInstanceId = input.ReadString();
             break;
           }
+          case 24: {
+            Durability = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            MaxDurability = input.ReadUInt32();
+            break;
+          }
+          case 40: {
+            AttributesActive = input.ReadBool();
+            break;
+          }
         }
       }
     }
@@ -6936,7 +7977,7 @@ namespace Divinity.Contracts.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7217,7 +8258,7 @@ namespace Divinity.Contracts.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7489,7 +8530,7 @@ namespace Divinity.Contracts.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7761,7 +8802,7 @@ namespace Divinity.Contracts.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[23]; }
+      get { return global::Divinity.Contracts.V1.GameReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

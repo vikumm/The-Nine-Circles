@@ -8,6 +8,7 @@ public sealed record WorldCombatActor(
     string MapId,
     string ChannelId,
     CharacterPosition Position,
+    string Vocation,
     KnightStats Stats,
     WorldCombatActorState State);
 
@@ -24,7 +25,10 @@ public sealed record WorldBasicAttackResult(
     ulong AckSequence,
     ErrorCode ErrorCode,
     CombatEvent? CombatEvent,
-    SkillStateChanged? SkillStateChanged)
+    SkillStateChanged? SkillStateChanged,
+    RewardGranted? RewardGranted = null,
+    InventoryDelta? InventoryDelta = null,
+    CharacterProgressed? RewardProgressed = null)
 {
     public bool Accepted => Status == WorldBasicAttackStatus.Accepted;
 }
@@ -44,3 +48,50 @@ public enum WorldBasicAttackStatus
     Collision,
     Cooldown
 }
+
+public sealed record WorldShieldBashResult(
+    WorldShieldBashStatus Status,
+    string Message,
+    ulong AckSequence,
+    ErrorCode ErrorCode,
+    CombatEvent? CombatEvent,
+    SkillStateChanged? SkillStateChanged,
+    CharacterProgressed? CharacterProgressed,
+    RewardGranted? RewardGranted = null,
+    InventoryDelta? InventoryDelta = null,
+    CharacterProgressed? RewardProgressed = null)
+{
+    public bool Accepted => Status == WorldShieldBashStatus.Accepted;
+}
+
+public enum WorldShieldBashStatus
+{
+    Accepted,
+    MissingAttacker,
+    InvalidClass,
+    InvalidSkill,
+    InvalidActionId,
+    DuplicateActionId,
+    SequenceReplay,
+    AttackerDead,
+    AttackerStunned,
+    TargetNotFound,
+    TargetDead,
+    DifferentMap,
+    OutOfRange,
+    Collision,
+    Cooldown,
+    InsufficientMp
+}
+
+public sealed record WorldCombatResourceState(
+    string CharacterId,
+    int Mp,
+    int MaxMp);
+
+public sealed record WorldCharacterSkillState(
+    string CharacterId,
+    string SkillId,
+    int SkillXp,
+    int Rank,
+    int MaxRank);

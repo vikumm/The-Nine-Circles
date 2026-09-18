@@ -19,14 +19,19 @@ Current scope:
 - return authoritative `WorldSnapshot`, `Correction` or `ServerError` responses for movement.
 - route VS-013 `AttackIntent` to World Runtime after join;
 - return server-authored `CombatEvent`, `SkillStateChanged` or `ServerError` responses for Basic Slash.
+- route VS-014 `CastIntent` for `knight_shield_bash_r1` to World Runtime after join;
+- return server-authored `CombatEvent`, `SkillStateChanged`, `CharacterProgressed` or `ServerError` responses for Shield Bash;
+- route VS-017 `EquipItemIntent` and `UnequipItemIntent` after join and character ownership verification;
+- return server-authored `InventoryDelta` or `ERROR_CODE_INVENTORY_REJECTED` responses for inventory/equipment mutations;
+- validate VS-018 `ReconnectRequest` with a fresh `ClientHello`, hashed token, account match and active lease;
+- rotate reconnect tokens and transfer the actor lease to the new connection.
 
 Out of scope here:
 
 - durable multi-node WSS session persistence;
-- reconnect leases;
 - client-side prediction/reconciliation;
-- Shield Bash, loot, XP and final combat reward flow;
-- inventory.
+- public loot, trade, marketplace and crafting;
+- client-authoritative inventory.
 
 VS-007 note:
 
@@ -45,3 +50,21 @@ VS-013 note:
 - the Gateway does not calculate damage, range, cooldown, crit, HP or death;
 - Basic Slash decisions are delegated to `services/world-runtime`;
 - the client still sends only intents.
+
+VS-014 note:
+
+- the Gateway does not calculate MP cost, stun duration, skill XP, rank, cooldown or target state;
+- Shield Bash decisions are delegated to `services/world-runtime`;
+- the client still sends only `CastIntent` with skill id, target id and action id.
+
+VS-017 note:
+
+- the Gateway does not calculate item owner, bind, rarity, durability, defense, block chance or currency;
+- inventory/equipment decisions are delegated to `packages/game-rules`;
+- the client sends only item/slot/version intents and renders `InventoryDelta`.
+
+VS-018 note:
+
+- the Gateway stores reconnect tokens hashed and short-lived;
+- reconnect requires a fresh game ticket plus the previous reconnect token;
+- old rewards are not replayed; the Gateway returns current join, snapshot and inventory state.

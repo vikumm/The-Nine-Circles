@@ -128,6 +128,8 @@ jobs:
         run: dotnet build packages/test-fixtures/movement-tests/Divinity.MovementTests.csproj --configuration Release --no-restore
 
       - name: VS-010 movement tests
+        env:
+          DIVINITY_RUN_GATEWAY_WSS_TEST: "true"
         run: dotnet run --project packages/test-fixtures/movement-tests/Divinity.MovementTests.csproj --configuration Release --no-build
 
       - name: Restore prediction tests
@@ -156,6 +158,75 @@ jobs:
 
       - name: VS-013 basic attack tests
         run: dotnet run --project packages/test-fixtures/basic-attack-tests/Divinity.BasicAttackTests.csproj --configuration Release --no-build
+
+      - name: Restore shield bash tests
+        run: dotnet restore packages/test-fixtures/shield-bash-tests/Divinity.ShieldBashTests.csproj
+
+      - name: Build shield bash tests
+        run: dotnet build packages/test-fixtures/shield-bash-tests/Divinity.ShieldBashTests.csproj --configuration Release --no-restore
+
+      - name: VS-014 shield bash tests
+        run: dotnet run --project packages/test-fixtures/shield-bash-tests/Divinity.ShieldBashTests.csproj --configuration Release --no-build
+
+      - name: Restore death and respawn tests
+        run: dotnet restore packages/test-fixtures/death-respawn-tests/Divinity.DeathRespawnTests.csproj
+
+      - name: Build death and respawn tests
+        run: dotnet build packages/test-fixtures/death-respawn-tests/Divinity.DeathRespawnTests.csproj --configuration Release --no-restore
+
+      - name: VS-015 death and respawn tests
+        run: dotnet run --project packages/test-fixtures/death-respawn-tests/Divinity.DeathRespawnTests.csproj --configuration Release --no-build
+
+      - name: Restore reward transaction tests
+        run: dotnet restore packages/test-fixtures/reward-transaction-tests/Divinity.RewardTransactionTests.csproj
+
+      - name: Build reward transaction tests
+        run: dotnet build packages/test-fixtures/reward-transaction-tests/Divinity.RewardTransactionTests.csproj --configuration Release --no-restore
+
+      - name: VS-016 reward transaction tests
+        run: dotnet run --project packages/test-fixtures/reward-transaction-tests/Divinity.RewardTransactionTests.csproj --configuration Release --no-build
+
+      - name: Restore inventory and equipment tests
+        run: dotnet restore packages/test-fixtures/inventory-equipment-tests/Divinity.InventoryEquipmentTests.csproj
+
+      - name: Build inventory and equipment tests
+        run: dotnet build packages/test-fixtures/inventory-equipment-tests/Divinity.InventoryEquipmentTests.csproj --configuration Release --no-restore
+
+      - name: VS-017 inventory and equipment tests
+        run: dotnet run --project packages/test-fixtures/inventory-equipment-tests/Divinity.InventoryEquipmentTests.csproj --configuration Release --no-build
+
+      - name: Restore reconnect tests
+        run: dotnet restore packages/test-fixtures/reconnect-tests/Divinity.ReconnectTests.csproj
+
+      - name: Build reconnect tests
+        run: dotnet build packages/test-fixtures/reconnect-tests/Divinity.ReconnectTests.csproj --configuration Release --no-restore
+
+      - name: VS-018 reconnect tests
+        run: dotnet run --project packages/test-fixtures/reconnect-tests/Divinity.ReconnectTests.csproj --configuration Release --no-build
+
+      - name: Restore load bot
+        run: dotnet restore tools/load-bots/Divinity.LoadBots.csproj
+
+      - name: Build load bot
+        run: dotnet build tools/load-bots/Divinity.LoadBots.csproj --configuration Release --no-restore
+
+      - name: VS-019 load bot smoke
+        run: dotnet run --project tools/load-bots/Divinity.LoadBots.csproj --configuration Release --no-build -- --profile smoke
+
+      - name: Restore load bot tests
+        run: dotnet restore packages/test-fixtures/load-bot-tests/Divinity.LoadBotTests.csproj
+
+      - name: Build load bot tests
+        run: dotnet build packages/test-fixtures/load-bot-tests/Divinity.LoadBotTests.csproj --configuration Release --no-restore
+
+      - name: VS-019 load bot tests
+        run: dotnet run --project packages/test-fixtures/load-bot-tests/Divinity.LoadBotTests.csproj --configuration Release --no-build
+
+      - name: VS-020 100 bot acceptance gate
+        run: dotnet run --project tools/load-bots/Divinity.LoadBots.csproj --configuration Release --no-build -- --profile acceptance
+
+      - name: VS-020 hardening and observability gate
+        run: dotnet run --project tools/load-bots/Divinity.LoadBots.csproj --configuration Release --no-build -- --profile hardening --soak-duration-seconds 1
 
       - name: Stop Keycloak
         if: always()

@@ -413,6 +413,7 @@ internal sealed class GatewayFixture : IAsyncDisposable
 {
     private readonly string? _previousStorePath;
     private readonly string? _previousCharacterStorePath;
+    private readonly string? _previousGatewaySessionStorePath;
 
     private GatewayFixture(
         WebApplication app,
@@ -421,6 +422,7 @@ internal sealed class GatewayFixture : IAsyncDisposable
         string characterStorePath,
         string? previousStorePath,
         string? previousCharacterStorePath,
+        string? previousGatewaySessionStorePath,
         CapturingLoggerProvider logs)
     {
         App = app;
@@ -429,6 +431,7 @@ internal sealed class GatewayFixture : IAsyncDisposable
         CharacterStorePath = characterStorePath;
         _previousStorePath = previousStorePath;
         _previousCharacterStorePath = previousCharacterStorePath;
+        _previousGatewaySessionStorePath = previousGatewaySessionStorePath;
         Store = new FileGameTicketStore(storePath);
         TicketService = new GameTicketService(Store);
         CharacterStore = new FileCharacterStore(characterStorePath);
@@ -453,8 +456,10 @@ internal sealed class GatewayFixture : IAsyncDisposable
         var characterStorePath = TestPaths.CreateTempDirectory(name + "-characters");
         var previousStorePath = Environment.GetEnvironmentVariable("DIVINITY_GAME_TICKET_STORE_PATH");
         var previousCharacterStorePath = Environment.GetEnvironmentVariable("DIVINITY_CHARACTER_STORE_PATH");
+        var previousGatewaySessionStorePath = Environment.GetEnvironmentVariable("DIVINITY_GATEWAY_SESSION_STORE_PATH");
         Environment.SetEnvironmentVariable("DIVINITY_GAME_TICKET_STORE_PATH", storePath);
         Environment.SetEnvironmentVariable("DIVINITY_CHARACTER_STORE_PATH", characterStorePath);
+        Environment.SetEnvironmentVariable("DIVINITY_GATEWAY_SESSION_STORE_PATH", TestPaths.CreateTempDirectory(name + "-gateway-sessions"));
 
         var logs = new CapturingLoggerProvider();
         var builder = WebApplication.CreateBuilder(new WebApplicationOptions
@@ -470,7 +475,7 @@ internal sealed class GatewayFixture : IAsyncDisposable
         app.Urls.Add(httpBaseUrl);
         await app.StartAsync();
 
-        return new GatewayFixture(app, httpBaseUrl, storePath, characterStorePath, previousStorePath, previousCharacterStorePath, logs);
+        return new GatewayFixture(app, httpBaseUrl, storePath, characterStorePath, previousStorePath, previousCharacterStorePath, previousGatewaySessionStorePath, logs);
     }
 
     public async Task<ClientWebSocket> ConnectAsync()
@@ -512,8 +517,14 @@ internal sealed class GatewayFixture : IAsyncDisposable
         await App.DisposeAsync();
         Environment.SetEnvironmentVariable("DIVINITY_GAME_TICKET_STORE_PATH", _previousStorePath);
         Environment.SetEnvironmentVariable("DIVINITY_CHARACTER_STORE_PATH", _previousCharacterStorePath);
+        var gatewaySessionStorePath = Environment.GetEnvironmentVariable("DIVINITY_GATEWAY_SESSION_STORE_PATH");
+        Environment.SetEnvironmentVariable("DIVINITY_GATEWAY_SESSION_STORE_PATH", _previousGatewaySessionStorePath);
         TestPaths.DeleteDirectory(StorePath);
         TestPaths.DeleteDirectory(CharacterStorePath);
+        if (!string.IsNullOrWhiteSpace(gatewaySessionStorePath))
+        {
+            TestPaths.DeleteDirectory(gatewaySessionStorePath);
+        }
         Logs.Dispose();
     }
 }
